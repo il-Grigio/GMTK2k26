@@ -54,13 +54,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         var speed = moveSpeed * Time.deltaTime;
 
-        // se voglio che il personaggio vada verso la direzione del mouse
-        targetVector = transform.TransformDirection(targetVector);
-
-        // muove il personaggio rispetto alla rotazione della telecamera
-
-        // targetVector = Quaternion.Euler(0, cam.gameObject.transform.eulerAngles.y, 0) * targetVector;
-
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
         return targetVector;
