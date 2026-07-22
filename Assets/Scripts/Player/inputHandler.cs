@@ -6,6 +6,8 @@ public class inputHandler : MonoBehaviour
     public Vector2 InputVector { get; private set; }
     public Vector2 MousePosition { get; private set; }
 
+    public bool IsShooting { get; private set; }
+
     void Update()
     {
         float h = 0f;
@@ -29,6 +31,7 @@ public class inputHandler : MonoBehaviour
         if (Mouse.current != null)
         {
             MousePosition = Mouse.current.position.ReadValue();
+            IsShooting = Mouse.current.leftButton.wasPressedThisFrame;
         }
     }
 }
