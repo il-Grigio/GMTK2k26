@@ -4,12 +4,15 @@ public class Bullet : MonoBehaviour
 {
     private Vector3 shootDir;
     private float moveSpeed;
+    private ObjectPool pool;
 
-    public void Setup(Vector3 shootDir, float speed)
+    public void Setup(Vector3 shootDir, float speed, ObjectPool pool)
     {
         this.shootDir = shootDir;
         this.moveSpeed = speed;
-        Destroy(gameObject, 2f);
+        this.pool = pool;
+
+        Invoke("Deactivate", 2f);
     }
 
     private void Update()
@@ -22,7 +25,17 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
-            gameObject.SetActive(false);
+            Deactivate();
         }
+    }
+    private void Deactivate()
+    {
+        if(pool != null)
+            pool.ReturnObject(this.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 }
