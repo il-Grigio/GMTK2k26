@@ -13,8 +13,9 @@ public class Item_Hold : MonoBehaviour
         if ((targetLayers.value & (1 << other.gameObject.layer)) != 0)
         {
             // Abilita shining shader dell'oggetto
-            
-            
+
+            // Il player col Mouse tocca l'oggetto
+            Inventory_System.Instance.AddInventory(other.gameObject.AddComponent<Item_Infos>());
         }
     }
 }

@@ -19,6 +19,7 @@ public class Inventory_System : Singleton<Inventory_System>
             actualItemCount += item.countValue;
             inventoryValue += item.moneyValue;
             inventory.Add(item);
+            item.gameObject.SetActive(false); //Spegni oggetto
         }
         else
         {
