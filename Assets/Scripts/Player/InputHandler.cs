@@ -34,7 +34,12 @@ public class InputHandler : MonoBehaviour
  
     private void OnLook(InputValue value)
     {
-        MousePosition = value.Get<Vector2>();
+        var v2 = value.Get<Vector2>();
+        if (v2.magnitude > 0.5f)
+        {
+            MousePosition = value.Get<Vector2>();
+            Debug.Log(MousePosition);
+        }
     }
  
     private void OnAttack(InputValue value)
