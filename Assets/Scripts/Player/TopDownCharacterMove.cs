@@ -5,13 +5,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
 {
     private inputHandler _input;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Camera cam;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private bool rotateTowardsMouse;
+    private Camera cam;
 
     private void Awake()
     {
         _input = GetComponent<inputHandler>();
+    }
+
+    private void Start()
+    {
+        cam = Camera.main;
     }
 
     void Update()
