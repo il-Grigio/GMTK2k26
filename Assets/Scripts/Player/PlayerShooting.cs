@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -13,10 +14,15 @@ public class PlayerShooting : MonoBehaviour
         _input = GetComponent<inputHandler>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (_input.IsShooting)
-            Shoot();
+        _input.OnShoot -= Shoot;
+        _input.OnShoot += Shoot;
+    }
+
+    private void OnDisable()
+    {
+        _input.OnShoot -= Shoot;
     }
 
     private void Shoot()
