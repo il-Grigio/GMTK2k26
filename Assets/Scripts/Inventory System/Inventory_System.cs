@@ -9,8 +9,8 @@ public class Inventory_System : Singleton<Inventory_System>
     int actualWeight, maxWeight = 200;
     int actualItemCount, maxItemCount = 3;
 
-    int inventoryValue; //Valore monetario dell'inventario
-    int moneyHeld; //Soldi che ha effettivamente il player
+    int inventoryValue; // Valore monetario dell'inventario
+    int moneyHeld; // Soldi che ha effettivamente il player
     public void AddInventory(Item_Infos item)
     {
         if(item.weight <= (maxWeight - actualWeight) && item.countValue <= (maxItemCount - actualItemCount))
@@ -19,7 +19,7 @@ public class Inventory_System : Singleton<Inventory_System>
             actualItemCount += item.countValue;
             inventoryValue += item.moneyValue;
             inventory.Add(item);
-            item.gameObject.SetActive(false); //Spegni oggetto
+            item.gameObject.SetActive(false); // Spegni oggetto
         }
         else
         {
