@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class TopDownCharacterMove : MonoBehaviour
 {
-    private inputHandler _input;
+    private InputHandler _input;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private bool rotateTowardsMouse;
@@ -11,7 +10,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void Awake()
     {
-        _input = GetComponent<inputHandler>();
+        _input = GetComponent<InputHandler>();
     }
 
     private void Start()

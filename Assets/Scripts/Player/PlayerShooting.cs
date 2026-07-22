@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private inputHandler _input;
+    private InputHandler _input;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void Awake()
     {
-        _input = GetComponent<inputHandler>();
+        _input = GetComponent<InputHandler>();
     }
 
     private void OnEnable()
