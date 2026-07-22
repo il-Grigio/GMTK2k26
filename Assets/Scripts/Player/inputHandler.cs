@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem; 
 
@@ -8,30 +9,55 @@ public class inputHandler : MonoBehaviour
 
     public bool IsShooting { get; private set; }
 
+
+    public Action OnShoot;
+    public Action OnInteractAction;
+    
+    private Vector2 _moveInput;
+    private Vector2 _lookInput;
+    private bool _isSprinting;
+    private float _verticalVelocity;
+    private float _pitch;
+
     void Update()
     {
-        float h = 0f;
-        float v = 0f;
-
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-                h = 1f;
-            else if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
-                h = -1f;
-
-            if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
-                v = 1f;
-            else if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
-                v = -1f;
-        }
-
-        InputVector = new Vector2(h, v);
-
         if (Mouse.current != null)
         {
             MousePosition = Mouse.current.position.ReadValue();
             IsShooting = Mouse.current.leftButton.wasPressedThisFrame;
         }
     }
+    private void OnMove(InputValue value)
+    {
+        InputVector = value.Get<Vector2>();
+    }
+ 
+    private void OnLook(InputValue value)
+    {
+        MousePosition = value.Get<Vector2>();
+    }
+ 
+    private void OnAttack(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Debug.Log("Attack!");
+            OnShoot?.Invoke();
+        }
+    }
+ 
+    private void OnInteract(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Debug.Log("Interact!");
+            OnInteractAction?.Invoke();
+        }
+    }
+ 
+    private void OnSprint(InputValue value)
+    {
+        _isSprinting = value.isPressed;
+    }
+
 }
