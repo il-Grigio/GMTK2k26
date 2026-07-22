@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem; 
 
-public class inputHandler : MonoBehaviour
+public class InputHandler : MonoBehaviour
 {
     public Vector2 InputVector { get; private set; }
     public Vector2 MousePosition { get; private set; }
@@ -11,7 +11,7 @@ public class inputHandler : MonoBehaviour
 
 
     public Action OnShoot;
-    public Action OnInteractAction;
+    public Action<Vector2> OnInteractAction;
     
     private Vector2 _moveInput;
     private Vector2 _lookInput;
@@ -41,7 +41,6 @@ public class inputHandler : MonoBehaviour
     {
         if (value.isPressed)
         {
-            Debug.Log("Attack!");
             OnShoot?.Invoke();
         }
     }
@@ -51,7 +50,7 @@ public class inputHandler : MonoBehaviour
         if (value.isPressed)
         {
             Debug.Log("Interact!");
-            OnInteractAction?.Invoke();
+            OnInteractAction?.Invoke(Vector2.down);
         }
     }
  
