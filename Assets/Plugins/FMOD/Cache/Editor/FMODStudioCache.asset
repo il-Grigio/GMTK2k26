@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639201911583367329
+  lastModified: 639201940570660070
   FileSizes: []
   Exists: 1
---- !u!114 &-1701288237138442746
+--- !u!114 &-805257137479533250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,12 +28,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/MainMusic.bank
+  m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: FMOD/Desktop/MainMusic.bank
-  Name: MainMusic
-  StudioPath: bank:/MainMusic
-  lastModified: 639201911601088338
+  Path: FMOD/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 639201940571143324
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -50,21 +50,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
   - {fileID: 6715324140233362238}
-  - {fileID: -1701288237138442746}
   - {fileID: -1745908764548291659}
+  - {fileID: -805257137479533250}
   EditorEvents:
-  - {fileID: 4933143239748438373}
+  - {fileID: 2093450774610740840}
+  - {fileID: 5941389634943666450}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1745908764548291659}
   StringsBanks:
   - {fileID: 6715324140233362238}
   cacheVersion: 131858
-  cacheTime: 639201911601088338
+  cacheTime: 639201940571143324
   SerializableEventsDict:
-  - key: event:/New Event
+  - key: event:/SwordHit
     index: 0
---- !u!114 &4933143239748438373
+  - key: event:/PlayerFootsteps
+    index: 1
+--- !u!114 &2093450774610740840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,23 +77,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/New Event
+  m_Name: event:/SwordHit
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/New Event
+  Path: event:/SwordHit
   Guid:
-    Data1: -1631091357
-    Data2: 1123979719
-    Data3: -1204380017
-    Data4: -1097057947
+    Data1: 1588193833
+    Data2: 1154497687
+    Data3: 919845549
+    Data4: 1796272322
   Banks:
-  - {fileID: -1701288237138442746}
-  IsStream: 1
-  Is3D: 0
+  - {fileID: -805257137479533250}
+  IsStream: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5941389634943666450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PlayerFootsteps
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/PlayerFootsteps
+  Guid:
+    Data1: 348960051
+    Data2: 1176019107
+    Data3: 1269737093
+    Data4: 964320659
+  Banks:
+  - {fileID: -805257137479533250}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &6715324140233362238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,8 +136,8 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639201911583382402
+  lastModified: 639201940570665059
   FileSizes:
   - Name: 
-    Value: 820
+    Value: 874
   Exists: 1
