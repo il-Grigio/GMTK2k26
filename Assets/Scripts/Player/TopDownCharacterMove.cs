@@ -5,13 +5,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
 {
     private inputHandler _input;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Camera cam;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private bool rotateTowardsMouse;
+    private Camera cam;
 
     private void Awake()
     {
         _input = GetComponent<inputHandler>();
+    }
+
+    private void Start()
+    {
+        cam = Camera.main;
     }
 
     void Update()
@@ -48,13 +53,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private Vector3 MoveTowardTarget(Vector3 targetVector)
     {
         var speed = moveSpeed * Time.deltaTime;
-
-        // se voglio che il personaggio vada verso la direzione del mouse
-        targetVector = transform.TransformDirection(targetVector);
-
-        // muove il personaggio rispetto alla rotazione della telecamera
-
-        // targetVector = Quaternion.Euler(0, cam.gameObject.transform.eulerAngles.y, 0) * targetVector;
 
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
