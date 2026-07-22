@@ -16,13 +16,15 @@ public class PlayerShooting : MonoBehaviour
 
     private void OnEnable()
     {
-        _input.OnShoot -= Shoot;
+        if (_input.OnShoot != null)
+            _input.OnShoot -= Shoot;
         _input.OnShoot += Shoot;
     }
 
     private void OnDisable()
     {
-        _input.OnShoot -= Shoot;
+        if (_input.OnShoot != null)
+            _input.OnShoot -= Shoot;
     }
 
     private void Shoot()
