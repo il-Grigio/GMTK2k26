@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public Vector2 InputVector { get; private set; }
-    public Vector2 MousePosition { get; private set; }
+    public Vector3 MousePosition { get; private set; }
 
     public bool IsShooting { get; private set; }
 
@@ -19,14 +19,14 @@ public class InputHandler : MonoBehaviour
     private float _verticalVelocity;
     private float _pitch;
 
-    void Update()
-    {
-        if (Mouse.current != null)
-        {
-            MousePosition = Mouse.current.position.ReadValue();
-            IsShooting = Mouse.current.leftButton.wasPressedThisFrame;
-        }
-    }
+    //void Update()
+    //{
+    //    if (Mouse.current != null)
+    //    {
+    //        MousePosition = Mouse.current.position.ReadValue();
+    //        IsShooting = Mouse.current.leftButton.wasPressedThisFrame;
+    //    }
+    //}
     private void OnMove(InputValue value)
     {
         InputVector = value.Get<Vector2>();
@@ -37,8 +37,8 @@ public class InputHandler : MonoBehaviour
         var v2 = value.Get<Vector2>();
         if (v2.magnitude > 0.5f)
         {
-            MousePosition = value.Get<Vector2>();
-            Debug.Log(MousePosition);
+            MousePosition = new Vector3(v2.x, v2.y, 0);
+            //Debug.Log(MousePosition);
         }
     }
  
@@ -55,7 +55,7 @@ public class InputHandler : MonoBehaviour
         if (value.isPressed)
         {
             Debug.Log("Interact!");
-            OnInteractAction?.Invoke(Vector2.down);
+            OnInteractAction?.Invoke(MousePosition);
         }
     }
  

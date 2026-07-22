@@ -5,7 +5,6 @@ public class TopDownCharacterMove : MonoBehaviour
     private InputHandler _input;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private bool rotateTowardsMouse;
     private Camera cam;
 
     private void Awake()
@@ -21,40 +20,32 @@ public class TopDownCharacterMove : MonoBehaviour
     void Update()
     {
         var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
-        var movementVector = MoveTowardTarget(targetVector);
-
-        if (!rotateTowardsMouse)
-            RotateTowardMovementVect(movementVector);
-        else
-            RotateTowardsMouseVector();
+        
+        MoveTowardTarget(targetVector);
+        RotateTowardsMouseVector();
     }
 
     private void RotateTowardsMouseVector()
     {
         Ray ray = cam.ScreenPointToRay(_input.MousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green);
 
         if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
             var target = hitInfo.point;
+            Debug.DrawLine(target, target + Vector3.up * 100f, Color.red);
             target.y = transform.position.y;
+            Debug.Log(target);
             transform.LookAt(target);
         }
     }
 
-    private void RotateTowardMovementVect(Vector3 movementVector)
-    {
-        if (movementVector.magnitude == 0)
-            return;
-        var rotation = Quaternion.LookRotation(movementVector);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotateSpeed);
-    }
 
-    private Vector3 MoveTowardTarget(Vector3 targetVector)
+    private void MoveTowardTarget(Vector3 targetVector)
     {
         var speed = moveSpeed * Time.deltaTime;
 
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
-        return targetVector;
     }
 }
