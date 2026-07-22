@@ -30,17 +30,19 @@ public class Item_Hold : MonoBehaviour
     private void ItemToInventory(Vector2 mousePos)
     {
         Ray ray = cam.ScreenPointToRay(_input.MousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, itemLayerMask))
         {
             var target = hitInfo.collider.gameObject;
-            if (((1 << target.layer) & itemLayerMask) != 0)
+            
+            var itemInfo = target.GetComponent<ItemInfoComponent>().GetInfo();
+            if (itemInfo != null)
             {
-                var itemInfo = target.GetComponent<Item_Infos>();
-                if (itemInfo != null)
+                if (Inventory_System.Instance.AddInventory(itemInfo))
                 {
-                    Inventory_System.Instance.AddInventory(itemInfo);
+                    target.gameObject.SetActive(false);
                 }
             }
+            
         }
     }
 

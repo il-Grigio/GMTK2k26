@@ -4,36 +4,39 @@ using UnityEngine;
 using Grigios;
 public class Inventory_System : Singleton<Inventory_System>
 {
-    public List<Item_Infos> inventory = new List<Item_Infos>();
+    public List<ItemInfoData> inventory = new List<ItemInfoData>();
 
     int actualWeight, maxWeight = 200;
     int actualItemCount, maxItemCount = 3;
 
     int inventoryValue; // Valore monetario dell'inventario
     int moneyHeld; // Soldi che ha effettivamente il player
-    public void AddInventory(Item_Infos item)
+    public bool AddInventory(ItemInfoData item)
     {
-        if(item.weight <= (maxWeight - actualWeight) && item.countValue <= (maxItemCount - actualItemCount))
+        if(item.Weight <= (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
         {
-            actualWeight += item.weight;
-            actualItemCount += item.countValue;
-            inventoryValue += item.moneyValue;
+            actualWeight += item.Weight;
+            actualItemCount += item.CountValue;
+            inventoryValue += item.MoneyValue;
             inventory.Add(item);
-            item.gameObject.SetActive(false); // Spegni oggetto
+            return true;
         }
         else
         {
-            if(item.weight > (maxWeight - actualWeight) && item.countValue <= (maxItemCount - actualItemCount))
+            if(item.Weight > (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
             {
                 // Troppo pesante l'inventario
+                return false;
             }
-            else if(item.countValue > (maxItemCount - actualItemCount) && item.weight <= (maxWeight - actualWeight))
+            else if(item.CountValue > (maxItemCount - actualItemCount) && item.Weight <= (maxWeight - actualWeight))
             {
                 // Troppi oggetti nell'inventario
+                return false;
             }
             else
             {
                 // Tutto ciò che poteva andare storto è andato storto
+                return false;
             }
         }
     }
