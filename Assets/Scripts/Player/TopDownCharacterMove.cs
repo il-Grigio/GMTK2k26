@@ -28,14 +28,11 @@ public class TopDownCharacterMove : MonoBehaviour
     private void RotateTowardsMouseVector()
     {
         Ray ray = cam.ScreenPointToRay(_input.MousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green);
 
         if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
             var target = hitInfo.point;
-            Debug.DrawLine(target, target + Vector3.up * 100f, Color.red);
             target.y = transform.position.y;
-            Debug.Log(target);
             transform.LookAt(target);
         }
     }
