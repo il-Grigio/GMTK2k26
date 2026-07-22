@@ -6,16 +6,42 @@ using UnityEngine;
 // Seleziona quell'item e chiama l'Inventory_Sistem
 public class Item_Hold : MonoBehaviour
 {
-    public LayerMask targetLayers;
+    private InputHandler _input;
+    private Camera cam;
 
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] LayerMask itemLayerMask;
+
+    private void Awake()
     {
-        if ((targetLayers.value & (1 << other.gameObject.layer)) != 0)
-        {
-            // Abilita shining shader dell'oggetto
+        _input = GetComponent<InputHandler>();
+    }
 
-            // Il player col Mouse tocca l'oggetto
-            Inventory_System.Instance.AddInventory(other.gameObject.AddComponent<Item_Infos>());
+    private void OnEnable()
+    {
+        _input.OnInteractAction -= ItemToInventory;
+        _input.OnInteractAction += ItemToInventory;
+    }
+
+    private void OnDisable()
+    {
+        _input.OnInteractAction -= ItemToInventory;
+    }
+
+    private void ItemToInventory(Vector2 mousePos)
+    {
+        Ray ray = cam.ScreenPointToRay(_input.MousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        {
+            var target = hitInfo.collider.gameObject;
+            if (((1 << target.layer) & itemLayerMask) != 0)
+            {
+                var itemInfo = target.GetComponent<Item_Infos>();
+                if (itemInfo != null)
+                {
+                    Inventory_System.Instance.AddInventory(itemInfo);
+                }
+            }
         }
     }
+
 }
