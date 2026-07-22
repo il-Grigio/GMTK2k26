@@ -5,7 +5,6 @@ public class PlayerShooting : MonoBehaviour
 {
     private InputHandler _input;
 
-    [SerializeField] private ObjectPool bulletPool;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletForce = 20f;
 
@@ -29,13 +28,12 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletObj = bulletPool.GetObject();
+        Bullet bullet = BulletManager.Instance.GetObject();
 
-        bulletObj.transform.position = firePoint.position;
-        bulletObj.transform.rotation = firePoint.rotation;
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
 
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
-            bullet.Setup(firePoint.forward, bulletForce, bulletPool);
+            bullet.Setup(firePoint.forward, bulletForce);
     }
 }
