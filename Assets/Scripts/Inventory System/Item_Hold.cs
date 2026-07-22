@@ -16,20 +16,31 @@ public class Item_Hold : MonoBehaviour
         _input = GetComponent<InputHandler>();
     }
 
+    private void Start()
+    {
+        cam = Camera.main;
+    }
+
     private void OnEnable()
     {
-        _input.OnInteractAction -= ItemToInventory;
+        if(_input.OnInteractAction != null)
+        {
+            _input.OnInteractAction -= ItemToInventory;
+        }
         _input.OnInteractAction += ItemToInventory;
     }
 
     private void OnDisable()
     {
-        _input.OnInteractAction -= ItemToInventory;
+        if (_input.OnInteractAction != null)
+        {
+            _input.OnInteractAction -= ItemToInventory;
+        }
     }
 
     private void ItemToInventory(Vector2 mousePos)
     {
-        Ray ray = cam.ScreenPointToRay(_input.MousePosition);
+        Ray ray = cam.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, itemLayerMask))
         {
             var target = hitInfo.collider.gameObject;

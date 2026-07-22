@@ -6,11 +6,10 @@ public class Inventory_System : Singleton<Inventory_System>
 {
     public List<ItemInfoData> inventory = new List<ItemInfoData>();
 
-    int actualWeight, maxWeight = 200;
-    int actualItemCount, maxItemCount = 3;
-
-    int inventoryValue; // Valore monetario dell'inventario
-    int moneyHeld; // Soldi che ha effettivamente il player
+    [SerializeField] int actualWeight, maxWeight = 200;
+    [SerializeField] int actualItemCount, maxItemCount = 3;
+    [SerializeField] int inventoryValue; // Valore monetario dell'inventario
+    [SerializeField] int moneyHeld; // Soldi che ha effettivamente il player
     public bool AddInventory(ItemInfoData item)
     {
         if(item.Weight <= (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
