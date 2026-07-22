@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639201940570660070
+  lastModified: 639203241603365205
   FileSizes: []
   Exists: 1
 --- !u!114 &-805257137479533250
@@ -33,7 +33,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639201940571143324
+  lastModified: 639203433843861360
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -61,7 +61,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6715324140233362238}
   cacheVersion: 131858
-  cacheTime: 639201940571143324
+  cacheTime: 639203433843861360
   SerializableEventsDict:
   - key: event:/SwordHit
     index: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639201940570665059
+  lastModified: 639203433843796306
   FileSizes:
   - Name: 
     Value: 874

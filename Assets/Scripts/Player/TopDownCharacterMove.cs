@@ -9,7 +9,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] private float rotateSpeed;
     [SerializeField] private bool rotateTowardsMouse;
 
-
     private void Awake()
     {
         _input = GetComponent<inputHandler>();
@@ -54,6 +53,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         targetVector = transform.TransformDirection(targetVector);
 
         // muove il personaggio rispetto alla rotazione della telecamera
+
         // targetVector = Quaternion.Euler(0, cam.gameObject.transform.eulerAngles.y, 0) * targetVector;
 
         var targetPosition = transform.position + targetVector * speed;
