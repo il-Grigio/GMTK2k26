@@ -90,7 +90,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3687638694119692295}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -302,6 +302,7 @@ MonoBehaviour:
   shopObject:
     serializedVersion: 2
     m_Bits: 128
+  interactionRadius: 4
 --- !u!1001 &4112513465269084
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -33,7 +33,8 @@ public class TopDownCharacterMove : MonoBehaviour
         {
             var target = hitInfo.point;
             target.y = transform.position.y;
-            transform.LookAt(target);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), rotateSpeed * Time.deltaTime);
+            //transform.LookAt(target);
         }
     }
 

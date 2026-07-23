@@ -30,11 +30,11 @@ public class CityManager : Singleton<CityManager>
 
     private void SpawnBuildingLeft(Vector3 position)
     {
-        Instantiate(BuildingsPrefab[Random.Range(0, BuildingsPrefab.Length)], position, Quaternion.identity);
+        Instantiate(BuildingsPrefab[Random.Range(0, BuildingsPrefab.Length)], position, Quaternion.Euler(0, -90, 0));
     }
 
     private void SpawnBuildingRight(Vector3 position)
     {
-        Instantiate(BuildingsPrefab[Random.Range(0, BuildingsPrefab.Length)], position, Quaternion.identity);
+        Instantiate(BuildingsPrefab[Random.Range(0, BuildingsPrefab.Length)], position, Quaternion.Euler(0, 90, 0));
     }
 }
