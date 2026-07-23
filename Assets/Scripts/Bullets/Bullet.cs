@@ -5,10 +5,17 @@ public class Bullet : MonoBehaviour
     private Vector3 shootDir;
     private float moveSpeed;
 
+    [SerializeField] TrailRenderer trailRenderer;
+
     public void Setup(Vector3 shootDir, float speed)
     {
         this.shootDir = shootDir;
         this.moveSpeed = speed;
+
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+        }
 
         Invoke(nameof(Deactivate), 2f);
     }
