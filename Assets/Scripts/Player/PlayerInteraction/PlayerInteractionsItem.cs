@@ -4,24 +4,12 @@ using UnityEngine;
 // Script dato come potere al Player.
 // Trova item attorno al Player.
 // Seleziona quell'item e chiama l'Inventory_Sistem
-public class Item_Hold : MonoBehaviour
+
+public class PlayerInteractionsItem : PlayerInteraction
 {
-    private InputHandler _input;
-    private Camera cam;
 
     [SerializeField] LayerMask itemLayerMask;
-
-    private void Awake()
-    {
-        _input = GetComponent<InputHandler>();
-    }
-
-    private void Start()
-    {
-        cam = Camera.main;
-    }
-
-    private void OnEnable()
+    protected override void OnEnable()
     {
         if(_input.OnInteractAction != null)
         {
@@ -30,7 +18,7 @@ public class Item_Hold : MonoBehaviour
         _input.OnInteractAction += ItemToInventory;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         if (_input.OnInteractAction != null)
         {

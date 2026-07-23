@@ -1,26 +1,19 @@
 using System;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerInteractionShooting : PlayerInteraction
 {
-    private InputHandler _input;
-
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletForce = 20f;
 
-    private void Awake()
-    {
-        _input = GetComponent<InputHandler>();
-    }
-
-    private void OnEnable()
+    protected override void OnEnable()
     {
         if (_input.OnShoot != null)
             _input.OnShoot -= Shoot;
         _input.OnShoot += Shoot;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         if (_input.OnShoot != null)
             _input.OnShoot -= Shoot;
