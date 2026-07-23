@@ -8,6 +8,8 @@ using UnityEngine;
 // Range 3: Chiama lo sceriffo!
 public class SuspectVillager : MonoBehaviour
 {
+    private NPCMovement npcMovement;
+
     [Header("Sospetto")]
     public int actualSuspectLevel;
     public int[] rangeSuspects;
@@ -20,7 +22,16 @@ public class SuspectVillager : MonoBehaviour
     [SerializeField] private LayerMask obstacleMask;
     [SerializeField] private Transform eyes;
 
+    [Header("Pettegolezzo")]
+    [SerializeField] private int gossipSuspicionAmount = 5; // quanto sospetto trasmette parlando
+
     // Chiamato solo se il villico è risultato "vicino" tramite OverlapSphere
+
+    private void Start()
+    {
+        npcMovement = GetComponent<NPCMovement>();
+    }
+
     public void TryDetectTheft(ItemInfoData item, GameObject thief)
     {
         if (!CanSee(thief.transform)) return;
@@ -68,7 +79,14 @@ public class SuspectVillager : MonoBehaviour
         }
         else if (actualSuspectLevel >= rangeSuspects[1])
         {
-            // Va a fare pettegolezzi
+            // Va a fare pettegolezzi, e se trova qualcuno gli passa un po' di sospetto
+            NPCMovement target = npcMovement?.TryStartTalkingWithNearbyNPC();
+
+            if (target != null)
+            {
+                SuspectVillager targetSuspect = target.GetComponent<SuspectVillager>();
+                targetSuspect?.AggiungiSospetto(gossipSuspicionAmount);
+            }
         }
         // else: Range 1, non fa nulla
     }
