@@ -744,6 +744,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 201
   eyes: {fileID: 1237691429}
+  gossipSuspicionAmount: 5
 --- !u!1 &596299587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,6 +1939,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   eyes: {fileID: 0}
+  gossipSuspicionAmount: 5
 --- !u!1001 &1203353231
 PrefabInstance:
   m_ObjectHideFlags: 0

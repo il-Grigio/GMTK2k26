@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private float moveSpeed;
 
     [SerializeField] TrailRenderer trailRenderer;
+    [SerializeField] private GameObject hitPrefab;
 
     public void Setup(Vector3 shootDir, float speed)
     {
@@ -28,6 +29,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (hitPrefab != null)
+        {
+            ContactPoint contact = other.contacts[0];
+            Instantiate(hitPrefab, contact.point, Quaternion.LookRotation(contact.normal));
+        }
+
         Deactivate();
     }
 

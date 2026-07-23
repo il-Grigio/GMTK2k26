@@ -9979,3 +9979,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   trailRenderer: {fileID: 96544362045145264}
+  hitPrefab: {fileID: 1801918589960200, guid: 03280e26db9a2524c8409f02a2ab4d7d, type: 3}
