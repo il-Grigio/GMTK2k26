@@ -8,7 +8,7 @@ public abstract class PlayerInteraction : MonoBehaviour
 
     private void Awake()
     {
-        _input = GetComponent<InputHandler>();
+        _input = InputHandler.Instance;
     }
     private void Start()
     {

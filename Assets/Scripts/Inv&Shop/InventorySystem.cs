@@ -2,14 +2,16 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using Grigios;
-public class Inventory_System : Singleton<Inventory_System>
+public class InventorySystem : Singleton<InventorySystem>
 {
     public List<ItemInfoData> inventory = new List<ItemInfoData>();
 
-    [SerializeField] int actualWeight, maxWeight = 200;
-    [SerializeField] int actualItemCount, maxItemCount = 3;
-    [SerializeField] int inventoryValue; // Valore monetario dell'inventario
-    [SerializeField] int moneyHeld; // Soldi che ha effettivamente il player
+    [SerializeField] private int actualWeight;
+    [SerializeField] private int maxWeight = 200;
+    [SerializeField] private int actualItemCount;
+    [SerializeField] private int maxItemCount = 3;
+    [SerializeField] private int inventoryValue; // Valore monetario dell'inventario
+    [SerializeField] private int moneyHeld; // Soldi che ha effettivamente il player
     public bool AddInventory(ItemInfoData item)
     {
         if(item.Weight <= (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
@@ -24,17 +26,14 @@ public class Inventory_System : Singleton<Inventory_System>
         {
             if(item.Weight > (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
             {
-                // Troppo pesante l'inventario
                 return false;
             }
             else if(item.CountValue > (maxItemCount - actualItemCount) && item.Weight <= (maxWeight - actualWeight))
             {
-                // Troppi oggetti nell'inventario
                 return false;
             }
             else
             {
-                // Tutto ciò che poteva andare storto è andato storto
                 return false;
             }
         }
@@ -61,16 +60,10 @@ public class Inventory_System : Singleton<Inventory_System>
 
     public bool RemoveMoneyCheck(int m) // Controlla se effettivamente hai i soldi per comprare
     {
-        if(moneyHeld - m < 0)
-        {
-            return false;
-        }
-
-        RemoveMoney(m);
-        return true;
+        return moneyHeld - m >= 0;
     }
 
-    private void RemoveMoney(int m)
+    public void RemoveMoney(int m)
     {
         moneyHeld -= m;
     }

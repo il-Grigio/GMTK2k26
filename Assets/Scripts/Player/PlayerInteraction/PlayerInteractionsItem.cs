@@ -36,7 +36,7 @@ public class PlayerInteractionsItem : PlayerInteraction
             if ((transform.position - target.transform.position).sqrMagnitude > interactionRadius * interactionRadius) return;
             var itemInfo = target.GetComponent<ItemInfoComponent>().GetInfo();
 
-            if (itemInfo != null && Inventory_System.Instance.AddInventory(itemInfo))
+            if (itemInfo != null && InventorySystem.Instance.AddInventory(itemInfo))
             {
                 target.SetActive(false);
 

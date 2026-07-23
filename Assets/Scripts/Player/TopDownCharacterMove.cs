@@ -9,7 +9,7 @@ public class TopDownCharacterMove : MonoBehaviour
 
     private void Awake()
     {
-        _input = GetComponent<InputHandler>();
+        _input = InputHandler.Instance;
     }
 
     private void Start()
@@ -20,9 +20,12 @@ public class TopDownCharacterMove : MonoBehaviour
     void Update()
     {
         var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
-        
-        MoveTowardTarget(targetVector);
-        RotateTowardsMouseVector();
+
+        if (_input.CurrentState == InputHandler.State.Game)
+        {
+            MoveTowardTarget(targetVector);
+            RotateTowardsMouseVector();
+        }
     }
 
     private void RotateTowardsMouseVector()

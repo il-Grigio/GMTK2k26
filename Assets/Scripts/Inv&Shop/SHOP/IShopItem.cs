@@ -1,4 +1,4 @@
 public interface IShopItem
 {
-    void Buy(PlayerInteractionShop shop);
+    void Buy(Shop shop);
 }

@@ -31,8 +31,40 @@ public class PlayerInteractionSelling : PlayerInteraction
         Ray ray = cam.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, sellingPlace))
         {
-            Inventory_System.Instance.SellInventory();
+            InventorySystem.Instance.SellInventory();
         }
+    }
+    public void BuyHorse(int m)
+    {
+        if (HasEnoughMoney(m))
+        {
+            InventorySystem.Instance.RemoveMoney(m);
+            
+            PointSystem.Instance.cavalliRaccolti += 1;
+            // Instantiate(cavallo, cavalloSpawnPoint.position, Quaternion.identity);
+        }
+
+    }
+
+    public void BuyBullet(int m)
+    {
+        if (HasEnoughMoney(m))
+        {
+            InventorySystem.Instance.RemoveMoney(m);
+        }
+    }
+
+    public void BuyDynamite(int m)
+    {
+        if (HasEnoughMoney(m))
+        {
+            InventorySystem.Instance.RemoveMoney(m);
+        }
+    }
+
+    public bool HasEnoughMoney(int m)
+    {
+        return InventorySystem.Instance.RemoveMoneyCheck(m);
     }
 
 }
