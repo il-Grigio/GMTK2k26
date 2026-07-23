@@ -5,7 +5,6 @@ using Grigios;
 public class BulletManager : Singleton<BulletManager>
 {
     public Bullet prefab;
-    public int maxBullets = 3;
     private List<Bullet> pool = new List<Bullet>();
 
     public Bullet GetObject()
@@ -16,9 +15,6 @@ public class BulletManager : Singleton<BulletManager>
             obj.gameObject.SetActive(true);
             return obj;
         }
-
-        if (pool.Count >= maxBullets)
-            return null; 
 
         var bullet = Instantiate(prefab);
         pool.Add(bullet);

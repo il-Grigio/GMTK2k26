@@ -7,6 +7,7 @@ public class PlayerInteractionShop : PlayerInteraction
     // Deve parlare con l'inventory system per rimuovere i soldi spesi
 
     [SerializeField] LayerMask shopObject;
+    [SerializeField] float interactionRadius = 4;
     protected override void OnEnable()
     {
         if (_input.OnInteractAction != null)
@@ -31,12 +32,13 @@ public class PlayerInteractionShop : PlayerInteraction
         {
             if (hitInfo.collider.TryGetComponent<IShopItem>(out var item))
             {
+                if ((transform.position - hitInfo.transform.position).sqrMagnitude > interactionRadius * interactionRadius) return;
                 item.Buy(this);
             }
         }
     }
 
-    public void CompraCavallo(int m)
+    public void BuyHorse(int m)
     {
         if (SpendiSoldi(m))
         {
@@ -46,15 +48,14 @@ public class PlayerInteractionShop : PlayerInteraction
 
     }
 
-    public void CompraBullet(int m)
+    public void BuyBullet(int m)
     {
         if (SpendiSoldi(m))
         {
-            BulletManager.Instance.maxBullets += 1;
         }
     }
 
-    public void CompraDinamite() // Non so se sia necessario, ma nel caso lo sia, lo aggiungo
+    public void BuyDynamite() // Non so se sia necessario, ma nel caso lo sia, lo aggiungo
     {
 
     }

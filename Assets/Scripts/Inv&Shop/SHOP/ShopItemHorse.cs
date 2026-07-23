@@ -6,6 +6,6 @@ public class ShopItemHorse : MonoBehaviour, IShopItem
 
     public void Buy(PlayerInteractionShop shop)
     {
-        shop.CompraCavallo(cost);
+        shop.BuyHorse(cost);
     }
 }

@@ -6,6 +6,6 @@ public class ShopItemBullet : MonoBehaviour, IShopItem
 
     public void Buy(PlayerInteractionShop shop)
     {
-        shop.CompraBullet(cost);
+        shop.BuyBullet(cost);
     }
 }

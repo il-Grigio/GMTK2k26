@@ -7,6 +7,7 @@ public class PlayerInteractionsItem : PlayerInteraction
 {
     [SerializeField] LayerMask itemLayerMask;
     [SerializeField] LayerMask villagerLayerMask;
+    [SerializeField] float interactionRadius = 2f;
     [SerializeField] float suspicionCheckRadius = 20f; // deve coprire il raggio di vista max dei villici
 
     protected override void OnEnable()
@@ -32,6 +33,7 @@ public class PlayerInteractionsItem : PlayerInteraction
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, itemLayerMask))
         {
             var target = hitInfo.collider.gameObject;
+            if ((transform.position - target.transform.position).sqrMagnitude > interactionRadius * interactionRadius) return;
             var itemInfo = target.GetComponent<ItemInfoComponent>().GetInfo();
 
             if (itemInfo != null && Inventory_System.Instance.AddInventory(itemInfo))
