@@ -50,7 +50,6 @@ GameObject:
   - component: {fileID: 7402506100302800892}
   - component: {fileID: 6857223170218559100}
   - component: {fileID: 2716835016746369888}
-  - component: {fileID: 3979879651655710857}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -90,7 +89,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3687638694119692295}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -251,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
   firePoint: {fileID: 3529143819616117054}
-  bulletForce: 20
+  bulletForce: 80
 --- !u!114 &6857223170218559100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,22 +286,6 @@ MonoBehaviour:
   sellingPlace:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &3979879651655710857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3687638694119692295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24f3a0fb8e8f8b642941b932917d836f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionShop
-  shopObject:
-    serializedVersion: 2
-    m_Bits: 128
-  interactionRadius: 4
 --- !u!1001 &4112513465269084
 PrefabInstance:
   m_ObjectHideFlags: 0

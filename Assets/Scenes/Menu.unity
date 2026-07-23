@@ -351,7 +351,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3979879651655710857, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1775,7 +1776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5581e50795540c6419b461991a5d614e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletManager
-  prefab: {fileID: 26577055526439061, guid: 6c5dffbb69f0f494db42eb6cae5cd0c7, type: 3}
+  prefab: {fileID: 5661524378920617937, guid: 8957951a15357404baf91c2670cc57c3, type: 3}
 --- !u!114 &1183243408
 MonoBehaviour:
   m_ObjectHideFlags: 0

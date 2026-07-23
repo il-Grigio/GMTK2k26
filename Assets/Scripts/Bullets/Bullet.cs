@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -25,14 +26,11 @@ public class Bullet : MonoBehaviour
         transform.position += shootDir * (moveSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-            Deactivate();
-        }
+        Deactivate();
     }
+
     private void Deactivate()
     {
         gameObject.SetActive(false);
