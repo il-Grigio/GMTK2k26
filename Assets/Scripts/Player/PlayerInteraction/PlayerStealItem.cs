@@ -3,8 +3,9 @@ using UnityEngine;
 // Script dato come potere al Player.
 // Trova item attorno al Player.
 // Seleziona quell'item e chiama l'Inventory_Sistem
-public class PlayerInteractionsItem : PlayerInteraction
+public class PlayerStealItem : PlayerInteraction
 {
+    [Range(0f, 1f)] public float stealthSkill = 0.5f;
     [SerializeField] LayerMask itemLayerMask;
     [SerializeField] LayerMask villagerLayerMask;
     [SerializeField] float interactionRadius = 2f;
@@ -35,18 +36,13 @@ public class PlayerInteractionsItem : PlayerInteraction
             var target = hitInfo.collider.gameObject;
             if ((transform.position - target.transform.position).sqrMagnitude > interactionRadius * interactionRadius) return;
             var itemInfo = target.GetComponent<ItemInfoComponent>().GetInfo();
-
-            if (itemInfo != null && InventorySystem.Instance.AddInventory(itemInfo))
+            if (target.TryGetComponent(out StealableItem item))
             {
-                target.SetActive(false);
-
-                TheftNotifier.NotifyTheft(
-                    itemInfo,
-                    target.transform.position,
-                    gameObject,
-                    suspicionCheckRadius,
-                    villagerLayerMask
-                );
+                if (itemInfo != null && InventorySystem.Instance.AddInventory(itemInfo))
+                {
+                    float currentStealth = stealthSkill;
+                    item.Steal(transform, Mathf.Clamp01(currentStealth));
+                }
             }
         }
     }

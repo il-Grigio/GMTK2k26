@@ -40,6 +40,7 @@ public class ShopCameraTrigger : MonoBehaviour
         player = other.transform;
         other.transform.position = playerTargetPosition.position;
         other.transform.rotation = playerTargetPosition.rotation;
+        InventorySystem.Instance.SellInventory();
     }
     
     public void ExitShop()

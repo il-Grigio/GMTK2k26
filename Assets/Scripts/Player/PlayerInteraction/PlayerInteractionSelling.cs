@@ -31,7 +31,7 @@ public class PlayerInteractionSelling : PlayerInteraction
         Ray ray = cam.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, sellingPlace))
         {
-            InventorySystem.Instance.SellInventory();
+            
         }
     }
     public void BuyHorse(int m)

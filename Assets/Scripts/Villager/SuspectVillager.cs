@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Il villico ha un raggio di visione, se vede che prendi roba si insospettisce.
-// Si insospettisce di più in base a: peso, valore, itemcount (tutto insomma).
+// Si insospettisce di pi in base a: peso, valore, itemcount (tutto insomma).
 // Range 1: non fa nulla :)
 // Range 2: Va a fare pettegolezzi in giro
 // Range 3: Chiama lo sceriffo!
@@ -25,7 +25,7 @@ public class SuspectVillager : MonoBehaviour
     [Header("Pettegolezzo")]
     [SerializeField] private int gossipSuspicionAmount = 5; // quanto sospetto trasmette parlando
 
-    // Chiamato solo se il villico è risultato "vicino" tramite OverlapSphere
+    // Chiamato solo se il villico ï¿½ risultato "vicino" tramite OverlapSphere
 
     private void Start()
     {
