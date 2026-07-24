@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using Grigios;
+using TMPro;
 public class InventorySystem : Singleton<InventorySystem>
 {
     public List<ItemInfoData> inventory = new List<ItemInfoData>();
@@ -12,6 +13,8 @@ public class InventorySystem : Singleton<InventorySystem>
     [SerializeField] private int maxItemCount = 3;
     [SerializeField] private int inventoryValue; // Valore monetario dell'inventario
     [SerializeField] private int moneyHeld; // Soldi che ha effettivamente il player
+
+    [SerializeField] TextMeshProUGUI moneyText;
     public bool AddInventory(ItemInfoData item)
     {
         if(item.Weight <= (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
@@ -50,12 +53,16 @@ public class InventorySystem : Singleton<InventorySystem>
         actualItemCount = 0;
 
         inventory.Clear();
+        FixText();
+
     }
 
 
     public void AddMoney(int m)
     {
         moneyHeld += m;
+        FixText();
+
     }
 
     public bool RemoveMoneyCheck(int m) // Controlla se effettivamente hai i soldi per comprare
@@ -66,15 +73,25 @@ public class InventorySystem : Singleton<InventorySystem>
     public void RemoveMoney(int m)
     {
         moneyHeld -= m;
+        FixText();
+
     }
-    
+
     public void HalfMoney()
     {
         moneyHeld /= 2;
+        FixText();
+
     }
 
     public void MultMoney()
     {
         moneyHeld = Mathf.RoundToInt(moneyHeld * 1.5f);
+        FixText();
+    }
+
+    private void FixText()
+    {
+        moneyText.text = moneyHeld.ToString();
     }
 }

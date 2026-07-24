@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 335613632}
   - component: {fileID: 335613631}
   m_Layer: 5
-  m_Name: Cavalli Salvati TMP
+  m_Name: 'Bounty:'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 338371919}
   - component: {fileID: 338371918}
   m_Layer: 5
-  m_Name: Cavalli Salvati TMP
+  m_Name: Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +679,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TIME
+  m_text: mm:ss
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1325,7 +1325,7 @@ GameObject:
   - component: {fileID: 510632613}
   - component: {fileID: 510632612}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Bounty Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1347,8 +1347,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -45.328636}
-  m_SizeDelta: {x: 33.0001, y: 45.3286}
+  m_AnchoredPosition: {x: 0, y: -45}
+  m_SizeDelta: {x: 250, y: 43.6145}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &510632612
 MonoBehaviour:
@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.55
+  m_fontSize: 39
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2554,6 +2554,7 @@ MonoBehaviour:
   maxItemCount: 3
   inventoryValue: 0
   moneyHeld: 0
+  moneyText: {fileID: 1385229545}
 --- !u!114 &1183243407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,6 +2603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimerSystem
   timer: 10
   increaseTime: 10
+  text: {fileID: 338371918}
 --- !u!114 &1183243410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2618,6 +2620,7 @@ MonoBehaviour:
   scoreMultiplier: 1
   timeToIncreaseMultiplier: 10
   scoreMultiplierIncrease: 0.1
+  bounty: {fileID: 510632612}
 --- !u!1001 &1203353231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2891,7 +2894,7 @@ GameObject:
   - component: {fileID: 1249383308}
   - component: {fileID: 1249383307}
   m_Layer: 5
-  m_Name: Cavalli Salvati TMP
+  m_Name: 'Money:'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3029,7 +3032,7 @@ GameObject:
   - component: {fileID: 1271765227}
   - component: {fileID: 1271765226}
   m_Layer: 5
-  m_Name: CavalloPFP
+  m_Name: BountyPFP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3516,7 +3519,7 @@ GameObject:
   - component: {fileID: 1385229546}
   - component: {fileID: 1385229545}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: 'Money Text:'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3539,7 +3542,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -45.328636}
-  m_SizeDelta: {x: 33.0001, y: 45.3286}
+  m_SizeDelta: {x: 250, y: 45.3286}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1385229545
 MonoBehaviour:
@@ -3561,7 +3564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3653,7 +3656,7 @@ GameObject:
   - component: {fileID: 1431837159}
   - component: {fileID: 1431837158}
   m_Layer: 5
-  m_Name: CavalloPFP
+  m_Name: MoneyPFP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3997,7 +4000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -561, y: -223}
   m_SizeDelta: {x: 686.7849, y: 313.3725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1554338814
@@ -5749,7 +5752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6500,7 +6503,7 @@ MonoBehaviour:
   gameObject: {fileID: 2140636864}
   weight: 20
   countValue: 1
-  moneyValue: 10
+  moneyValue: 100
 --- !u!135 &2140636867
 SphereCollider:
   m_ObjectHideFlags: 0

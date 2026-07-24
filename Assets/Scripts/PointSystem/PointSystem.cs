@@ -1,5 +1,6 @@
 using UnityEngine;
 using Grigios;
+using TMPro;
 public class PointSystem : Singleton<PointSystem>
 {
     [SerializeField] private float score;
@@ -8,7 +9,7 @@ public class PointSystem : Singleton<PointSystem>
     [SerializeField]float scoreMultiplier = 1.0f;
     [SerializeField]float timeToIncreaseMultiplier = 10.0f;
     [SerializeField]float scoreMultiplierIncrease = 0.1f;
-    
+    [SerializeField] TextMeshProUGUI bounty;
     public void AddScore(int qta)
     {
         Debug.Log(qta + "!!!!!!");
@@ -27,13 +28,15 @@ public class PointSystem : Singleton<PointSystem>
     private void AddPlainScore(float qta)
     {
         score += (qta * scoreMultiplier);
+        bounty.text = score.ToString();
         Debug.Log("Score: " + score + " Multiplier: " + scoreMultiplier);
     }
 
     private void AddPlainScoreNOMultiplier(float qta)
     {
         score += qta;
-    }   
+        bounty.text = score.ToString();
+    }
 
     private void AddScoreMultiplier(float multiplier)
     {
