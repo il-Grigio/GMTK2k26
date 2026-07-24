@@ -40,7 +40,7 @@ public class PlayerInteractionSelling : PlayerInteraction
         {
             InventorySystem.Instance.RemoveMoney(m);
             
-            PointSystem.Instance.cavalliRaccolti += 1;
+            PointSystem.Instance.AddHorses(1);
             // Instantiate(cavallo, cavalloSpawnPoint.position, Quaternion.identity);
         }
 
