@@ -5,6 +5,7 @@ public class PlayerInteractionShooting : PlayerInteraction
 {
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletForce = 20f;
+    [SerializeField] private Animator anim;
 
     protected override void OnEnable()
     {
@@ -21,6 +22,9 @@ public class PlayerInteractionShooting : PlayerInteraction
 
     private void Shoot()
     {
+        if (anim != null)
+            anim.SetTrigger("Shoot");
+
         Bullet bullet = BulletManager.Instance.GetObject();
 
         bullet.transform.position = firePoint.position;
