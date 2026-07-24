@@ -2,9 +2,6 @@ using UnityEngine;
 using Grigios;
 public class PointSystem : Singleton<PointSystem>
 {
-    // Deve mantenere sì tutti i point ma comunque tutte le informazioni relative ai punti stessi
-
-    private int cavalliRaccolti;
     [SerializeField] private float score;
 
     [Header("Score Manager")]
@@ -39,6 +36,11 @@ public class PointSystem : Singleton<PointSystem>
     private void AddScoreMultiplier(float multiplier)
     {
         scoreMultiplier += multiplier;
+    }
+
+    public int GetScore()
+    {
+        return (int)score;
     }
 
     private void Update()
