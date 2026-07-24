@@ -54,7 +54,6 @@ public class InventorySystem : Singleton<InventorySystem>
 
         inventory.Clear();
         FixText();
-
     }
 
 
@@ -62,7 +61,6 @@ public class InventorySystem : Singleton<InventorySystem>
     {
         moneyHeld += m;
         FixText();
-
     }
 
     public bool RemoveMoneyCheck(int m) // Controlla se effettivamente hai i soldi per comprare
