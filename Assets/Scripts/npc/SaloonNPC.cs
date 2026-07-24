@@ -19,6 +19,8 @@ public enum NPCState
 [RequireComponent(typeof(NavMeshAgent))]
 public class SaloonNPC : MonoBehaviour
 {
+    [SerializeField] private Animator anim;
+
     [Header("Identità")]
     public string npcName = "Cowboy";
 
@@ -99,6 +101,7 @@ public class SaloonNPC : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+       // anim = GetComponent<Animator>();
         homePosition = transform.position;
 
         SaloonManager.Instance.Register(this);
@@ -125,6 +128,21 @@ public class SaloonNPC : MonoBehaviour
         HandleIdleMovement();
         HandleCombatRepositioning();
         HandleFleeing();
+
+        UpdateAnimator();
+    }
+    private void UpdateAnimator()
+    {
+        if (anim == null || agent == null) return;
+
+        bool isMoving = agent.isOnNavMesh &&
+                        !agent.isStopped &&
+                        agent.velocity.magnitude > 0.05f;
+
+        bool isFleeing = State == NPCState.Fleeing; 
+
+        anim.SetBool("IsMoving", isMoving);
+        anim.SetBool("IsFleeing", isFleeing);
     }
 
     // ---------------- DRINKING ----------------
@@ -153,6 +171,8 @@ public class SaloonNPC : MonoBehaviour
         if (State == NPCState.Idle || State == NPCState.Chatting)
             SetState(NPCState.Drinking);
         // qui puoi far partire l'animazione "beve dal bicchiere"
+        if (anim != null)
+            anim.SetTrigger("Drink");
     }
 
     // ---------------- MOVIMENTO: TRANQUILLO ----------------
@@ -497,6 +517,9 @@ public class SaloonNPC : MonoBehaviour
         SetState(NPCState.Combat);
         timeSinceLastIncident = 0f;
 
+        if (anim != null)
+            anim.SetTrigger("Shoot");
+
         // più sei ubriaco, più è probabile che il colpo vada a vuoto (o peggio, colpisca qualcun altro)
         float missChance = Mathf.Clamp01(drunkenness * 0.6f - courage * 0.15f);
 
@@ -570,6 +593,8 @@ public class SaloonNPC : MonoBehaviour
         agent.isStopped = true;
         Debug.Log($"{npcName} è morto.");
         // disabilita collider, avvia ragdoll/animazione morte, ecc.
+        if (anim != null)
+            anim.SetTrigger("Die");
     }
 
     // ---------------- CALMA DOPO LA TEMPESTA ----------------

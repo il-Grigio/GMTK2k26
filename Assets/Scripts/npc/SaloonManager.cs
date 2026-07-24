@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SaloonManager : MonoBehaviour
@@ -9,7 +10,11 @@ public class SaloonManager : MonoBehaviour
     [Tooltip("0 = nessuno sospetta di te, 1 = tutti ti tengono d'occhio")]
     [Range(0f, 1f)] public float playerHeat = 0f;
     public float heatDecayPerSecond = 0.01f; // quanto scende nel tempo se non fai altri casini
-    public float heatGainOnCaught = 0.35f;   // quanto sale se un NPC ti becca direttamente
+    public float heatGainOnCaught = 0.35f;   // quanto sale se un NPC ti becca direttament
+
+    [Header("Update UI")]
+    [SerializeField] TextMeshProUGUI suspectText;
+    [SerializeField] float timerUpdate = 1f;
 
     private readonly List<SaloonNPC> npcs = new List<SaloonNPC>();
 
@@ -26,6 +31,13 @@ public class SaloonManager : MonoBehaviour
     private void Update()
     {
         playerHeat = Mathf.Max(0f, playerHeat - heatDecayPerSecond * Time.deltaTime);
+
+        timerUpdate -= Time.deltaTime;
+        if(timerUpdate <= 0)
+        {
+            suspectText.text = Mathf.RoundToInt(playerHeat * 10).ToString();
+            timerUpdate = 1f;
+        }
     }
 
     public void Register(SaloonNPC npc)
