@@ -5,6 +5,7 @@ using UnityEngine;
 public class EffectPoolManager : MonoBehaviour
 {
     public static EffectPoolManager Instance { get; private set; }
+    private Transform poolParent;
 
     [System.Serializable]
     public class Pool
@@ -24,6 +25,8 @@ public class EffectPoolManager : MonoBehaviour
             return;
         }
         Instance = this;
+        poolParent = new GameObject("EffectPool_Container").transform;
+        poolParent.SetParent(transform);
     }
 
     public GameObject Get(string key, Vector3 position, Quaternion rotation)
@@ -39,7 +42,7 @@ public class EffectPoolManager : MonoBehaviour
 
         if (obj == null)
         {
-            obj = Instantiate(pool.prefab);
+            obj = Instantiate(pool.prefab, poolParent);
             list.Add(obj);
         }
 
