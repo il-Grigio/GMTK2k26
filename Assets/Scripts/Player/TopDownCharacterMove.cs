@@ -5,6 +5,7 @@ public class TopDownCharacterMove : MonoBehaviour
     private InputHandler _input;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
+    [SerializeField] private Animator anim;
     private Camera cam;
 
     private void Awake()
@@ -25,8 +26,23 @@ public class TopDownCharacterMove : MonoBehaviour
         {
             MoveTowardTarget(targetVector);
             RotateTowardsMouseVector();
+            UpdateAnimator(targetVector);
+        }
+        else
+        {
+            if (anim != null)
+                anim.SetBool("IsMoving", false);
         }
     }
+
+    private void UpdateAnimator(Vector3 targetVector)
+    {
+        if (anim == null) return;
+
+        bool isMoving = targetVector.sqrMagnitude > 0.001f;
+        anim.SetBool("IsMoving", isMoving);
+    }
+
 
     private void RotateTowardsMouseVector()
     {
