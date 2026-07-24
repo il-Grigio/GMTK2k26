@@ -1,23 +1,25 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SaloonManager : MonoBehaviour
 {
     public static SaloonManager Instance { get; private set; }
-
     [Header("Reputazione Player")]
     [Tooltip("0 = nessuno sospetta di te, 1 = tutti ti tengono d'occhio")]
     [Range(0f, 1f)] public float playerHeat = 0f;
     public float heatDecayPerSecond = 0.01f; // quanto scende nel tempo se non fai altri casini
     public float heatGainOnCaught = 0.35f;   // quanto sale se un NPC ti becca direttament
-
     [Header("Update UI")]
-    [SerializeField] TextMeshProUGUI suspectText;
-    [SerializeField] float timerUpdate = 1f;
+    [SerializeField] Image[] stelleImage = new Image[5]; // componenti Image delle stelle
+    [SerializeField] float heatPerStar = 0.18f; // quanto heat serve per accendere una stella
+
+    public event Action<float> OnHeatChanged;
 
     private readonly List<SaloonNPC> npcs = new List<SaloonNPC>();
-
+    private int lastStarCount = -1; // tiene traccia del rank attuale, per rilevare i cambi
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,40 +29,49 @@ public class SaloonManager : MonoBehaviour
         }
         Instance = this;
     }
-
     private void Update()
     {
-        playerHeat = Mathf.Max(0f, playerHeat - heatDecayPerSecond * Time.deltaTime);
-
-        timerUpdate -= Time.deltaTime;
-        if(timerUpdate <= 0)
-        {
-            suspectText.text = Mathf.RoundToInt(playerHeat * 10).ToString();
-            timerUpdate = 1f;
-        }
+        SetHeat(Mathf.Max(0f, playerHeat - heatDecayPerSecond * Time.deltaTime));
     }
-
     public void Register(SaloonNPC npc)
     {
         if (!npcs.Contains(npc)) npcs.Add(npc);
     }
-
     public void Unregister(SaloonNPC npc)
     {
         npcs.Remove(npc);
     }
-
     // ---------------- REPUTAZIONE PLAYER ----------------
-
     public void IncreasePlayerHeat(float amount)
     {
-        playerHeat = Mathf.Clamp01(playerHeat + amount);
+        SetHeat(Mathf.Clamp01(playerHeat + amount));
     }
-
     public float GetPlayerHeat() => playerHeat;
 
-    // ---------------- FURTO / SPARATORIE ----------------
+    private void SetHeat(float newHeat)
+    {
+        playerHeat = newHeat;
 
+        int currentStarCount = Mathf.Clamp(Mathf.FloorToInt(playerHeat / heatPerStar), 0, stelleImage.Length);
+        if (currentStarCount != lastStarCount)
+        {
+            lastStarCount = currentStarCount;
+            OnHeatChanged?.Invoke(playerHeat);
+            UpdateStars(currentStarCount);
+        }
+    }
+
+    // Accende/spegne le stelle in base al rank corrente. Chiamato solo quando il rank cambia.
+    private void UpdateStars(int starsToLight)
+    {
+        for (int i = 0; i < stelleImage.Length; i++)
+        {
+            if (stelleImage[i] == null) continue;
+            stelleImage[i].enabled = i < starsToLight;
+        }
+    }
+
+    // ---------------- FURTO / SPARATORIE ----------------
     // Chiamato dal sistema di furto: notifica tutti gli NPC abbastanza vicini
     public void NotifyTheft(Transform thief, float stealthValue, Vector3 theftPosition)
     {
@@ -70,7 +81,6 @@ public class SaloonManager : MonoBehaviour
             npc.OnTheftAttempt(thief, stealthValue, theftPosition);
         }
     }
-
     // Chiamato quando avviene una sparatoria, per avvisare i testimoni vicini
     public void BroadcastShooting(SaloonNPC shooter, SaloonNPC victim, Vector3 position, float witnessRadius = 12f)
     {
@@ -84,9 +94,7 @@ public class SaloonManager : MonoBehaviour
             }
         }
     }
-
     // ---------------- RICERCA NPC ----------------
-
     public List<SaloonNPC> GetNPCsNear(Vector3 position, float radius, SaloonNPC exclude = null)
     {
         List<SaloonNPC> result = new List<SaloonNPC>();
@@ -98,7 +106,6 @@ public class SaloonManager : MonoBehaviour
         }
         return result;
     }
-
     // Usato per il "colpo a vuoto": trova un bersaglio casuale nel raggio, diverso da chi spara/mira originale
     public SaloonNPC GetRandomNearby(Vector3 position, float radius, params SaloonNPC[] exclude)
     {
@@ -112,12 +119,10 @@ public class SaloonManager : MonoBehaviour
                 if (npc == ex) { excluded = true; break; }
             }
             if (excluded) continue;
-
             if (Vector3.Distance(npc.transform.position, position) <= radius)
                 candidates.Add(npc);
         }
-
         if (candidates.Count == 0) return null;
-        return candidates[Random.Range(0, candidates.Count)];
+        return candidates[UnityEngine.Random.Range(0, candidates.Count)];
     }
 }
