@@ -1,38 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Scena di gioco")]
-    [Tooltip("Nome esatto della scena da caricare al Play (deve essere in Build Settings)")]
-    [SerializeField] private string gameplaySceneName = "Gameplay";
- 
+    [Header("Items")]
+    [Tooltip("Item da attivare e disattivare tra inizio e fine scena")]
+    public List<GameObject> turnableitems = new List<GameObject>();
+
     [Header("Pannelli UI")]
-    [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject creditsPanel;
  
     private void Start()
     {
-        // All'avvio mostriamo solo il menu principale.
+        Time.timeScale = 0f;
+        foreach (GameObject gb in turnableitems)
+        {
+            gb.SetActive(false);
+        }
         ShowMainMenu();
     }
  
     public void Signal_OnPlayClick()
     {
-        SceneManager.LoadScene(gameplaySceneName);
+        Time.timeScale = 1f;
+        foreach (GameObject gb in turnableitems)
+        {
+            gb.SetActive(true);
+            // Altre implementazioni varie
+        }
     }
  
     public void Signal_OnSettingsClick()
     {
-        if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
         if (creditsPanel != null) creditsPanel.SetActive(false);
         if (settingsPanel != null) settingsPanel.SetActive(true);
     }
  
     public void Signal_OnCreditsClick()
     {
-        if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (creditsPanel != null) creditsPanel.SetActive(true);
     }
@@ -59,6 +66,5 @@ public class MainMenu : MonoBehaviour
     {
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (creditsPanel != null) creditsPanel.SetActive(false);
-        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
     }
 }

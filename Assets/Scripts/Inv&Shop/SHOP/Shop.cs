@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -9,6 +11,7 @@ public class Shop : MonoBehaviour
     private InputHandler _input;
     private Camera cam;
     [SerializeField] private int cavalliRaccolti;
+    [SerializeField] TextMeshProUGUI horseText;
 
     private void Awake()
     {
@@ -56,6 +59,7 @@ public class Shop : MonoBehaviour
 
             cavalliRaccolti += 1;
             PointSystem.Instance.AddScoreNOCombo(1000 * cavalliRaccolti);
+            horseText.text = cavalliRaccolti.ToString();
             // Instantiate(cavallo, cavalloSpawnPoint.position, Quaternion.identity);
         }
 
