@@ -14,7 +14,7 @@ public class SaloonManager : MonoBehaviour
     public float heatGainOnCaught = 0.35f;   // quanto sale se un NPC ti becca direttament
     [Header("Update UI")]
     [SerializeField] Image[] stelleImage = new Image[5]; // componenti Image delle stelle
-    [SerializeField] float heatPerStar = 0.25f; // quanto heat serve per accendere una stella
+    [SerializeField] float heatPerStar = 0.18f; // quanto heat serve per accendere una stella
 
     public event Action<float> OnHeatChanged;
 
