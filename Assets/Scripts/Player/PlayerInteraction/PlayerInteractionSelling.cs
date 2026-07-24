@@ -1,10 +1,11 @@
+/*
+
 using Unity.VisualScripting;
 using UnityEngine;
 
 // Script dato come potere al Player.
 // Trova item dove clicka il player.
 // Seleziona quell'item e chiama l'Inventory_Sistem
-
 public class PlayerInteractionSelling : PlayerInteraction
 {
     [SerializeField] LayerMask sellingPlace;
@@ -68,3 +69,4 @@ public class PlayerInteractionSelling : PlayerInteraction
     }
 
 }
+*/
