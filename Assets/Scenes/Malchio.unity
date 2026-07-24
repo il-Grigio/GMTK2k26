@@ -1834,6 +1834,7 @@ GameObject:
   - component: {fileID: 1183243407}
   - component: {fileID: 1183243406}
   - component: {fileID: 1183243408}
+  - component: {fileID: 1183243409}
   m_Layer: 0
   m_Name: ---- GAME MANAGERS
   m_TagString: Untagged
@@ -1887,7 +1888,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b708673bd1171542ac4aa3832b3f05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PointSystem
-  cavalliRaccolti: 0
+  score: 0
+  scoreMultiplier: 1
+  timeToIncreaseMultiplier: 10
+  scoreMultiplierIncrease: 0.1
 --- !u!114 &1183243406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1940,6 +1944,21 @@ MonoBehaviour:
     m_Bits: 0
   eyes: {fileID: 0}
   gossipSuspicionAmount: 5
+--- !u!114 &1183243409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183243402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48649f872f68a834cb569e5b1926ff96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EffectPoolManager
+  pools:
+  - key: hit
+    prefab: {fileID: 1801918589960200, guid: 03280e26db9a2524c8409f02a2ab4d7d, type: 3}
 --- !u!1001 &1203353231
 PrefabInstance:
   m_ObjectHideFlags: 0
