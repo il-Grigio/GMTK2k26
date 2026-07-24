@@ -15,12 +15,14 @@ Shader "Custom/ToonShader4Level"
         [Header(Soglie bande da 0 a 1)]
         _Threshold1 ("Soglia 1-2", Range(0,1)) = 0.75
         _Threshold2 ("Soglia 2-3", Range(0,1)) = 0.5
-        _Threshold3 ("Soglia 3-4", Range(0,1)) = 0.25   
+        _Threshold3 ("Soglia 3-4", Range(0,1)) = 0.25
         _BandSmooth ("Morbidezza bordo banda", Range(0.0, 0.2)) = 0.01
+        _ShadowCutoff ("Soglia Shadow Map (binaria)", Range(0.0, 1.0)) = 0.5
 
         [Header(Outline)]
         _OutlineColor ("Colore Outline", Color) = (0,0,0,1)
-        _OutlineWidth ("Spessore Outline", Range(0.0, 0.1)) = 0.02
+        _OutlineWidth ("Spessore Outline", Range(0.0, 0.02)) = 0.003
+        [Toggle(_USE_SMOOTHED_NORMALS)] _UseSmoothedNormals ("Usa Normali Smussate per Outline (UV3)", Float) = 0
 
         [Header(Specular opzionale)]
         _SpecularColor ("Colore Specular", Color) = (1,1,1,1)
@@ -49,6 +51,7 @@ Shader "Custom/ToonShader4Level"
             HLSLPROGRAM
             #pragma vertex OutlineVert
             #pragma fragment OutlineFrag
+            #pragma multi_compile _ _USE_SMOOTHED_NORMALS
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
@@ -60,6 +63,7 @@ Shader "Custom/ToonShader4Level"
             {
                 float4 positionOS : POSITION;
                 float3 normalOS   : NORMAL;
+                float3 smoothedNormalOS : TEXCOORD2; // normale media per-posizione, generata dallo script di baking
             };
 
             struct Varyings
@@ -71,10 +75,31 @@ Shader "Custom/ToonShader4Level"
             {
                 Varyings OUT;
                 VertexPositionInputs vpi = GetVertexPositionInputs(IN.positionOS.xyz);
-                VertexNormalInputs vni = GetVertexNormalInputs(IN.normalOS);
 
-                // Espande il vertice lungo la normale in world space
-                float3 expandedPosWS = vpi.positionWS + vni.normalWS * _OutlineWidth;
+                // Per l'estrusione dell'outline usiamo, se attivato, la
+                // normale smussata (media tra tutte le facce che
+                // condividono la stessa posizione) invece della normale
+                // "hard" del modello. Su mesh lowpoli le normali hard
+                // sono duplicate e divergono bruscamente ai bordi netti,
+                // il che spacca la mesh dell'outline proprio in
+                // corrispondenza di quei vertici.
+                #if defined(_USE_SMOOTHED_NORMALS)
+                    float3 normalForOutlineOS = IN.smoothedNormalOS;
+                #else
+                    float3 normalForOutlineOS = IN.normalOS;
+                #endif
+                VertexNormalInputs vni = GetVertexNormalInputs(normalForOutlineOS);
+
+                // Scala lo spessore dell'outline in base alla distanza
+                // dalla camera. Senza questo, uno spessore fisso in
+                // world-units diventa troppo sottile rispetto alla
+                // precisione dello z-buffer a certe distanze, causando
+                // z-fighting visibile come una "linea strana" che
+                // appare/scompare solo in certi punti.
+                float distToCam = distance(_WorldSpaceCameraPos, vpi.positionWS);
+                float scaledWidth = _OutlineWidth * distToCam;
+
+                float3 expandedPosWS = vpi.positionWS + vni.normalWS * scaledWidth;
                 OUT.positionHCS = TransformWorldToHClip(expandedPosWS);
                 return OUT;
             }
@@ -124,6 +149,7 @@ Shader "Custom/ToonShader4Level"
                 float _SpecularSize;
                 float _SpecularSmooth;
                 float _UseSpecular;
+                float _ShadowCutoff;
             CBUFFER_END
 
             struct Attributes
@@ -176,10 +202,14 @@ Shader "Custom/ToonShader4Level"
                 Light mainLight = GetMainLight(IN.shadowCoord);
                 float NdotL = saturate(dot(normalWS, mainLight.direction));
 
-                // L'attenuazione delle ombre (shadow map) viene inclusa
-                // nel valore di luce cosi anche le aree in ombra proiettata
-                // vengono classificate correttamente nelle 4 bande.
-                float lightValue = NdotL * mainLight.shadowAttenuation;
+                // L'attenuazione della shadow map viene resa binaria
+                // (0 oppure 1) invece di lasciarla sfumare gradualmente.
+                // Senza questo, il fade naturale di URP verso il bordo
+                // della Shadow Distance attraversa il confine tra due
+                // bande di luce e crea una riga visibile a quella
+                // distanza precisa dalla camera.
+                float shadowFactor = step(_ShadowCutoff, mainLight.shadowAttenuation);
+                float lightValue = NdotL * shadowFactor;
 
                 half4 bandColor = GetBandColor(lightValue);
 

@@ -9,12 +9,14 @@ public class InputHandler : Singleton<InputHandler>
     {
         Menu,
         Game,
+        Duel,
         Shop
     }
     public Vector2 InputVector { get; private set; }
     public Vector3 MousePosition { get; private set; }
 
     public Action OnShoot;
+    public Action OnStepForward;
     public Action<Vector2> OnInteractAction;
     public Action<Vector2> OnShopAction;
     public Action OnExitAction;
@@ -26,7 +28,7 @@ public class InputHandler : Singleton<InputHandler>
     private float _verticalVelocity;
     private float _pitch;
 
-    private State _currentState = State.Game;
+    private State _currentState = State.Duel;
     public State CurrentState
     {
         get => _currentState;
@@ -60,7 +62,7 @@ public class InputHandler : Singleton<InputHandler>
     {
         if (value.isPressed)
         {
-            if (CurrentState == State.Game) 
+            if (CurrentState == State.Game || CurrentState == State.Duel) 
                 OnShoot?.Invoke();
             else if (CurrentState == State.Shop)
                 OnShopAction?.Invoke(internalMousePosition);
@@ -88,7 +90,12 @@ public class InputHandler : Singleton<InputHandler>
             }
         }
     }
- 
+
+    private void OnStep(InputValue value)
+    {
+        if (value.isPressed)
+            OnStepForward?.Invoke();
+    }
     private void OnSprint(InputValue value)
     {
         _isSprinting = value.isPressed;

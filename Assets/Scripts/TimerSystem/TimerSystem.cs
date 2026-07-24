@@ -40,7 +40,7 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
             timer = 0;
             text.text = "00:00";
             increaseTime = 0;
-            Debug.Log("TEMPO FINITO");
+            //Debug.Log("TEMPO FINITO");
         }
     }
 }
