@@ -16,18 +16,18 @@ public class GamblingStation : MonoBehaviour
 
     protected void OnEnable()
     {
-        if (_input.OnShopAction != null)
+        if (_input.OnInteractAction != null)
         {
-            _input.OnShopAction -= GambleAction;
+            _input.OnInteractAction -= GambleAction;
         }
-        _input.OnShopAction += GambleAction;
+        _input.OnInteractAction += GambleAction;
     }
 
     protected void OnDisable()
     {
-        if (_input.OnShopAction != null)
+        if (_input.OnInteractAction != null)
         {
-            _input.OnShopAction -= GambleAction;
+            _input.OnInteractAction -= GambleAction;
         }
     }
 
@@ -36,7 +36,14 @@ public class GamblingStation : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, gamblingLayer))
         {
-            
+            if(Random.value < 0.5f)
+            {
+                InventorySystem.Instance.HalfMoney();
+            }
+            else
+            {
+                InventorySystem.Instance.MultMoney();
+            }
         }
 
     }

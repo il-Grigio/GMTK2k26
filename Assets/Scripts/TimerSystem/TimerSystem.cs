@@ -4,7 +4,7 @@ using Grigios;
 public class TimerSystem : Grigios.Singleton<TimerSystem>
 {
     [Header("Timer Settings")]
-    private float timer = 30f;
+    [SerializeField] private float timer = 30f;
     [SerializeField] float increaseTime = 10f;
 
     public float GetTimer()
@@ -21,4 +21,20 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
     {
         timer -= qta;
     }
+
+    private void Update()
+    {
+        if (timer > 0)
+        {
+            
+            timer -= Time.deltaTime;
+        }
+        else
+        {
+            timer = 0;
+            increaseTime = 0;
+            Debug.Log("TEMPO FINITO");
+        }
+    }
 }
+

@@ -11,7 +11,8 @@ public class PointSystem : Singleton<PointSystem>
     
     public void AddScore(int qta)
     {
-        if(timeToIncreaseMultiplier > 0)
+        Debug.Log(qta + "!!!!!!");
+        if (timeToIncreaseMultiplier > 0)
         {
             AddScoreMultiplier(scoreMultiplierIncrease);
             timeToIncreaseMultiplier = 10.0f;
@@ -26,6 +27,7 @@ public class PointSystem : Singleton<PointSystem>
     private void AddPlainScore(float qta)
     {
         score += (qta * scoreMultiplier);
+        Debug.Log("Score: " + score + " Multiplier: " + scoreMultiplier);
     }
 
     private void AddPlainScoreNOMultiplier(float qta)

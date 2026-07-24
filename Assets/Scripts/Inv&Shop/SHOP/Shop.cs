@@ -8,7 +8,7 @@ public class Shop : MonoBehaviour
     [SerializeField] ShopCameraTrigger shopTrigger;
     private InputHandler _input;
     private Camera cam;
-    private int cavalliRaccolti;
+    [SerializeField] private int cavalliRaccolti;
 
     private void Awake()
     {
@@ -55,7 +55,7 @@ public class Shop : MonoBehaviour
             InventorySystem.Instance.RemoveMoney(m);
 
             cavalliRaccolti += 1;
-            PointSystem.Instance.AddScore(1000 * cavalliRaccolti);
+            PointSystem.Instance.AddScoreNOCombo(1000 * cavalliRaccolti);
             // Instantiate(cavallo, cavalloSpawnPoint.position, Quaternion.identity);
         }
 

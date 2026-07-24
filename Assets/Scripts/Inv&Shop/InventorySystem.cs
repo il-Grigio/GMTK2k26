@@ -67,4 +67,14 @@ public class InventorySystem : Singleton<InventorySystem>
     {
         moneyHeld -= m;
     }
+    
+    public void HalfMoney()
+    {
+        moneyHeld /= 2;
+    }
+
+    public void MultMoney()
+    {
+        moneyHeld = Mathf.RoundToInt(moneyHeld * 1.5f);
+    }
 }

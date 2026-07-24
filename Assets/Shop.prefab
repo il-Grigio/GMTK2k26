@@ -298,7 +298,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2149743270508040699}
-  - component: {fileID: 5943765293096570303}
   - component: {fileID: 460735793555808283}
   m_Layer: 6
   m_Name: Shop
@@ -327,19 +326,6 @@ Transform:
   - {fileID: 5908706399312592464}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -93.423, z: 0}
---- !u!114 &5943765293096570303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7313138328297298966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b552d0d05859cc74e857d620b6b64cde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopItemHorse
-  cost: 50
 --- !u!114 &460735793555808283
 MonoBehaviour:
   m_ObjectHideFlags: 0

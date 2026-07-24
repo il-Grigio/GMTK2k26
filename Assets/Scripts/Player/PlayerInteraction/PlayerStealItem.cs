@@ -11,6 +11,10 @@ public class PlayerStealItem : PlayerInteraction
     [SerializeField] float interactionRadius = 2f;
     [SerializeField] float suspicionCheckRadius = 20f; // deve coprire il raggio di vista max dei villici
 
+    [SerializeField] private int increaseTimerMULT = 1;
+
+    [Header("Points for stealing")]
+    [SerializeField] private int pointsForStealing = 100;
     protected override void OnEnable()
     {
         if (_input.OnInteractAction != null)
@@ -42,6 +46,8 @@ public class PlayerStealItem : PlayerInteraction
                 {
                     float currentStealth = stealthSkill;
                     item.Steal(transform, Mathf.Clamp01(currentStealth));
+                    PointSystem.Instance.AddScore(target.GetComponent<ItemInfoComponent>().GetPointValue());
+                    TimerSystem.Instance.IncreaseTimer(increaseTimerMULT);
                 }
             }
         }
