@@ -39,6 +39,8 @@ public class MainMenu : MonoBehaviour
         creditsCamera.Priority = 5;
         leaderboardCamera.Priority = 5;
         gameCamera.Priority = 5;
+        settingsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
     void BlockMenuInput()
     {
@@ -62,6 +64,8 @@ public class MainMenu : MonoBehaviour
             gb.SetActive(true);
             // Altre implementazioni varie
         }
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
     }
  
     public void Signal_OnSettingsClick()
@@ -73,6 +77,7 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         ResetCameras();
+        settingsPanel.SetActive(true);
         settingsCamera.Priority = 20;
     }
  
@@ -85,11 +90,18 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         ResetCameras();
+        creditsPanel.SetActive(true);
         creditsCamera.Priority = 20;
     }
  
     public void Signal_OnQuitClick()
     {
+        BlockMenuInput();
+        StartCoroutine(QuitCoroutine());
+    }
+    private IEnumerator QuitCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
 #if UNITY_WEBGL && !UNITY_EDITOR
         // In WebGL non si puo' chiudere la scheda/finestra del browser via codice
         // (per motivi di sicurezza): Application.Quit() non ha alcun effetto qui.

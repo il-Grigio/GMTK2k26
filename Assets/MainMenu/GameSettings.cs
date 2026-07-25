@@ -10,10 +10,9 @@ public class GameSettings : Singleton<GameSettings>
     public AudioMixer audioMixer;
 
     // ---------------- Stato corrente (in memoria) ----------------
-    public float MusicVolume { get; private set; } = 0.75f;
-    public float SfxVolume { get; private set; } = 0.75f;
-    public bool MusicMuted { get; set; } = false;
-    public bool SfxMuted { get; private set; } = false;
+    public float MusicVolume { get; private set; } = 0.70f;
+    public float SfxVolume { get; private set; } = 0.70f;
+    public float AmbianceVolume { get; private set; } = 0.70f;
     
     public event Action OnSettingsChanged;
 
@@ -36,26 +35,12 @@ public class GameSettings : Singleton<GameSettings>
 #endif
     }
 
-    private void Update()
-    {
-        if (!audioUnlocked && (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.touchCount > 0))
-        {
-            UnlockAudio();
-        }
-    }
-
-    private void UnlockAudio()
-    {
-        audioUnlocked = true;
-        AudioListener.pause = false;
-    }
-
     // ==================== AUDIO ====================
 
     public void SetMusicVolume(float linear01)
     {
         MusicVolume = Mathf.Clamp01(linear01);
-        ApplyMixerVolume("MusicVolume", MusicMuted ? 0f : MusicVolume);
+        ApplyMixerVolume("MusicVolume", MusicVolume);
         PlayerPrefs.SetFloat(PREFIX + "music_vol", MusicVolume);
         Notify();
     }
@@ -63,24 +48,16 @@ public class GameSettings : Singleton<GameSettings>
     public void SetSfxVolume(float linear01)
     {
         SfxVolume = Mathf.Clamp01(linear01);
-        ApplyMixerVolume("SFXVolume", SfxMuted ? 0f : SfxVolume);
+        ApplyMixerVolume("SFXVolume", SfxVolume);
         PlayerPrefs.SetFloat(PREFIX + "sfx_vol", SfxVolume);
         Notify();
     }
 
-    public void SetMusicMuted(bool muted)
+    public void SetAmbianceVolume(float linear01)
     {
-        MusicMuted = muted;
-        ApplyMixerVolume("MusicVolume", muted ? 0f : MusicVolume);
-        PlayerPrefs.SetInt(PREFIX + "music_mute", muted ? 1 : 0);
-        Notify();
-    }
-
-    public void SetSfxMuted(bool muted)
-    {
-        SfxMuted = muted;
-        ApplyMixerVolume("SFXVolume", muted ? 0f : SfxVolume);
-        PlayerPrefs.SetInt(PREFIX + "sfx_mute", muted ? 1 : 0);
+        AmbianceVolume = Mathf.Clamp01(linear01);
+        ApplyMixerVolume("AmbianceVolume", AmbianceVolume);
+        PlayerPrefs.SetFloat(PREFIX + "ambiance_vol", AmbianceVolume);
         Notify();
     }
 
@@ -105,8 +82,9 @@ public class GameSettings : Singleton<GameSettings>
     /// <summary>Applica tutto lo stato corrente al motore. Chiamalo anche dopo un cambio scena se serve.</summary>
     public void ApplyAll()
     {
-        ApplyMixerVolume("MusicVolume", MusicMuted ? 0f : MusicVolume);
-        ApplyMixerVolume("SFXVolume", SfxMuted ? 0f : SfxVolume);
+        ApplyMixerVolume("MusicVolume", MusicVolume);
+        ApplyMixerVolume("SFXVolume", SfxVolume);
+        ApplyMixerVolume("AmbianceVolume", AmbianceVolume);
     }
 
     private void Notify() => OnSettingsChanged?.Invoke();

@@ -4,10 +4,9 @@ using UnityEngine.UI;
 public class SettingsUIController : MonoBehaviour
 {
     [Header("Tab Audio")]
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Toggle musicMuteToggle;
-    [SerializeField] private Toggle sfxMuteToggle;
+    [SerializeField] private Image[] musicSlider;
+    [SerializeField] private Image[] sfxSlider;
+    [SerializeField] private Image[] ambianceSlider;
     
     private bool isRefreshingUI = false; // evita loop quando aggiorniamo la UI a mano
 
@@ -19,53 +18,55 @@ public class SettingsUIController : MonoBehaviour
             return;
         }
         RefreshUIFromSettings();
-        HookEvents();
     }
 
-    private void OnDisable()
-    {
-        UnhookEvents();
-    }
 
     // ---------------- Riempi la UI con lo stato corrente ----------------
 
     private void RefreshUIFromSettings()
     {
         var s = GameSettings.Instance;
-        isRefreshingUI = true;
 
-        if (musicSlider != null) musicSlider.SetValueWithoutNotify(s.MusicVolume);
-        if (sfxSlider != null) sfxSlider.SetValueWithoutNotify(s.SfxVolume);
-        if (musicMuteToggle != null) musicMuteToggle.SetIsOnWithoutNotify(s.MusicMuted);
-        if (sfxMuteToggle != null) sfxMuteToggle.SetIsOnWithoutNotify(s.SfxMuted);
+        SetValue(musicSlider, s.MusicVolume);
+        SetValue(sfxSlider, s.SfxVolume);
+        SetValue(ambianceSlider, s.AmbianceVolume);
 
-        isRefreshingUI = false;
     }
 
-    // ---------------- Hook eventi ----------------
-
-    private void HookEvents()
+    private void SetValue(Image[] slider, float i)
     {
-        if (musicSlider != null) musicSlider.onValueChanged.AddListener(OnMusicSlider);
-        if (sfxSlider != null) sfxSlider.onValueChanged.AddListener(OnSfxSlider);
-        if (musicMuteToggle != null) musicMuteToggle.onValueChanged.AddListener(OnMusicMute);
-        if (sfxMuteToggle != null) sfxMuteToggle.onValueChanged.AddListener(OnSfxMute);
-    }
-
-    private void UnhookEvents()
-    {
-        if (musicSlider != null) musicSlider.onValueChanged.RemoveListener(OnMusicSlider);
-        if (sfxSlider != null) sfxSlider.onValueChanged.RemoveListener(OnSfxSlider);
-        if (musicMuteToggle != null) musicMuteToggle.onValueChanged.RemoveListener(OnMusicMute);
-        if (sfxMuteToggle != null) sfxMuteToggle.onValueChanged.RemoveListener(OnSfxMute);
+        for (int j = slider.Length - 1; j >= 0; j--)
+        {
+            slider[j].enabled = j < i * 10;
+        }
     }
 
     // ---------------- Callback: inoltrano tutto a GameSettings ----------------
 
-    private void OnMusicSlider(float v) { if (!isRefreshingUI) GameSettings.Instance.SetMusicVolume(v); }
-    private void OnSfxSlider(float v) { if (!isRefreshingUI) GameSettings.Instance.SetSfxVolume(v); }
-    private void OnMusicMute(bool v) { if (!isRefreshingUI) GameSettings.Instance.SetMusicMuted(v); }
-    private void OnSfxMute(bool v) { if (!isRefreshingUI) GameSettings.Instance.SetSfxMuted(v); }
+    public void OnAmbianceUp() => OnAmbianceSlider(Mathf.Clamp01(GameSettings.Instance.AmbianceVolume + 0.1f));
+    public void OnAmbianceDown() => OnAmbianceSlider(Mathf.Clamp01(GameSettings.Instance.AmbianceVolume - 0.1f));
+    public void OnMusicUp() => OnMusicSlider(Mathf.Clamp01(GameSettings.Instance.MusicVolume + 0.1f));
+    public void OnMusicDown() => OnMusicSlider(Mathf.Clamp01(GameSettings.Instance.MusicVolume - 0.1f));
+    public void OnSfxUp() => OnSfxSlider(Mathf.Clamp01(GameSettings.Instance.SfxVolume + 0.1f));
+    public void OnSfxDown() => OnSfxSlider(Mathf.Clamp01(GameSettings.Instance.SfxVolume - 0.1f));
+
+    private void OnMusicSlider(float v)
+    {
+        SetValue(musicSlider, v);
+        GameSettings.Instance.SetMusicVolume(v);
+    }
+
+    private void OnSfxSlider(float v)
+    {
+        SetValue(sfxSlider, v);
+        GameSettings.Instance.SetSfxVolume(v);
+    }
+
+    private void OnAmbianceSlider(float v)
+    {
+        SetValue(ambianceSlider, v);
+        GameSettings.Instance.SetAmbianceVolume(v);
+    }
 
     /// <summary>Collega questo a un pulsante "Ripristina predefiniti" nel Canvas.</summary>
     public void OnResetToDefaultsPressed()
