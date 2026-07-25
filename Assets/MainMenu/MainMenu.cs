@@ -1,9 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private CinemachineCamera menuCamera;
+    [SerializeField] private CinemachineCamera settingsCamera;
+    [SerializeField] private CinemachineCamera creditsCamera;
+    [SerializeField] private CinemachineCamera leaderboardCamera;
+    [SerializeField] private CinemachineCamera gameCamera;
+    
+    [SerializeField] private MenuButton[] buttons;
+    
     [Header("Items")]
     [Tooltip("Item da attivare e disattivare tra inizio e fine scena")]
     public List<GameObject> turnableitems = new List<GameObject>();
@@ -14,17 +25,38 @@ public class MainMenu : MonoBehaviour
  
     private void Start()
     {
-        Time.timeScale = 0f;
         foreach (GameObject gb in turnableitems)
         {
             gb.SetActive(false);
         }
         ShowMainMenu();
     }
- 
+
+    private void ResetCameras()
+    {
+        menuCamera.Priority = 5;
+        settingsCamera.Priority = 5;
+        creditsCamera.Priority = 5;
+        leaderboardCamera.Priority = 5;
+        gameCamera.Priority = 5;
+    }
+    void BlockMenuInput()
+    {
+        foreach (MenuButton button in buttons)
+            button.DisableCollider();
+    }
     public void Signal_OnPlayClick()
     {
-        Time.timeScale = 1f;
+        BlockMenuInput();
+        StartCoroutine(PlayCoroutine());
+    }
+
+    private IEnumerator PlayCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        ResetCameras();
+        gameCamera.Priority = 20;
+        InputHandler.Instance.CurrentState = InputHandler.State.Game;
         foreach (GameObject gb in turnableitems)
         {
             gb.SetActive(true);
@@ -34,14 +66,26 @@ public class MainMenu : MonoBehaviour
  
     public void Signal_OnSettingsClick()
     {
-        if (creditsPanel != null) creditsPanel.SetActive(false);
-        if (settingsPanel != null) settingsPanel.SetActive(true);
+        BlockMenuInput();
+        StartCoroutine(SettingsCoroutine());
+    }
+    private IEnumerator SettingsCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        ResetCameras();
+        settingsCamera.Priority = 20;
     }
  
     public void Signal_OnCreditsClick()
     {
-        if (settingsPanel != null) settingsPanel.SetActive(false);
-        if (creditsPanel != null) creditsPanel.SetActive(true);
+        BlockMenuInput();
+        StartCoroutine(CreditsCoroutine());
+    }
+    private IEnumerator CreditsCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        ResetCameras();
+        creditsCamera.Priority = 20;
     }
  
     public void Signal_OnQuitClick()
@@ -61,10 +105,11 @@ public class MainMenu : MonoBehaviour
 #endif
     }
  
-    /// <summary>Collega questo a un pulsante "Indietro" dentro Settings/Crediti per tornare al menu.</summary>
     public void ShowMainMenu()
     {
-        if (settingsPanel != null) settingsPanel.SetActive(false);
-        if (creditsPanel != null) creditsPanel.SetActive(false);
+        foreach (MenuButton button in buttons)
+            button.EnableCollider();
+        ResetCameras();
+        menuCamera.Priority = 20;
     }
 }

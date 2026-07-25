@@ -99,12 +99,16 @@ public class MenuButton : MonoBehaviour
                 spinLeft?.Invoke();
             isHover = false;
             collider.enabled = false;
-            Invoke(nameof(EnableCollider), 1f);
+            //Invoke(nameof(EnableCollider), 1f); 
         }
     }
 
-    void EnableCollider()
+    public void EnableCollider()
     {
         collider.enabled = true;
+    }
+    public void DisableCollider()
+    {
+        collider.enabled = false;
     }
 }
