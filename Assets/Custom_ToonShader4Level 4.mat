@@ -32,7 +32,7 @@ Material:
     m_Floats:
     - _BandSmooth: 0
     - _DebugShowLightCount: 0
-    - _OutlineWidth: 0.003
+    - _OutlineWidth: 0.002
     - _ShadowCutoff: 0.5
     - _SpecularSize: 0.85
     - _SpecularSmooth: 0.05

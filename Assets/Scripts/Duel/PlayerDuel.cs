@@ -67,8 +67,9 @@ public class PlayerDuel : MonoBehaviour
     void ShootBullet()
     {
         Bullet bullet = BulletManager.Instance.GetObject();
-        bullet.transform.position = transform.position;
+        bullet.transform.position = gunHand.transform.position;
         bullet.transform.forward = Vector3.back;
+        bullet.Setup(Vector3.back, 25);
     }
     void Lose()
     {
