@@ -24,6 +24,12 @@ Shader "Custom/ToonShader4Level"
         _OutlineWidth ("Spessore Outline", Range(0.0, 0.02)) = 0.003
         [Toggle(_USE_SMOOTHED_NORMALS)] _UseSmoothedNormals ("Usa Normali Smussate per Outline (UV3)", Float) = 0
 
+        [Header(Outline override per layer OBJECT_SCENE)]
+        // Impostato via script (MaterialPropertyBlock), non a mano nell'inspector:
+        // quando l'oggetto sta sul layer "OBJECT_SCENE" l'outline diventa bianco
+        // indipendentemente da _OutlineColor. Vedi SceneLayerOutlineOverride.cs
+        [HideInInspector] _IsSceneLayer ("Is Scene Layer (script-set)", Float) = 0
+
         [Header(Specular opzionale)]
         _SpecularColor ("Colore Specular", Color) = (1,1,1,1)
         _SpecularSize ("Dimensione Specular", Range(0.0, 1.0)) = 0.85
@@ -60,6 +66,7 @@ Shader "Custom/ToonShader4Level"
             CBUFFER_START(UnityPerMaterial)
                 float4 _OutlineColor;
                 float _OutlineWidth;
+                float _IsSceneLayer;
             CBUFFER_END
 
             struct Attributes
@@ -109,6 +116,15 @@ Shader "Custom/ToonShader4Level"
 
             half4 OutlineFrag(Varyings IN) : SV_Target
             {
+                // Se l'oggetto e' sul layer OBJECT_SCENE (flag impostato
+                // via script/MaterialPropertyBlock, vedi
+                // SceneLayerOutlineOverride.cs), forza l'outline a
+                // bianco puro indipendentemente dal colore configurato
+                // nel materiale.
+                if (_IsSceneLayer > 0.5)
+                {
+                    return half4(1, 1, 1, 1);
+                }
                 return _OutlineColor;
             }
             ENDHLSL
