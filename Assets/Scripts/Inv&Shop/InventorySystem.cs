@@ -7,38 +7,39 @@ public class InventorySystem : Singleton<InventorySystem>
 {
     public List<ItemInfoData> inventory = new List<ItemInfoData>();
 
-    [SerializeField] private int actualWeight;
-    [SerializeField] private int maxWeight = 200;
+    [Header("Inventario")]
     [SerializeField] private int actualItemCount;
     [SerializeField] private int maxItemCount = 3;
     [SerializeField] private int inventoryValue; // Valore monetario dell'inventario
     [SerializeField] private int moneyHeld; // Soldi che ha effettivamente il player
 
+    [Header("Max Bullet")]
+    [SerializeField] int maxBullet = 3;
+    [SerializeField] int bulletInInventory;
+
+    [Header("UI")]
     [SerializeField] TextMeshProUGUI moneyText;
+    [SerializeField] TextMeshProUGUI actualItemCountUI;
+    [SerializeField] TextMeshProUGUI actualBulletUI;
+
+    private void Start()
+    {
+        FixInventoryText();
+        FixMoneyText();
+    }
     public bool AddInventory(ItemInfoData item)
     {
-        if(item.Weight <= (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
+        if(item.CountValue <= (maxItemCount - actualItemCount))
         {
-            actualWeight += item.Weight;
             actualItemCount += item.CountValue;
             inventoryValue += item.MoneyValue;
             inventory.Add(item);
+            FixInventoryText();
             return true;
         }
         else
         {
-            if(item.Weight > (maxWeight - actualWeight) && item.CountValue <= (maxItemCount - actualItemCount))
-            {
-                return false;
-            }
-            else if(item.CountValue > (maxItemCount - actualItemCount) && item.Weight <= (maxWeight - actualWeight))
-            {
-                return false;
-            }
-            else
-            {
-                return false;
-            }
+            return false; // Gestisci eccezione in UI
         }
     }
 
@@ -48,19 +49,18 @@ public class InventorySystem : Singleton<InventorySystem>
 
         inventoryValue = 0;
 
-        actualWeight = 0;
-
         actualItemCount = 0;
 
         inventory.Clear();
-        FixText();
+        FixMoneyText();
+        FixInventoryText();
     }
 
 
     public void AddMoney(int m)
     {
         moneyHeld += m;
-        FixText();
+        FixMoneyText();
     }
 
     public bool RemoveMoneyCheck(int m) // Controlla se effettivamente hai i soldi per comprare
@@ -71,25 +71,56 @@ public class InventorySystem : Singleton<InventorySystem>
     public void RemoveMoney(int m)
     {
         moneyHeld -= m;
-        FixText();
+        FixMoneyText();
 
     }
 
     public void HalfMoney()
     {
         moneyHeld /= 2;
-        FixText();
+        FixMoneyText();
 
     }
 
     public void MultMoney()
     {
         moneyHeld = Mathf.RoundToInt(moneyHeld * 1.5f);
-        FixText();
+        FixMoneyText();
     }
 
-    private void FixText()
+    public void AddBullet()
+    {
+        maxBullet++;
+        bulletInInventory = maxBullet;
+        FixInventoryText();
+    }
+
+    public void RemoveBullet()
+    {
+        bulletInInventory--;
+        FixInventoryText();
+    }
+
+    public bool CanShoot()
+    {
+        if(bulletInInventory <= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private void FixMoneyText()
     {
         moneyText.text = moneyHeld.ToString();
+    }
+
+    private void FixInventoryText()
+    {
+        actualItemCountUI.text = actualItemCount.ToString() + "/" + maxItemCount.ToString();
+        actualBulletUI.text = bulletInInventory.ToString() + "/" + maxBullet.ToString();
     }
 }

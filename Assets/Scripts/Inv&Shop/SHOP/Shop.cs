@@ -70,6 +70,7 @@ public class Shop : MonoBehaviour
         if (HasEnoughMoney(m))
         {
             InventorySystem.Instance.RemoveMoney(m);
+            InventorySystem.Instance.AddBullet();
         }
     }
 

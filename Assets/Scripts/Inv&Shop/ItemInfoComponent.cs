@@ -5,8 +5,6 @@ public class ItemInfoComponent : MonoBehaviour
 {
     [SerializeField] GameObject gameObject;
 
-    [SerializeField] int weight;
-
     [SerializeField] int countValue;
 
     [SerializeField] int moneyValue;
@@ -14,10 +12,10 @@ public class ItemInfoComponent : MonoBehaviour
     public int GetPointValue()
     {
         Debug.Log("moneyvalue: " + moneyValue + " countvalue: " + countValue + " moneyvalue: " + moneyValue);
-        return moneyValue * countValue + weight;
+        return moneyValue * countValue ;
     }
     public ItemInfoData GetInfo()
     {
-        return new ItemInfoData(weight, countValue, moneyValue);
+        return new ItemInfoData(countValue, moneyValue);
     }
 }

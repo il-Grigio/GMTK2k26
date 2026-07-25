@@ -22,6 +22,9 @@ public class PlayerInteractionShooting : PlayerInteraction
 
     private void Shoot()
     {
+        if (!InventorySystem.Instance.CanShoot()) return;
+
+        InventorySystem.Instance.RemoveBullet();
         if (anim != null)
             anim.SetTrigger("Shoot");
 
@@ -31,6 +34,8 @@ public class PlayerInteractionShooting : PlayerInteraction
         bullet.transform.rotation = firePoint.rotation;
 
         if (bullet != null)
+        {
             bullet.Setup(firePoint.forward, bulletForce);
+        }
     }
 }
