@@ -28,7 +28,7 @@ public class InputHandler : Singleton<InputHandler>
     private float _verticalVelocity;
     private float _pitch;
 
-    private State _currentState = State.Duel;
+    private State _currentState = State.Game;
     public State CurrentState
     {
         get => _currentState;
