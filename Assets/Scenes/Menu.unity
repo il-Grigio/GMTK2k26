@@ -2124,7 +2124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &729131935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3554,7 +3554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5581e50795540c6419b461991a5d614e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletManager
-  prefab: {fileID: 5661524378920617937, guid: 8957951a15357404baf91c2670cc57c3, type: 3}
+  prefab: {fileID: 7338387467780140133, guid: a04891f71ed7d2840a6430a982255bfa, type: 3}
 --- !u!114 &1183243408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7856,6 +7856,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----Duel----
       objectReference: {fileID: 0}
+    - target: {fileID: 707521035890487847, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1433669779106207836, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7994,7 +7998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8336956570733564471, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.z
-      value: -0.000000043914117
+      value: -0.00000004391412
       objectReference: {fileID: 0}
     - target: {fileID: 9012281505073128749, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_LocalPosition.x
