@@ -14,6 +14,6 @@ public class StealableItem : MonoBehaviour
 
         // qui la tua logica di raccolta oggetto (inventario, distruggi oggetto, ecc.)
         Debug.Log($"Oggetto '{name}' rubato da {thief.name}");
-        Destroy(gameObject);
+        SpawnStealableObjectManager.Instance.TurnDownItems(gameObject);
     }
 }
