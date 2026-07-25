@@ -14,11 +14,13 @@ public class InputHandler : Singleton<InputHandler>
     }
     public Vector2 InputVector { get; private set; }
     public Vector3 MousePosition { get; private set; }
+    public Vector3 UIPointerPosition { get; private set; }
 
     public Action OnShoot;
     public Action OnStepForward;
     public Action<Vector2> OnInteractAction;
     public Action<Vector2> OnShopAction;
+    public Action OnMenuAction;
     public Action OnExitAction;
     
     private Vector3 internalMousePosition;
@@ -28,7 +30,7 @@ public class InputHandler : Singleton<InputHandler>
     private float _verticalVelocity;
     private float _pitch;
 
-    private State _currentState = State.Game;
+    private State _currentState = State.Menu;
     public State CurrentState
     {
         get => _currentState;
@@ -50,6 +52,7 @@ public class InputHandler : Singleton<InputHandler>
     {
         var v2 = value.Get<Vector2>();
         internalMousePosition = new Vector3(v2.x, v2.y, 0);
+        UIPointerPosition = internalMousePosition;
         if (CurrentState != State.Game) return;
         if (v2.magnitude > 0.5f)
         {
@@ -66,6 +69,8 @@ public class InputHandler : Singleton<InputHandler>
                 OnShoot?.Invoke();
             else if (CurrentState == State.Shop)
                 OnShopAction?.Invoke(internalMousePosition);
+            else if (CurrentState == State.Menu)
+                OnMenuAction?.Invoke();
         }
     }
 
