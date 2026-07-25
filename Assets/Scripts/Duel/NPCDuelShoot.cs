@@ -30,6 +30,7 @@ public class NPCDuelShoot : MonoBehaviour
 
     private void Shoot()
     {
+        Debug.Log("NPC Shoot");
         DuelManager.Instance.OnNPCShoot();
     }
     private void Step()

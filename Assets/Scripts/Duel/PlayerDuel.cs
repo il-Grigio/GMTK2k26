@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerDuel : MonoBehaviour
 {
     [SerializeField] AnimationCurve stepSpeedCurve;
+    [SerializeField] private Transform playerShootRotation;
+    [SerializeField] private GameObject gunHand;
+    [SerializeField] private GameObject gunLeg;
+    
     Animator animator;
     DuelManager manager;
     private void Awake()
@@ -20,10 +24,15 @@ public class PlayerDuel : MonoBehaviour
         manager.OnStepForward += StepForward;
         manager.OnShoot -= Shoot;
         manager.OnShoot += Shoot;
+        manager.OnLose -= Lose;
+        manager.OnLose += Lose;
+        gunHand.SetActive(false);
+        gunLeg.SetActive(true);
     }
 
     private void OnDisable()
     {
+        manager.OnLose -= Lose;
         manager.OnShoot -= Shoot;
         manager.OnStepForward -= StepForward;
     }
@@ -49,6 +58,20 @@ public class PlayerDuel : MonoBehaviour
     }
     void Shoot()
     {
+        transform.rotation = playerShootRotation.rotation;
         animator.SetTrigger("Shoot");
+        gunHand.SetActive(true);
+        gunLeg.SetActive(false);
+    }
+
+    void ShootBullet()
+    {
+        Bullet bullet = BulletManager.Instance.GetObject();
+        bullet.transform.position = transform.position;
+        bullet.transform.forward = Vector3.back;
+    }
+    void Lose()
+    {
+        animator.SetTrigger("Lose");
     }
 }

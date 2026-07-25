@@ -33,7 +33,17 @@ public class DuelManager : Singleton<DuelManager>
     private bool stepForwardInput;
     private bool canStepForward;
     private bool shootInput;
-    private bool canShoot;
+    private bool _canShoot;
+
+    private bool canShoot
+    {
+        get => _canShoot;
+        set
+        {
+            _canShoot = value;
+            Debug.Log("Can Shoot: " + _canShoot);
+        }
+    }
 
     bool isDuelStarted;
     private bool isDuelActive
@@ -102,7 +112,7 @@ public class DuelManager : Singleton<DuelManager>
 
     private IEnumerator DuelCoroutine()
     {
-        while (countdown > 0)
+        while (countdown > 1)
         {
             duelCameraSwitcher.SwitchCamera();
             yield return new WaitForSeconds(1.5f);
@@ -111,10 +121,10 @@ public class DuelManager : Singleton<DuelManager>
             if (!isDuelActive) yield break;
 
             countdown--;
-        Debug.Log("Duel Countdown: " + countdown);
             
             OnCountSign?.Invoke(countdown);
             yield return new WaitForSeconds(0.2f);
+            Debug.Log("Duel Countdown: " + countdown);
             OnCountDown?.Invoke(countdown);
 
             stepForwardInput = false;
@@ -126,15 +136,17 @@ public class DuelManager : Singleton<DuelManager>
             if (!isDuelActive) yield break;
         }
 
+        if (!isDuelActive) yield break;
+        duelCameraSwitcher.SwitchCamera();
         yield return new WaitForSeconds(1.5f);
         yield return new WaitForSeconds(Random.Range(minReactionDelay, maxReactionDelay));
 
         if (!isDuelActive) yield break;
 
         countdown--;
-        Debug.Log("Duel Countdown SHOOT: " + countdown);
         OnCountSign?.Invoke(countdown);
         yield return new WaitForSeconds(0.2f);
+        Debug.Log("Duel Countdown SHOOT: " + countdown);
         OnCountDown?.Invoke(countdown);
 
         shootInput = false;
