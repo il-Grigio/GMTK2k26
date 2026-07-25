@@ -3,9 +3,12 @@ using UnityEngine;
 public class TopDownCharacterMove : MonoBehaviour
 {
     private InputHandler _input;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private Animator anim;
+    [SerializeField] private float animDampTime = 0.1f;
+
     private Camera cam;
 
     private static readonly int MoveX = Animator.StringToHash("MoveX");
@@ -33,8 +36,8 @@ public class TopDownCharacterMove : MonoBehaviour
         }
         else if (anim != null)
         {
-            anim.SetFloat(MoveX, 0f);
-            anim.SetFloat(MoveY, 0f);
+            anim.SetFloat(MoveX, 0f, animDampTime, Time.deltaTime);
+            anim.SetFloat(MoveY, 0f, animDampTime, Time.deltaTime);
         }
     }
 
@@ -42,40 +45,39 @@ public class TopDownCharacterMove : MonoBehaviour
     {
         if (anim == null) return;
 
-        Vector2 dir = new Vector2(inputVector.x, inputVector.z);
-
-        if (dir.sqrMagnitude < 0.001f)
+        if (inputVector.sqrMagnitude < 0.001f)
         {
-            anim.SetFloat(MoveX, 0f);
-            anim.SetFloat(MoveY, 0f);
+            anim.SetFloat(MoveX, 0f, animDampTime, Time.deltaTime);
+            anim.SetFloat(MoveY, 0f, animDampTime, Time.deltaTime);
             return;
         }
 
-        dir.Normalize();
+        Vector3 localMove = transform.InverseTransformDirection(inputVector.normalized);
 
-        anim.SetFloat(MoveX, dir.x);
-        anim.SetFloat(MoveY, dir.y);
+        anim.SetFloat(MoveX, localMove.x, animDampTime, Time.deltaTime);
+        anim.SetFloat(MoveY, localMove.z, animDampTime, Time.deltaTime);
     }
-
 
     private void RotateTowardsMouseVector()
     {
         Ray ray = cam.ScreenPointToRay(_input.MousePosition);
 
-        if(Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 300f))
         {
             var target = hitInfo.point;
             target.y = transform.position.y;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), rotateSpeed * Time.deltaTime);
-            //transform.LookAt(target);
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(target - transform.position),
+                rotateSpeed * Time.deltaTime
+            );
         }
     }
-
 
     private void MoveTowardTarget(Vector3 targetVector)
     {
         var speed = moveSpeed * Time.deltaTime;
-
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
     }
