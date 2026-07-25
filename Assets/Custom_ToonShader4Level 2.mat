@@ -31,21 +31,22 @@ Material:
     m_Ints: []
     m_Floats:
     - _BandSmooth: 0
-    - _OutlineWidth: 0.00949
+    - _DebugShowLightCount: 0
+    - _OutlineWidth: 0.003
     - _ShadowCutoff: 0.5
     - _SpecularSize: 0.85
     - _SpecularSmooth: 0.05
-    - _Threshold1: 0.75
-    - _Threshold2: 0.5
-    - _Threshold3: 0.25
+    - _Threshold1: 0.774
+    - _Threshold2: 0.395
+    - _Threshold3: 0
     - _UseSmoothedNormals: 1
     - _UseSpecular: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.26274514, g: 0.3496356, b: 0.7647059, a: 1}
-    - _Color2: {r: 0.23921567, g: 0.25077596, b: 0.54901963, a: 1}
-    - _Color3: {r: 0.10980393, g: 0.098039225, b: 0.09411766, a: 1}
-    - _Color4: {r: 0.043137256, g: 0.043137256, b: 0.043137256, a: 1}
+    - _Color1: {r: 0.44705886, g: 0.46274513, b: 0.3803922, a: 1}
+    - _Color2: {r: 0.21568629, g: 0.3372549, b: 0.30588236, a: 1}
+    - _Color3: {r: 0.07058824, g: 0.14117648, b: 0.15686275, a: 1}
+    - _Color4: {r: 0.027450982, g: 0.043137256, b: 0.04705883, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
