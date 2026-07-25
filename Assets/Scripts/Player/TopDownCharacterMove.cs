@@ -8,6 +8,9 @@ public class TopDownCharacterMove : MonoBehaviour
     [SerializeField] private Animator anim;
     private Camera cam;
 
+    private static readonly int MoveX = Animator.StringToHash("MoveX");
+    private static readonly int MoveY = Animator.StringToHash("MoveY");
+
     private void Awake()
     {
         _input = InputHandler.Instance;
@@ -28,19 +31,30 @@ public class TopDownCharacterMove : MonoBehaviour
             RotateTowardsMouseVector();
             UpdateAnimator(targetVector);
         }
-        else
+        else if (anim != null)
         {
-            if (anim != null)
-                anim.SetBool("IsMoving", false);
+            anim.SetFloat(MoveX, 0f);
+            anim.SetFloat(MoveY, 0f);
         }
     }
 
-    private void UpdateAnimator(Vector3 targetVector)
+    private void UpdateAnimator(Vector3 inputVector)
     {
         if (anim == null) return;
 
-        bool isMoving = targetVector.sqrMagnitude > 0.001f;
-        anim.SetBool("IsMoving", isMoving);
+        Vector2 dir = new Vector2(inputVector.x, inputVector.z);
+
+        if (dir.sqrMagnitude < 0.001f)
+        {
+            anim.SetFloat(MoveX, 0f);
+            anim.SetFloat(MoveY, 0f);
+            return;
+        }
+
+        dir.Normalize();
+
+        anim.SetFloat(MoveX, dir.x);
+        anim.SetFloat(MoveY, dir.y);
     }
 
 
