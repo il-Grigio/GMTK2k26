@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_ToonShader4Level
+  m_Name: Custom_ToonShader4Level 5
   m_Shader: {fileID: 4800000, guid: 30381b3cd25c0b545b691e35afcc4114, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -30,23 +30,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BandSmooth: 0.01
+    - _BandSmooth: 0
     - _DebugShowLightCount: 0
     - _OutlineWidth: 0.003
     - _ShadowCutoff: 0.5
     - _SpecularSize: 0.85
     - _SpecularSmooth: 0.05
-    - _Threshold1: 0.75
-    - _Threshold2: 0.5
-    - _Threshold3: 0.25
+    - _Threshold1: 0.569
+    - _Threshold2: 0.279
+    - _Threshold3: 0.064
     - _UseSmoothedNormals: 1
     - _UseSpecular: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 1, g: 0.97184783, b: 0.7971698, a: 1}
-    - _Color2: {r: 0.764151, g: 0.7305501, b: 0.59474015, a: 1}
-    - _Color3: {r: 0.4509804, g: 0.48135313, b: 0.54901963, a: 1}
-    - _Color4: {r: 0.19999996, g: 0.19999996, b: 0.29999998, a: 1}
+    - _Color1: {r: 0.4339623, g: 0.11835411, b: 0.10849057, a: 1}
+    - _Color2: {r: 0.3584906, g: 0.17907406, b: 0.14373444, a: 1}
+    - _Color3: {r: 0.3019608, g: 0.17254902, b: 0.22830153, a: 1}
+    - _Color4: {r: 0.058823533, g: 0.1254902, b: 0.15686275, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
