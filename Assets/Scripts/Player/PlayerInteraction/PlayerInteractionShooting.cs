@@ -6,7 +6,6 @@ public class PlayerInteractionShooting : PlayerInteraction
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletForce = 20f;
     [SerializeField] private Animator anim;
-
     protected override void OnEnable()
     {
         if (_input.OnShoot != null)
@@ -35,6 +34,7 @@ public class PlayerInteractionShooting : PlayerInteraction
 
         if (bullet != null)
         {
+            CameraShake.Instance.StartShake(0.5f,15f,0.25f);
             bullet.Setup(firePoint.forward, bulletForce);
         }
     }

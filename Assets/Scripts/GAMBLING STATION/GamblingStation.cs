@@ -8,7 +8,6 @@ public class GamblingStation : MonoBehaviour
     [SerializeField] float interactionRadius = 4;
     private InputHandler _input;
     private Camera cam;
-    [SerializeField] CameraShakeSimpleScript cameraShakeSimpleScript;
 
     private void Awake()
     {
@@ -41,8 +40,8 @@ public class GamblingStation : MonoBehaviour
             if(Random.value < 0.5f)
             {
                 InventorySystem.Instance.HalfMoney();
+                CameraShake.Instance.StartShake(2,1,1);
  
-                if (cameraShakeSimpleScript && cameraShakeSimpleScript != null) cameraShakeSimpleScript.ShakeCamera();
             }
             else
             {
