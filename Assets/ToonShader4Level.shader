@@ -29,6 +29,9 @@ Shader "Custom/ToonShader4Level"
         _SpecularSize ("Dimensione Specular", Range(0.0, 1.0)) = 0.85
         _SpecularSmooth ("Morbidezza Specular", Range(0.001, 0.5)) = 0.05
         [Toggle] _UseSpecular ("Attiva Specular", Float) = 0
+
+        [Header(Debug)]
+        [Toggle] _DebugShowLightCount ("DEBUG - Mostra conteggio Additional Lights", Float) = 0
     }
 
     SubShader
@@ -127,6 +130,10 @@ Shader "Custom/ToonShader4Level"
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma multi_compile _ _SHADOWS_SOFT
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile _ _FORWARD_PLUS
+            #pragma multi_compile _ _LIGHT_LAYERS
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -150,6 +157,7 @@ Shader "Custom/ToonShader4Level"
                 float _SpecularSmooth;
                 float _UseSpecular;
                 float _ShadowCutoff;
+                float _DebugShowLightCount;
             CBUFFER_END
 
             struct Attributes
@@ -217,6 +225,55 @@ Shader "Custom/ToonShader4Level"
                 half4 albedo = baseTex * _BaseColor;
 
                 half3 color = albedo.rgb * bandColor.rgb * mainLight.color;
+
+                // Additional Lights: point light e spot light configurate
+                // nella scena. Ognuna viene bandizzata allo stesso modo
+                // della luce principale (in base al proprio NdotL), poi
+                // sommata al colore finale scalata per la sua
+                // distance/angle attenuation (raggio d'azione, cono spot).
+                //
+                // NOTA IMPORTANTE (Forward+): a differenza del Forward
+                // classico, con la Rendering Path "Forward+" URP deve
+                // sapere in quale "tile" schermo si trova il pixel per
+                // recuperare le luci corrette (light clustering). Per
+                // questo costruiamo un InputData minimo con la posizione
+                // schermo normalizzata, e usiamo le macro ufficiali
+                // LIGHT_LOOP_BEGIN/END che gestiscono da sole sia il
+                // percorso Forward+ che quello Forward classico.
+                uint additionalLightsCount = 0u;
+                #if defined(_ADDITIONAL_LIGHTS)
+                    InputData inputData = (InputData)0;
+                    inputData.positionWS = IN.positionWS;
+                    inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(IN.positionHCS);
+
+                    uint pixelLightCount = GetAdditionalLightsCount();
+
+                    LIGHT_LOOP_BEGIN(pixelLightCount)
+                        Light addLight = GetAdditionalLight(lightIndex, inputData.positionWS, half4(1,1,1,1));
+                        float addNdotL = saturate(dot(normalWS, addLight.direction));
+                        float addLightValue = addNdotL * addLight.shadowAttenuation;
+                        half4 addBandColor = GetBandColor(addLightValue);
+
+                        color += albedo.rgb * addBandColor.rgb * addLight.color * addLight.distanceAttenuation;
+                        additionalLightsCount++;
+                    LIGHT_LOOP_END
+                #endif
+
+                // DEBUG: se attivo, ignora tutto lo shading e mostra il
+                // conteggio delle additional lights rilevate come colore
+                // (nero = 0, poi rosso/verde/blu/bianco per 1/2/3/4+).
+                // Usalo per capire se il problema e' che il conteggio e'
+                // zero (impostazioni URP/scena) oppure se le luci vengono
+                // rilevate ma non si vedono nello shading (bug nel codice).
+                if (_DebugShowLightCount > 0.5)
+                {
+                    if (additionalLightsCount == 0u) return half4(0, 0, 0, 1);
+                    if (additionalLightsCount == 1u) return half4(1, 0, 0, 1);
+                    if (additionalLightsCount == 2u) return half4(0, 1, 0, 1);
+                    if (additionalLightsCount == 3u) return half4(0, 0, 1, 1);
+                    return half4(1, 1, 1, 1);
+                }
+
 
                 // Specular a taglio netto (opzionale)
                 if (_UseSpecular > 0.5)
