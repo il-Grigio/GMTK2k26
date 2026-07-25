@@ -54,8 +54,19 @@ public class TopDownCharacterMove : MonoBehaviour
 
         Vector3 localMove = transform.InverseTransformDirection(inputVector.normalized);
 
-        anim.SetFloat(MoveX, localMove.x, animDampTime, Time.deltaTime);
-        anim.SetFloat(MoveY, localMove.z, animDampTime, Time.deltaTime);
+        Vector2 dir = new Vector2(localMove.x, localMove.z);
+
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        {
+            dir = new Vector2(Mathf.Sign(dir.x), 0f);
+        }
+        else
+        {
+            dir = new Vector2(0f, Mathf.Sign(dir.y));
+        }
+
+        anim.SetFloat(MoveX, dir.x, animDampTime, Time.deltaTime);
+        anim.SetFloat(MoveY, dir.y, animDampTime, Time.deltaTime);
     }
 
     private void RotateTowardsMouseVector()
