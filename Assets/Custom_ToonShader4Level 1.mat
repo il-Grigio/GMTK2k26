@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Custom_ToonShader4Level 1
   m_Shader: {fileID: 4800000, guid: 30381b3cd25c0b545b691e35afcc4114, type: 3}
-  m_Parent: {fileID: 2100000, guid: 01ca03e3f461a344cb45d27ff86a20e3, type: 2}
+  m_Parent: {fileID: 2100000, guid: 8286e1de59b399b43a56246f19661976, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _USE_SMOOTHED_NORMALS
