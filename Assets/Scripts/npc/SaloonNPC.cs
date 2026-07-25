@@ -17,7 +17,7 @@ public enum NPCState
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class SaloonNPC : MonoBehaviour
+public class SaloonNPC : MonoBehaviour, IDamageable
 {
     [SerializeField] private Animator anim;
 
@@ -47,6 +47,11 @@ public class SaloonNPC : MonoBehaviour
     public float accusationThreshold = 0.5f;
     public float hostileThreshold = 0.75f;
     public float shootCheckInterval = 3f;
+
+    [Header("Player Target")]
+    [Tooltip("Transform del player. Se lasciato vuoto viene cercato automaticamente tramite il Tag 'Player'.")]
+    public Transform playerTransform;
+    [Range(0f, 1f)] public float playerAnger = 0f;
 
     [Header("Alibi")]
     [Tooltip("Se un NPC ha un altro NPC entro questo raggio, si considera 'visto con qualcuno' e ha meno probabilità di essere incolpato")]
@@ -84,6 +89,15 @@ public class SaloonNPC : MonoBehaviour
     public float fleeDistance = 10f;
     public float fleeSpeed = 4f;
 
+    [Header("Sparo - Visuale")]
+    [Tooltip("Punto da cui parte il proiettile visivo (es. la canna della pistola). Se vuoto usa la posizione dell'NPC.")]
+    public Transform firePoint;
+    public float bulletSpeed = 40f;
+    [Tooltip("Offset verticale per mirare più o meno al 'busto' del bersaglio invece che ai piedi")]
+    public float aimHeightOffset = 1f;
+    [Tooltip("Quanto si allarga il tiro quando il colpo va completamente a vuoto (nessuna vittima per errore)")]
+    public float totalMissSpread = 1.5f;
+
     public NPCState State { get; private set; } = NPCState.Idle;
 
     private Dictionary<SaloonNPC, float> angerTowards = new Dictionary<SaloonNPC, float>();
@@ -101,8 +115,14 @@ public class SaloonNPC : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-       // anim = GetComponent<Animator>();
+        // anim = GetComponent<Animator>();
         homePosition = transform.position;
+
+        if (playerTransform == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null) playerTransform = playerObj.transform;
+        }
 
         SaloonManager.Instance.Register(this);
         ScheduleNextDrink();
@@ -139,7 +159,7 @@ public class SaloonNPC : MonoBehaviour
                         !agent.isStopped &&
                         agent.velocity.magnitude > 0.05f;
 
-        bool isFleeing = State == NPCState.Fleeing; 
+        bool isFleeing = State == NPCState.Fleeing;
 
         anim.SetBool("IsMoving", isMoving);
         anim.SetBool("IsFleeing", isFleeing);
@@ -215,26 +235,27 @@ public class SaloonNPC : MonoBehaviour
     private void HandleCombatRepositioning()
     {
         if (State != NPCState.Hostile && State != NPCState.Combat) return;
-        if (!TryGetHighestAnger(out SaloonNPC target, out float _)) return;
-        if (target == null || !target.IsAlive) return;
+        if (!TryGetCombatTarget(out Transform targetTransform, out SaloonNPC npcTarget, out float _)) return;
+        if (targetTransform == null) return;
+        if (npcTarget != null && !npcTarget.IsAlive) return;
 
         repositionTimer -= Time.deltaTime;
         if (repositionTimer > 0f) return;
         repositionTimer = repositionCheckInterval;
 
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        bool hasLineOfSight = HasLineOfSight(target);
+        float distance = Vector3.Distance(transform.position, targetTransform.position);
+        bool hasLineOfSight = HasLineOfSight(targetTransform);
 
         if (distance < minCombatDistance || distance > maxCombatDistance || !hasLineOfSight)
         {
-            MoveToBetterCombatPosition(target);
+            MoveToBetterCombatPosition(targetTransform);
         }
     }
 
-    private bool HasLineOfSight(SaloonNPC target)
+    private bool HasLineOfSight(Transform targetTransform)
     {
         Vector3 origin = transform.position + Vector3.up;
-        Vector3 targetPos = target.transform.position + Vector3.up;
+        Vector3 targetPos = targetTransform.position + Vector3.up;
         Vector3 dir = targetPos - origin;
 
         if (Physics.Raycast(origin, dir.normalized, out RaycastHit hit, dir.magnitude, obstacleMask))
@@ -244,7 +265,7 @@ public class SaloonNPC : MonoBehaviour
         return true;
     }
 
-    private void MoveToBetterCombatPosition(SaloonNPC target)
+    private void MoveToBetterCombatPosition(Transform targetTransform)
     {
         agent.speed = combatSpeed;
 
@@ -253,11 +274,11 @@ public class SaloonNPC : MonoBehaviour
         // angolo casuale: invece di andare sempre dritto verso/via dal bersaglio, si sposta di lato
         // per cercare un angolo di tiro migliore (accerchiamento leggero)
         float randomAngle = Random.Range(-60f, 60f);
-        Vector3 dirFromTarget = (transform.position - target.transform.position).normalized;
+        Vector3 dirFromTarget = (transform.position - targetTransform.position).normalized;
         if (dirFromTarget == Vector3.zero) dirFromTarget = Random.insideUnitSphere.normalized;
         dirFromTarget = Quaternion.Euler(0f, randomAngle, 0f) * dirFromTarget;
 
-        Vector3 desiredPoint = target.transform.position + dirFromTarget * desiredDistance;
+        Vector3 desiredPoint = targetTransform.position + dirFromTarget * desiredDistance;
 
         if (NavMesh.SamplePosition(desiredPoint, out NavMeshHit hit, 3f, NavMesh.AllAreas))
         {
@@ -323,8 +344,19 @@ public class SaloonNPC : MonoBehaviour
         SetState(NPCState.Hostile);
         timeSinceLastIncident = 0f;
         SaloonManager.Instance.IncreasePlayerHeat(SaloonManager.Instance.heatGainOnCaught);
-        // qui puoi gestire l'allarme diretto contro il player (fuori scope di questo script,
-        // collegalo al tuo PlayerController / sistema di combattimento)
+
+        if (playerTransform != null && thief == playerTransform)
+        {
+            // ti ha visto rubare con i suoi occhi: rabbia massima verso di te
+            playerAnger = 1f;
+        }
+        else
+        {
+            // fallback: nel caso il "ladro" non sia il player ma un altro NPC
+            SaloonNPC thiefNpc = thief.GetComponent<SaloonNPC>();
+            if (thiefNpc != null) SetAngerMax(thiefNpc);
+        }
+
         Debug.Log($"{npcName} ti ha beccato con le mani nel sacco!");
     }
 
@@ -435,6 +467,10 @@ public class SaloonNPC : MonoBehaviour
             float decay = angerDecayPerSecond * (1f - drunkenness * 0.5f) * Time.deltaTime;
             angerTowards[key] = Mathf.Max(0f, angerTowards[key] - decay);
         }
+
+        // la rabbia verso il player decade con la stessa logica
+        float playerDecay = angerDecayPerSecond * (1f - drunkenness * 0.5f) * Time.deltaTime;
+        playerAnger = Mathf.Max(0f, playerAnger - playerDecay);
     }
 
     private bool TryGetHighestAnger(out SaloonNPC target, out float amount)
@@ -452,6 +488,23 @@ public class SaloonNPC : MonoBehaviour
         return target != null;
     }
 
+    // Sceglie il bersaglio con la rabbia più alta in assoluto, che sia un NPC oppure il player.
+    // npcTarget torna null quando il bersaglio scelto è il player.
+    private bool TryGetCombatTarget(out Transform targetTransform, out SaloonNPC npcTarget, out float amount)
+    {
+        TryGetHighestAnger(out npcTarget, out amount);
+        targetTransform = npcTarget != null ? npcTarget.transform : null;
+
+        if (playerTransform != null && playerAnger > amount)
+        {
+            amount = playerAnger;
+            npcTarget = null;
+            targetTransform = playerTransform;
+        }
+
+        return targetTransform != null;
+    }
+
     // ---------------- ESCALATION ----------------
 
     private void EvaluateEscalation()
@@ -460,15 +513,16 @@ public class SaloonNPC : MonoBehaviour
         if (shootCheckTimer > 0f) return;
         shootCheckTimer = shootCheckInterval;
 
-        if (!TryGetHighestAnger(out SaloonNPC angriestTarget, out float highestAnger)) return;
+        if (!TryGetCombatTarget(out Transform targetTransform, out SaloonNPC npcTarget, out float highestAnger)) return;
 
         if (highestAnger >= hostileThreshold)
         {
-            TryEscalateToViolence(angriestTarget, highestAnger);
+            TryEscalateToViolence(targetTransform, npcTarget, highestAnger);
         }
-        else if (highestAnger >= accusationThreshold && State != NPCState.Accusing)
+        else if (npcTarget != null && highestAnger >= accusationThreshold && State != NPCState.Accusing)
         {
-            Accuse(angriestTarget);
+            // l'accusa aperta ha senso solo verso un altro avventore, non verso il player
+            Accuse(npcTarget);
         }
     }
 
@@ -481,12 +535,12 @@ public class SaloonNPC : MonoBehaviour
         // può provare a calmarlo con una battuta (skill check) riducendo un po' la rabbia
     }
 
-    private void TryEscalateToViolence(SaloonNPC target, float angerLevel)
+    private void TryEscalateToViolence(Transform targetTransform, SaloonNPC npcTarget, float angerLevel)
     {
         // se non è ancora a distanza/angolo di tiro buono, prima si riposiziona (gestito in HandleCombatRepositioning)
         // e rimanda la decisione di sparare al prossimo check
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < minCombatDistance || distance > maxCombatDistance || !HasLineOfSight(target))
+        float distance = Vector3.Distance(transform.position, targetTransform.position);
+        if (distance < minCombatDistance || distance > maxCombatDistance || !HasLineOfSight(targetTransform))
         {
             SetState(NPCState.Hostile);
             return;
@@ -502,7 +556,7 @@ public class SaloonNPC : MonoBehaviour
 
         if (Random.value < shootChance)
         {
-            ShootAt(target);
+            ShootAt(targetTransform, npcTarget);
         }
         else
         {
@@ -512,7 +566,30 @@ public class SaloonNPC : MonoBehaviour
 
     // ---------------- COMBATTIMENTO ----------------
 
-    private void ShootAt(SaloonNPC intendedTarget)
+    // Spara un proiettile puramente visivo (VFX) verso un punto già deciso dalla logica di gioco.
+    // Il danno NON dipende da questo: è già stato risolto prima di chiamarlo.
+    private void FireVisualBullet(Vector3 aimPoint)
+    {
+        if (BulletManager.Instance == null) return;
+
+        Transform spawn = firePoint != null ? firePoint : transform;
+        Bullet bullet = BulletManager.Instance.GetObject();
+        if (bullet == null) return;
+
+        bullet.transform.position = spawn.position;
+        bullet.transform.rotation = Quaternion.identity;
+
+        Vector3 dir = (aimPoint - spawn.position).normalized;
+        if (dir == Vector3.zero) dir = spawn.forward;
+
+        // Passo la mia faction (NPC) e me stesso come shooter: se il proiettile colpisce
+        // fisicamente un altro NPC, Bullet.cs non gli farà danno (fuoco amico disattivato).
+        // Se colpisce il player invece, il danno viene applicato normalmente.
+        bullet.Setup(dir, bulletSpeed, Bullet.ShooterFaction.NPC, this);
+    }
+
+    // npcTarget è null quando il bersaglio è il player
+    private void ShootAt(Transform targetTransform, SaloonNPC npcTarget)
     {
         SetState(NPCState.Combat);
         timeSinceLastIncident = 0f;
@@ -520,32 +597,52 @@ public class SaloonNPC : MonoBehaviour
         if (anim != null)
             anim.SetTrigger("Shoot");
 
+        bool targetIsPlayer = npcTarget == null;
+        string targetName = targetIsPlayer ? "il player" : npcTarget.npcName;
+
         // più sei ubriaco, più è probabile che il colpo vada a vuoto (o peggio, colpisca qualcun altro)
         float missChance = Mathf.Clamp01(drunkenness * 0.6f - courage * 0.15f);
 
         if (Random.value < missChance)
         {
             SaloonNPC accidentalVictim = SaloonManager.Instance
-                .GetRandomNearby(transform.position, strayBulletRadius, this, intendedTarget);
+                .GetRandomNearby(transform.position, strayBulletRadius, this, npcTarget);
 
             if (accidentalVictim != null)
             {
-                Debug.Log($"{npcName} spara a {intendedTarget.npcName} ma, ubriaco com'è, colpisce {accidentalVictim.npcName} per sbaglio!");
+                Debug.Log($"{npcName} spara a {targetName} ma, ubriaco com'è, colpisce {accidentalVictim.npcName} per sbaglio!");
+                FireVisualBullet(accidentalVictim.transform.position + Vector3.up * aimHeightOffset);
                 accidentalVictim.OnShotBy(this);
                 SaloonManager.Instance.BroadcastShooting(this, accidentalVictim, transform.position);
             }
             else
             {
-                Debug.Log($"{npcName} spara a {intendedTarget.npcName} ma manca completamente il colpo!");
-                SaloonManager.Instance.BroadcastShooting(this, intendedTarget, transform.position);
+                Debug.Log($"{npcName} spara a {targetName} ma manca completamente il colpo!");
+                Vector3 missOffset = Random.insideUnitSphere * totalMissSpread;
+                missOffset.y = Mathf.Abs(missOffset.y); // evita che il colpo vada a finire sotto il pavimento
+                FireVisualBullet(targetTransform.position + Vector3.up * aimHeightOffset + missOffset);
+                if (!targetIsPlayer)
+                    SaloonManager.Instance.BroadcastShooting(this, npcTarget, transform.position);
             }
 
             return;
         }
 
-        Debug.Log($"{npcName} ha sparato a {intendedTarget.npcName}!!");
-        intendedTarget.OnShotBy(this);
-        SaloonManager.Instance.BroadcastShooting(this, intendedTarget, transform.position);
+        if (targetIsPlayer)
+        {
+            Debug.Log($"{npcName} ha sparato al player!!");
+            // il danno arriva quando il proiettile colpisce fisicamente il player (vedi Bullet.cs -> TryApplyDamage)
+            FireVisualBullet(targetTransform.position + Vector3.up * aimHeightOffset);
+            // opzionale: se vuoi che gli altri NPC reagiscano vedendo sparare al player,
+            // aggiungi un metodo tipo SaloonManager.Instance.BroadcastShootingAtPlayer(this, transform.position);
+        }
+        else
+        {
+            Debug.Log($"{npcName} ha sparato a {npcTarget.npcName}!!");
+            FireVisualBullet(npcTarget.transform.position + Vector3.up * aimHeightOffset);
+            npcTarget.OnShotBy(this);
+            SaloonManager.Instance.BroadcastShooting(this, npcTarget, transform.position);
+        }
     }
 
     public void OnShotBy(SaloonNPC shooter)
@@ -563,6 +660,29 @@ public class SaloonNPC : MonoBehaviour
         {
             Die();
         }
+    }
+
+    // Implementazione di IDamageable: chiamato da Bullet.cs quando un proiettile ti colpisce fisicamente.
+    // shooter è null quando a sparare è stato il player (stessa convenzione usata nel resto dello script).
+    public void TakeDamage(SaloonNPC shooter)
+    {
+        if (shooter != null)
+        {
+            // colpito da un altro NPC: in teoria non dovrebbe mai succedere fisicamente
+            // (il fuoco amico è bloccato in Bullet.cs), ma resta gestito qui per coerenza/sicurezza
+            OnShotBy(shooter);
+        }
+        else
+        {
+            OnShotByPlayer();
+        }
+    }
+
+    private void OnShotByPlayer()
+    {
+        if (!IsAlive) return;
+
+        Die();
     }
 
     // Chiamato da SaloonManager quando un NPC vicino assiste a una sparatoria
@@ -606,7 +726,7 @@ public class SaloonNPC : MonoBehaviour
 
         if (timeSinceLastIncident < calmDownTime) return;
 
-        TryGetHighestAnger(out _, out float highestAnger);
+        TryGetCombatTarget(out _, out _, out float highestAnger);
         if (highestAnger > calmAngerThreshold) return;
 
         // nessun incidente da un po', la rabbia residua è bassa: si torna tranquilli
