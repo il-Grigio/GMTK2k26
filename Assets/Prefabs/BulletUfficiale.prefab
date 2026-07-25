@@ -5056,9 +5056,9 @@ GameObject:
   - component: {fileID: 198287450618253528}
   - component: {fileID: 65663540896221684}
   - component: {fileID: 54705770189447398}
-  - component: {fileID: 5661524378920617937}
+  - component: {fileID: 7338387467780140133}
   m_Layer: 0
-  m_Name: BulletProva
+  m_Name: BulletUfficiale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5073,7 +5073,7 @@ Transform:
   m_GameObject: {fileID: 1830508508936448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.65, y: 2, z: 0.204}
+  m_LocalPosition: {x: 5.65, y: 2, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9966,7 +9966,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5661524378920617937
+--- !u!114 &7338387467780140133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9978,5 +9978,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37bf22ec267a11479b09dac0e05a72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  trailRenderer: {fileID: 96544362045145264}
+  trailRenderer: {fileID: 96544362045145264, guid: 8957951a15357404baf91c2670cc57c3, type: 3}
   hitPrefab: {fileID: 1801918589960200, guid: 03280e26db9a2524c8409f02a2ab4d7d, type: 3}
