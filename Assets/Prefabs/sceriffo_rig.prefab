@@ -33,6 +33,18 @@ PrefabInstance:
       value: 16.434303
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.41074
       objectReference: {fileID: 0}
@@ -71,6 +83,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8069032694317455793, guid: 774f5eae3dd3204459d09eb58776be8d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -625,6 +641,8 @@ MonoBehaviour:
   accusationThreshold: 0.5
   hostileThreshold: 0.75
   shootCheckInterval: 3
+  playerTransform: {fileID: 0}
+  playerAnger: 0
   alibiCheckRadius: 2.5
   alibiWeightPenalty: 0.15
   gossipRadius: 8
@@ -645,6 +663,10 @@ MonoBehaviour:
     m_Bits: 0
   fleeDistance: 10
   fleeSpeed: 4
+  firePoint: {fileID: 0}
+  bulletSpeed: 40
+  aimHeightOffset: 1
+  totalMissSpread: 1.5
 --- !u!114 &4009914719752855188
 MonoBehaviour:
   m_ObjectHideFlags: 0

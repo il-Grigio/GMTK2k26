@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.46
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.46
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.46
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       propertyPath: m_LocalPosition.x
@@ -610,6 +610,8 @@ MonoBehaviour:
   accusationThreshold: 0.5
   hostileThreshold: 0.75
   shootCheckInterval: 3
+  playerTransform: {fileID: 0}
+  playerAnger: 0
   alibiCheckRadius: 2.5
   alibiWeightPenalty: 0.15
   gossipRadius: 8
@@ -630,3 +632,7 @@ MonoBehaviour:
     m_Bits: 0
   fleeDistance: 10
   fleeSpeed: 4
+  firePoint: {fileID: 0}
+  bulletSpeed: 40
+  aimHeightOffset: 1
+  totalMissSpread: 1.5
