@@ -89,7 +89,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -7949429039749201848}
-    m_Position: {x: 320, y: 120, z: 0}
+    m_Position: {x: 330, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -177,7 +177,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Shooting Layer
     m_StateMachine: {fileID: 4255786880449665548}
-    m_Mask: {fileID: 31900000, guid: 94ad1d6b93e6bd8419fb1f51e256118a, type: 2}
+    m_Mask: {fileID: 31900000, guid: 93b945e88d0f14141b93c6e6d81ea95d, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
@@ -211,7 +211,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 58c2267980ecaae4db1ac4920d3beb24, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 29498c3f34e8f8249baf7f72d4b3698a, type: 3}
     m_Threshold: 0.5
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -252,7 +252,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3511855616574869146}
-    m_Position: {x: 370, y: 10, z: 0}
+    m_Position: {x: 350, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5451304261178804870}
     m_Position: {x: 30, y: 230, z: 0}
