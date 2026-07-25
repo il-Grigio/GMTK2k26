@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
         if (hitPrefab != null)
         {
             ContactPoint contact = other.contacts[0];
-            EffectPoolManager.Instance.Get("hit", contact.point, Quaternion.LookRotation(contact.normal));
+            EffectPoolManager.Instance.Get(EffectPoolManager.EffectType.bullet, contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
         }
         Deactivate();
     }
