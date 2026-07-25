@@ -3986,7 +3986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5581e50795540c6419b461991a5d614e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletManager
-  prefab: {fileID: 5661524378920617937, guid: 8957951a15357404baf91c2670cc57c3, type: 3}
+  prefab: {fileID: 7338387467780140133, guid: a04891f71ed7d2840a6430a982255bfa, type: 3}
 --- !u!114 &1183243408
 MonoBehaviour:
   m_ObjectHideFlags: 0
