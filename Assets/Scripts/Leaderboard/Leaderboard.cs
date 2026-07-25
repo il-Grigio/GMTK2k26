@@ -62,6 +62,32 @@ public class Leaderboard : MonoBehaviour
         }, OnEntriesError);
     }
 
+    public void UploadEntryPROVA()
+    {
+        string cleanName = "kiograh";
+
+        if (string.IsNullOrWhiteSpace(cleanName))
+        {
+            Debug.LogWarning("Username non valido");
+            return;
+        }
+
+        if (cleanName.Length > 16)
+            cleanName = cleanName.Substring(0, 16);
+
+        // Prima controlliamo se esiste già
+        Leaderboards.GIOCO.GetEntries((entries) =>
+        {
+
+            // Se arriviamo qui, il nome è unico → procediamo
+            Leaderboards.GIOCO.UploadNewEntry(cleanName, 1000000, (success) =>
+            {
+                if (success)
+                    GetLeaderboard();
+            }, OnEntriesError);
+
+        }, OnEntriesError);
+    }
 
 
     public void GetEntriesCount()

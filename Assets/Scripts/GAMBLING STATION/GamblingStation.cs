@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 
@@ -7,6 +8,7 @@ public class GamblingStation : MonoBehaviour
     [SerializeField] float interactionRadius = 4;
     private InputHandler _input;
     private Camera cam;
+    [SerializeField] CameraShakeSimpleScript cameraShakeSimpleScript;
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public class GamblingStation : MonoBehaviour
             if(Random.value < 0.5f)
             {
                 InventorySystem.Instance.HalfMoney();
+ 
+                if (cameraShakeSimpleScript && cameraShakeSimpleScript != null) cameraShakeSimpleScript.ShakeCamera();
             }
             else
             {
