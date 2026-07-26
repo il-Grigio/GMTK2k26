@@ -120,7 +120,7 @@ public class MainMenu : MonoBehaviour
 
     public void TurnDownItems()
     {
-        foreach (GameObject gb in turnableitems)
+        foreach (GameObject gb in turnDownItems)
         {
             gb.SetActive(false);
         }
@@ -128,7 +128,7 @@ public class MainMenu : MonoBehaviour
 
     public void TurnUpItems()
     {
-        foreach (GameObject gb in turnableitems)
+        foreach (GameObject gb in turnDownItems)
         {
             gb.SetActive(true);
         }
