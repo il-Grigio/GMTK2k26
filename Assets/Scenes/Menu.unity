@@ -8581,6 +8581,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 806693519544270007, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
   m_PrefabInstance: {fileID: 322703628}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &322703630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3687638694119692295, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
+  m_PrefabInstance: {fileID: 322703628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &324562579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33553,6 +33558,7 @@ MonoBehaviour:
   - {fileID: 669357733}
   - {fileID: 8687434957099140593}
   - {fileID: 8687434957099140594}
+  - {fileID: 322703630}
   turnUpITEMS:
   - {fileID: 346031218}
   - {fileID: 1997142927}
@@ -66241,6 +66247,18 @@ PrefabInstance:
       propertyPath: gameCamera
       value: 
       objectReference: {fileID: 1363652745}
+    - target: {fileID: 2795916595441030956, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: turnDownItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2795916595441030956, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: 'turnDownItems.Array.data[0]'
+      value: 
+      objectReference: {fileID: 322703630}
+    - target: {fileID: 2795916595441030956, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: 'turnDownItems.Array.data[1]'
+      value: 
+      objectReference: {fileID: 669357733}
     - target: {fileID: 2795916595441030956, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: 'turnableitems.Array.data[0]'
       value: 
