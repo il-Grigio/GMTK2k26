@@ -45,7 +45,7 @@ public class SaloonNPC : MonoBehaviour, IDamageable
     [Header("Rabbia")]
     public float angerDecayPerSecond = 0.02f;
     public float accusationThreshold = 0.5f;
-    public float hostileThreshold = 0.75f;
+    public float hostileThreshold = 0.50f;
     public float shootCheckInterval = 3f;
 
     [Header("Player Target")]
