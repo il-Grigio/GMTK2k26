@@ -5,8 +5,8 @@ using TMPro;
 public class TimerSystem : Grigios.Singleton<TimerSystem>
 {
     [Header("Timer Settings")]
-    [SerializeField] private float timer = 30f;
-    [SerializeField] float increaseTime = 10f;
+    [SerializeField] private float timer = 80f;
+    [SerializeField] float increaseTime = 20f;
     [SerializeField] TextMeshProUGUI text;
     private bool isStopped = true;
 
