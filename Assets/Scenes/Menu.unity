@@ -45774,7 +45774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b27298fd3198be4cb149ec1c3ebef16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemBullet
-  cost: 10
+  cost: 100
 --- !u!65 &1536990185
 BoxCollider:
   m_ObjectHideFlags: 0
