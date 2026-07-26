@@ -17,7 +17,7 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
 
     public void IncreaseTimer(float multiplier)
     {
-        timer += increaseTime * multiplier * 1.5f;
+        timer += increaseTime * multiplier;
     }
 
     public void ReduceTimer(int qta)
