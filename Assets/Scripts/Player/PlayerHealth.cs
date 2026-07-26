@@ -1,11 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Esempio minimo: mettilo sul GameObject del player (con Tag = "Player")
 // oppure implementa IDamageable direttamente nel tuo PlayerController esistente.
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
-    public int maxHealth = 3;
-    public int currentHealth = 3;
+    public int maxHealth = 100;
+    public int currentHealth = 100;
 
     private void Awake()
     {
@@ -17,10 +18,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         int dmg = 1;
         currentHealth -= dmg;
         Debug.Log($"Il player è stato colpito da {shooter.npcName} per {dmg} danni! Vita: {currentHealth}/{maxHealth}");
-
+        DuelManager.Instance.PrepareDuel();
         if (currentHealth <= 0)
         {
             Debug.Log("Il player è morto.");
+            // OnLose?.Invoke();
             // TODO: game over / respawn / ragdoll
         }
     }

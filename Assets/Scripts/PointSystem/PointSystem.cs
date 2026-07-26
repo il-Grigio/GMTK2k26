@@ -48,6 +48,11 @@ public class PointSystem : Singleton<PointSystem>
         return (int)score;
     }
 
+    public void DoubleScore()
+    {
+        score *= 2;
+        bounty.text = score.ToString();
+    }
     private void Update()
     {
         if (timeToIncreaseMultiplier > 0)

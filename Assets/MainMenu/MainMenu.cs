@@ -25,10 +25,7 @@ public class MainMenu : MonoBehaviour
  
     private void Start()
     {
-        foreach (GameObject gb in turnableitems)
-        {
-            gb.SetActive(false);
-        }
+        GameOver.Instance.TurnDownItems();
         ShowMainMenu();
     }
 
@@ -124,4 +121,5 @@ public class MainMenu : MonoBehaviour
         ResetCameras();
         menuCamera.Priority = 20;
     }
+
 }

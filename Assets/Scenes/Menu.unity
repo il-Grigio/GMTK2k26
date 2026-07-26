@@ -3708,7 +3708,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 35
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3735,7 +3735,7 @@ Transform:
   m_GameObject: {fileID: 123050538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.24, y: 1.406, z: -18.161}
+  m_LocalPosition: {x: 7.9110003, y: 1.28, z: -21.994999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8615,7 +8615,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 3979879651655710857, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects:
     - {fileID: -2399161894071909346, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
     - {fileID: 7385840281053320732, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
@@ -12789,11 +12789,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   <ambiance>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1132837757
+      Data2: 1096322557
+      Data3: 153076411
+      Data4: -667493159
+    Path: event:/AMBIENCE/AMBIENCE
   <playerFootstepsSFX>k__BackingField:
     Guid:
       Data1: 1585277895
@@ -12808,6 +12808,48 @@ MonoBehaviour:
       Data3: -1475250528
       Data4: -149948753
     Path: event:/MUSIC/Stealth (base Music)
+  <shootSound>k__BackingField:
+    Guid:
+      Data1: 1051187472
+      Data2: 1196530015
+      Data3: 339387029
+      Data4: 883085296
+    Path: event:/SFX/PlayerShoot/PlayerShoot
+  <megIn>k__BackingField:
+    Guid:
+      Data1: -1429615923
+      Data2: 1325955318
+      Data3: 314062726
+      Data4: 505193978
+    Path: event:/SFX/PlayerShoot/MagIn
+  <megOut>k__BackingField:
+    Guid:
+      Data1: 1600736963
+      Data2: 1223237706
+      Data3: -186328683
+      Data4: -827734
+    Path: event:/SFX/PlayerShoot/MagOut
+  <stoleItem>k__BackingField:
+    Guid:
+      Data1: 1720626307
+      Data2: 1328687717
+      Data3: -1710098278
+      Data4: -1100861460
+    Path: event:/SFX/Steal/STEAL
+  <soldSound>k__BackingField:
+    Guid:
+      Data1: -475795574
+      Data2: 1247333415
+      Data3: 2050223788
+      Data4: -1856976767
+    Path: event:/SFX/SoldSound/SoldSound
+  <dieSound>k__BackingField:
+    Guid:
+      Data1: -1058273894
+      Data2: 1309663931
+      Data3: 898511505
+      Data4: 8183196
+    Path: event:/SFX/BODY DROP/BodyDrop
 --- !u!4 &476022618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4711375206408613415, guid: a8de5f6a2932a834a84783440acf06a8, type: 3}
@@ -24816,8 +24858,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4c60d54e248394ab0160ad00dd9b82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 3
-  currentHealth: 3
+  maxHealth: 5
+  currentHealth: 5
 --- !u!1001 &880150661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33246,6 +33288,8 @@ GameObject:
   - component: {fileID: 1183243411}
   - component: {fileID: 1183243412}
   - component: {fileID: 1183243413}
+  - component: {fileID: 1183243415}
+  - component: {fileID: 1183243414}
   m_Layer: 0
   m_Name: ---- GAME MANAGERS
   m_TagString: Untagged
@@ -33410,6 +33454,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraShake
   noise: {fileID: 1363652747}
+--- !u!114 &1183243414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183243402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf05efaa4048f94183cc8375e162e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOver
+  turnableitems:
+  - {fileID: 669357733}
+--- !u!114 &1183243415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183243402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6320780177d37674caf5f1e27ea31083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &1183500985 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6379977681586933107, guid: 12300391316cd8b429132964529db3b9, type: 3}
@@ -66738,6 +66808,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4495020008301564004, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: ambianceVcaPath
+      value: vca:/AMBIANCE
+      objectReference: {fileID: 0}
     - target: {fileID: 4825922530375173058, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -66957,6 +67031,10 @@ PrefabInstance:
     - target: {fileID: 6644193263582985152, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_Name
       value: -----MENU-----
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644193263582985152, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6771345425263439280, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_AnchorMax.y

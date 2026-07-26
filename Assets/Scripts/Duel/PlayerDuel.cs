@@ -69,6 +69,7 @@ public class PlayerDuel : MonoBehaviour
         Bullet bullet = BulletManager.Instance.GetObject();
         bullet.transform.position = gunHand.transform.position;
         bullet.transform.forward = Vector3.back;
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.shootSound, gunHand.transform.position);
         bullet.Setup(Vector3.back, 25);
     }
     void Lose()
