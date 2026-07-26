@@ -28729,7 +28729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140c7579046f6934f859fc47d1d9a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerSystem
-  timer: 6
+  timer: 40
   increaseTime: 20
   text: {fileID: 338371918}
   duelObject: {fileID: 1999036815}
