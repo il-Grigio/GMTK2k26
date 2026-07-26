@@ -208,5 +208,28 @@ public class dreamloLeaderBoard : Singleton<dreamloLeaderBoard> {
 		int.TryParse(s, out x);
 		return x;
 	}
-	
+
+    public void AddScoreThenRefresh(string playerName, int totalScore, System.Action onComplete)
+    {
+        playerName = Clean(playerName);
+        StartCoroutine(AddThenGet(playerName, totalScore, onComplete));
+    }
+
+    IEnumerator AddThenGet(string playerName, int totalScore, System.Action onComplete)
+    {
+        string addUrl = dreamloWebserviceURL + privateCode + "/add-pipe/" + UnityWebRequest.EscapeURL(playerName) + "/" + totalScore.ToString();
+        using (UnityWebRequest www = UnityWebRequest.Get(addUrl))
+        {
+            yield return www.SendWebRequest();
+        }
+
+        string getUrl = dreamloWebserviceURL + publicCode + "/pipe";
+        using (UnityWebRequest www2 = UnityWebRequest.Get(getUrl))
+        {
+            yield return www2.SendWebRequest();
+            highScores = www2.downloadHandler.text;
+        }
+
+        onComplete?.Invoke();
+    }
 }
