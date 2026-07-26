@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{ed421f35-0c00-418b-86b7-dbbccc26c617}">
+		<property name="assetPath">
+			<value>SFX/SWING/Swing 1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.740375</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2622321c-9252-4593-9795-55c556c3fd30}</destination>
+		</relationship>
+	</object>
+</objects>

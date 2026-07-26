@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{a71ed832-858c-41f4-bc66-54ea59754e75}">
+		<property name="assetPath">
+			<value>SFX/FootSteps2/Sand footstep 4.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.4480045351473923</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2622321c-9252-4593-9795-55c556c3fd30}</destination>
+		</relationship>
+	</object>
+</objects>

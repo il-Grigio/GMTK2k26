@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{df9b5b59-59b5-4ef7-a3fb-a9fd41611a90}">
+		<property name="assetPath">
+			<value>SFX/PlayerShoot/Pistol Shot 26.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.8124943310657597</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2622321c-9252-4593-9795-55c556c3fd30}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -380,8 +380,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../../../FMOD/PROGETTO GIOCO/PROGETTO GIOCO.fspro
-  sourceBankPath: ../../../../../FMOD/PROGETTO GIOCO/Build
+  sourceProjectPath: FMOD/PROGETTO GIOCO/PROGETTO GIOCO.fspro
+  sourceBankPath: FMOD/PROGETTO GIOCO/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
