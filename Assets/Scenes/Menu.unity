@@ -3708,7 +3708,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3735,7 +3735,7 @@ Transform:
   m_GameObject: {fileID: 123050538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9110003, y: 1.28, z: -21.994999}
+  m_LocalPosition: {x: 6.24, y: 1.406, z: -18.161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8598,32 +8598,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4036259648404383396, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: 2d74bd8478e84bc4cbfa2c2cc976d1ea, type: 2}
-    - target: {fileID: 6857223170218559100, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-      propertyPath: villagerLayerMask.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939056882784705986, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7402506100302800892, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-      propertyPath: cameraShakeSimpleScript
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 0}
-    m_RemovedGameObjects:
-    - {fileID: -2399161894071909346, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-    - {fileID: 7385840281053320732, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
+    - {fileID: 7042710767259231590, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3687638694119692295, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 878030709}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
 --- !u!4 &322703629 stripped
 Transform:
@@ -22380,11 +22359,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01594381, y: 0.021093953, z: 0.011774649}
   m_Center: {x: 0.0005588756, y: -0.00053540245, z: 0.00067246746}
---- !u!1 &781211907 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3687638694119692295, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-  m_PrefabInstance: {fileID: 322703628}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &782271745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24835,31 +24809,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1417954858}
   m_LocalEulerAnglesHint: {x: 0, y: -149.36, z: 0}
---- !u!114 &878030700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7042710767259231590, guid: fe0f0d7660467844cb31e4332ad1db5f, type: 3}
-  m_PrefabInstance: {fileID: 322703628}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781211907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
---- !u!114 &878030709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781211907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4c60d54e248394ab0160ad00dd9b82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 5
-  currentHealth: 5
 --- !u!1001 &880150661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33290,6 +33239,7 @@ GameObject:
   - component: {fileID: 1183243413}
   - component: {fileID: 1183243415}
   - component: {fileID: 1183243414}
+  - component: {fileID: 1183243416}
   m_Layer: 0
   m_Name: ---- GAME MANAGERS
   m_TagString: Untagged
@@ -33480,6 +33430,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6320780177d37674caf5f1e27ea31083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1183243416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183243402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!4 &1183500985 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6379977681586933107, guid: 12300391316cd8b429132964529db3b9, type: 3}
@@ -66150,7 +66130,7 @@ PrefabInstance:
     - target: {fileID: 4514169998914717922, guid: 4cdc64a5cf5f7b7488422d8f809c2599, type: 3}
       propertyPath: playerInput
       value: 
-      objectReference: {fileID: 878030700}
+      objectReference: {fileID: 0}
     - target: {fileID: 7313138328297298966, guid: 4cdc64a5cf5f7b7488422d8f809c2599, type: 3}
       propertyPath: m_Name
       value: Shop
