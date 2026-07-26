@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public int maxHealth = 100;
     public int currentHealth = 100;
-
+    [SerializeField] private GameObject duelObject;
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -18,7 +18,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         int dmg = 1;
         currentHealth -= dmg;
         Debug.Log($"Il player è stato colpito da {shooter.npcName} per {dmg} danni! Vita: {currentHealth}/{maxHealth}");
+
         DuelManager.Instance.PrepareDuel();
+        duelObject.SetActive( true );
         if (currentHealth <= 0)
         {
             Debug.Log("Il player è morto.");

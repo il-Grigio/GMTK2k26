@@ -9,6 +9,7 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
     [SerializeField] float increaseTime = 10f;
     [SerializeField] TextMeshProUGUI text;
     private bool isStopped = true;
+    [SerializeField] GameObject duelObject;
 
     public float GetTimer()
     {
@@ -47,6 +48,7 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
             text.text = "00:00";
             increaseTime = 0;
             DuelManager.Instance.PrepareDuel();
+            duelObject.SetActive(true);
             //Debug.Log("TEMPO FINITO");
         }
     }
