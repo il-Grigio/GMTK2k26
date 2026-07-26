@@ -55,13 +55,8 @@ public class MainMenu : MonoBehaviour
         ResetCameras();
         gameCamera.Priority = 20;
         TimerSystem.Instance.ResumeTimer();
-        TurnUpItems();
         InputHandler.Instance.CurrentState = InputHandler.State.Game;
-        foreach (GameObject gb in turnableitems)
-        {
-            gb.SetActive(true);
-            // Altre implementazioni varie
-        }
+        TurnUpItems();
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
