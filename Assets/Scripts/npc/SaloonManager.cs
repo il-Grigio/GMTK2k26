@@ -1,11 +1,12 @@
 using FMODUnity;
+using Grigios;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class SaloonManager : MonoBehaviour
+using Grigios;
+public class SaloonManager : Grigios.Singleton<SaloonManager>
 {
     public static SaloonManager Instance { get; private set; }
     [Header("Reputazione Player")]
@@ -53,7 +54,7 @@ public class SaloonManager : MonoBehaviour
     }
     public float GetPlayerHeat() => playerHeat;
 
-    private void SetHeat(float newHeat)
+    public void SetHeat(float newHeat)
     {
         playerHeat = newHeat;
 

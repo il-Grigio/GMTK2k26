@@ -5,7 +5,7 @@ public class GameOver : Singleton<GameOver>
 {
     [Header("Turnable Items")]
     [Tooltip("METTERE NPC")]
-    public List<GameObject> turnableitems = new List<GameObject>(); // 
+    public List<GameObject> turnableitems = new List<GameObject>();
 
     public void Loose()
     {

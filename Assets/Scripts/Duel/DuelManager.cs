@@ -235,6 +235,7 @@ public class DuelManager : Singleton<DuelManager>
         if(TimerSystem.Instance.GetTimer() <= 0)
         {
             duelCameraSwitcher.SwitchToLeaderboardCamera();
+            SaloonManager.Instance.SetHeat(0);
         }
         else
         {
