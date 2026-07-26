@@ -66,10 +66,13 @@ public class PointSystem : Singleton<PointSystem>
     {
         playername = nome;
     }
+    [SerializeField] private TMP_InputField nameInputField;
     public void SendScore()
     {
-        dreamloLeaderBoard.Instance.AddScore(playername, (int)score);
-        LeaderBoardWanted.Instance.SetWanteds();
+        playername = nameInputField.text; // leggi qui, non aspettare OnEndEdit
+        dreamloLeaderBoard.Instance.AddScoreThenRefresh(playername, (int)score, () => {
+            LeaderBoardWanted.Instance.SetWanteds();
+        });
     }
 }
 
