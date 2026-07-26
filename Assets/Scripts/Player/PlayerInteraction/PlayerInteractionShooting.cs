@@ -1,8 +1,4 @@
-using FMODUnity;
-using Mono.Cecil;
-using System;
 using UnityEngine;
-using EventReference = FMODUnity.EventReference;
 
 public class PlayerInteractionShooting : PlayerInteraction
 {
