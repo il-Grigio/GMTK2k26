@@ -19,8 +19,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         currentHealth -= dmg;
         Debug.Log($"Il player è stato colpito da {shooter.npcName} per {dmg} danni! Vita: {currentHealth}/{maxHealth}");
 
+        duelObject.SetActive(true);
         DuelManager.Instance.PrepareDuel();
-        duelObject.SetActive( true );
         if (currentHealth <= 0)
         {
             Debug.Log("Il player è morto.");
