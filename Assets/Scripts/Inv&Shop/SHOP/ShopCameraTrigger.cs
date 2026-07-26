@@ -6,7 +6,7 @@ using UnityEngine.InputSystem; // per Cinemachine 3.x
 public class ShopCameraTrigger : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera shopCamera; // CinemachineVirtualCamera in v2
-    [SerializeField] private int shopPriority = 15;
+    [SerializeField] private int shopPriority = 20;
     [SerializeField] private int defaultPriority = 5;
     
     [SerializeField] Transform playerTargetPosition;
