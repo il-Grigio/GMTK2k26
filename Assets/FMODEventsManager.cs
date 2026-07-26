@@ -22,7 +22,7 @@ public class FMODEventsManager : Singleton<FMODEventsManager>
 
     [field: Header("Player Interaction")]
     [field: SerializeField] public EventReference stoleItem { get; private set; }
-    [field: Header("Music di base")]
+    [field: Header("Sold Sound")]
     [field: SerializeField] public EventReference soldSound { get; private set; }
 
     [field: Header("Nemico")]

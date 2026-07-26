@@ -53,6 +53,8 @@ public class InventorySystem : Singleton<InventorySystem>
         actualItemCount = 0;
 
         inventory.Clear();
+
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.soldSound, transform.position);
         FixMoneyText();
         FixInventoryText();
     }
