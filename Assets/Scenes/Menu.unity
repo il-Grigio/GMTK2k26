@@ -56033,6 +56033,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----Duel----
       objectReference: {fileID: 0}
+    - target: {fileID: 707521035890487847, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242211215717843296, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: playerUi
+      value: 
+      objectReference: {fileID: 669357733}
     - target: {fileID: 6213572012034757956, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.49
@@ -56167,6 +56175,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6928465226252313084, guid: 1abe18a032c6b08468fdf728cd1adc9c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255907681781151499, guid: 1abe18a032c6b08468fdf728cd1adc9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.27
+      objectReference: {fileID: 0}
     - target: {fileID: 7901680246876873686, guid: 1abe18a032c6b08468fdf728cd1adc9c, type: 3}
       propertyPath: m_Name
       value: "----CItt\xE0----"
@@ -56210,6 +56226,10 @@ PrefabInstance:
     - target: {fileID: 8241847609391623408, guid: 1abe18a032c6b08468fdf728cd1adc9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214465816695135257, guid: 1abe18a032c6b08468fdf728cd1adc9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
