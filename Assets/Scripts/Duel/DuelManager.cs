@@ -81,6 +81,7 @@ public class DuelManager : Singleton<DuelManager>
 
     void PrepareDuel()
     {
+        AudioManager.Instance.SetMusicState(4);
         countdown = countdownStart;
         Debug.Log("Duel Countdown: " + countdown);
         canStepForward = false;
@@ -227,6 +228,7 @@ public class DuelManager : Singleton<DuelManager>
         StopDuelCoroutine();
         OnWin?.Invoke();
         Debug.Log("Duel Win");
+        AudioManager.Instance.SetMusicState(0);
     }
 
     private void Lose()
@@ -236,5 +238,6 @@ public class DuelManager : Singleton<DuelManager>
         StopDuelCoroutine();
         OnLose?.Invoke();
         Debug.Log("Duel Lost");
+        AudioManager.Instance.SetMusicState(0);
     }
 }
