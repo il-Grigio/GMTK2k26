@@ -2427,6 +2427,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4611073273061102298, guid: eb0e211173eb86d438aba0b785d07c28, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2745,6 +2749,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8818473137417408593, guid: 6d4d05f4efd0c10408be427c8cd69c0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8148,6 +8156,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 3313138986481847270, guid: 2e509d51dc652234a96bf5e047fef4d2, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 6241688290985926115, guid: 2e509d51dc652234a96bf5e047fef4d2, type: 3}
       propertyPath: m_Name
       value: cowboy_fine
@@ -18927,6 +18939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4611073273061102298, guid: eb0e211173eb86d438aba0b785d07c28, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20560,6 +20576,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 3313138986481847270, guid: 2e509d51dc652234a96bf5e047fef4d2, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 6241688290985926115, guid: 2e509d51dc652234a96bf5e047fef4d2, type: 3}
       propertyPath: m_Name
       value: cowboy_fine (1)
@@ -20936,6 +20956,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 6650758977277780311, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 7387256199461161358, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
       propertyPath: m_Name
       value: npc1
@@ -21949,6 +21973,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 6650758977277780311, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 7387256199461161358, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
       propertyPath: m_Name
       value: npc1 (2)
@@ -24960,6 +24988,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4611073273061102298, guid: eb0e211173eb86d438aba0b785d07c28, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26450,6 +26482,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 6650758977277780311, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 7387256199461161358, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
       propertyPath: m_Name
       value: npc1
@@ -28414,6 +28450,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 3313138986481847270, guid: 2e509d51dc652234a96bf5e047fef4d2, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 6241688290985926115, guid: 2e509d51dc652234a96bf5e047fef4d2, type: 3}
       propertyPath: m_Name
       value: cowboy_fine
@@ -30061,6 +30101,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8818473137417408593, guid: 6d4d05f4efd0c10408be427c8cd69c0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34867,6 +34911,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 1696652168925920019, guid: fafea4af442e86642885e0989d230090, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 3977561808453460970, guid: fafea4af442e86642885e0989d230090, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.2263
@@ -38891,6 +38939,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 6650758977277780311, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 7387256199461161358, guid: 28f15ed2acede214fac65a11eeea9476, type: 3}
       propertyPath: m_Name
       value: npc1 (1)
@@ -40382,6 +40434,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8818473137417408593, guid: 6d4d05f4efd0c10408be427c8cd69c0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41783,6 +41839,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 1696652168925920019, guid: fafea4af442e86642885e0989d230090, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 3977561808453460970, guid: fafea4af442e86642885e0989d230090, type: 3}
       propertyPath: m_LocalPosition.x
       value: 40.320675
@@ -45011,6 +45071,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8818473137417408593, guid: 6d4d05f4efd0c10408be427c8cd69c0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49890,6 +49954,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8818473137417408593, guid: 6d4d05f4efd0c10408be427c8cd69c0e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50256,6 +50324,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 1696652168925920019, guid: fafea4af442e86642885e0989d230090, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 3977561808453460970, guid: fafea4af442e86642885e0989d230090, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30.49
@@ -54479,6 +54551,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1923844994}
     m_Modifications:
+    - target: {fileID: 1696652168925920019, guid: fafea4af442e86642885e0989d230090, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 322703629}
     - target: {fileID: 3977561808453460970, guid: fafea4af442e86642885e0989d230090, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.740925
