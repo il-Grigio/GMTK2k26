@@ -1,6 +1,4 @@
-using UnityEditor.Rendering;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 
 public class GamblingStation : MonoBehaviour
 {
