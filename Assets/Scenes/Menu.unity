@@ -56113,6 +56113,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2453342848721963833, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: LeaderboardCamera
+      value: 
+      objectReference: {fileID: 8687434957099140595}
     - target: {fileID: 3242211215717843296, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: playerUi
       value: 
@@ -57446,6 +57450,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6862465203403835202, guid: cdf74d3258095e94698d0f302128e522, type: 3}
   m_PrefabInstance: {fileID: 8687434957099140592}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8687434957099140595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4188635450986398397, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+  m_PrefabInstance: {fileID: 8687434957099140592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
