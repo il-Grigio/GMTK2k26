@@ -597,6 +597,7 @@ public class SaloonNPC : MonoBehaviour, IDamageable
         if (anim != null)
             anim.SetTrigger("Shoot");
 
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.shootSound, transform.position);
         bool targetIsPlayer = npcTarget == null;
         string targetName = targetIsPlayer ? "il player" : npcTarget.npcName;
 
@@ -715,6 +716,7 @@ public class SaloonNPC : MonoBehaviour, IDamageable
         // disabilita collider, avvia ragdoll/animazione morte, ecc.
         if (anim != null)
             anim.SetTrigger("Die");
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.dieSound, transform.position);
     }
 
     // ---------------- CALMA DOPO LA TEMPESTA ----------------

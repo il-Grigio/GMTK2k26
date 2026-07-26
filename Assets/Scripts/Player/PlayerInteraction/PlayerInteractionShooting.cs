@@ -1,5 +1,8 @@
+using FMODUnity;
+using Mono.Cecil;
 using System;
 using UnityEngine;
+using EventReference = FMODUnity.EventReference;
 
 public class PlayerInteractionShooting : PlayerInteraction
 {
@@ -23,6 +26,7 @@ public class PlayerInteractionShooting : PlayerInteraction
     {
         if (!InventorySystem.Instance.CanShoot()) return;
 
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.shootSound, firePoint.position);
         InventorySystem.Instance.RemoveBullet();
         if (anim != null)
             anim.SetTrigger("Shoot");
