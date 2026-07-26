@@ -682,9 +682,10 @@ public class SaloonNPC : MonoBehaviour, IDamageable
     private void OnShotByPlayer()
     {
         if (!IsAlive) return;
-
+        SaloonManager.Instance.BroadcastPlayerShooting(this, transform.position);
         Die();
     }
+
 
     // Chiamato da SaloonManager quando un NPC vicino assiste a una sparatoria
     public void OnWitnessShooting(SaloonNPC shooter, SaloonNPC victim)
@@ -707,6 +708,26 @@ public class SaloonNPC : MonoBehaviour, IDamageable
         }
     }
 
+    // Chiamato da SaloonManager quando un NPC vicino assiste a una sparatoria del PLAYER
+    public void OnWitnessPlayerShooting(SaloonNPC victim)
+    {
+        if (!IsAlive) return;
+        if (victim == this) return; // gestito da TakeDamage/OnShotByPlayer
+
+        timeSinceLastIncident = 0f;
+
+        // vedere il player sparare a un innocente fa scattare rabbia diretta verso il player
+        float outrage = Random.Range(0.3f, 0.6f) * (1f + loyalty);
+        playerAnger = Mathf.Clamp01(playerAnger + outrage);
+
+        // stessa logica di paura già presente in OnWitnessShooting
+        if (courage < 0.3f && Random.value > courage)
+        {
+            lastThreatPosition = playerTransform != null ? playerTransform.position : transform.position;
+            SetState(NPCState.Fleeing);
+        }
+    }
+
     private void Die()
     {
         IsAlive = false;
@@ -717,6 +738,7 @@ public class SaloonNPC : MonoBehaviour, IDamageable
         if (anim != null)
             anim.SetTrigger("Die");
         AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.dieSound, transform.position);
+        SaloonManager.Instance.SetHeat(1f);
     }
 
     // ---------------- CALMA DOPO LA TEMPESTA ----------------
