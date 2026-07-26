@@ -8,6 +8,7 @@ public class DuelCameraSwitcher : MonoBehaviour
     public CinemachineCamera LoseCamera;
     public CinemachineCamera LoseStepForwardCamera;
     public CinemachineCamera LeaderboardCamera;
+    
     int currentCamera = 0;
 
     private void OnEnable()
@@ -30,6 +31,7 @@ public class DuelCameraSwitcher : MonoBehaviour
         ResetCameras();
         currentCamera = 0;
         Cameras[currentCamera].Priority = 20;
+        LeaderboardCamera.Priority = 5;
     }
 
     public void SwitchCamera()
@@ -58,7 +60,6 @@ public class DuelCameraSwitcher : MonoBehaviour
     public void SwitchToLeaderboardCamera()
     {
         LeaderboardCamera.Priority = 19;
-        
     }
 
     public void EndDuel()

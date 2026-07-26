@@ -28729,7 +28729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140c7579046f6934f859fc47d1d9a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerSystem
-  timer: 40
+  timer: 6
   increaseTime: 20
   text: {fileID: 338371918}
   duelObject: {fileID: 1999036815}
@@ -47494,6 +47494,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1041386584}
   m_SourcePrefab: {fileID: 100100000, guid: 12300391316cd8b429132964529db3b9, type: 3}
+--- !u!1 &1822573733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6644193263582985152, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+  m_PrefabInstance: {fileID: 8687434957099140592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1823366017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8047983581868775951, guid: 451cedc25f111a04fb8eee6f6239e0f4, type: 3}
@@ -56118,9 +56123,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8687434957099140595}
     - target: {fileID: 3242211215717843296, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 1822573733}
+    - target: {fileID: 3242211215717843296, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: playerUi
       value: 
       objectReference: {fileID: 669357733}
+    - target: {fileID: 3242211215717843296, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: indoorCamera
+      value: 
+      objectReference: {fileID: 1363652745}
     - target: {fileID: 6213572012034757956, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.49
@@ -56160,6 +56173,10 @@ PrefabInstance:
     - target: {fileID: 6213572012034757956, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274745493953075606, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8336956570733564471, guid: 2da16f684e1b1aa42bbc9004af6e7dd3, type: 3}
       propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[1].Rotation.value.z

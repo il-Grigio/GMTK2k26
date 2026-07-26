@@ -37,6 +37,14 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
             int seconds = totalSeconds % 60;
 
             text.text = $"{minutes:00}:{seconds:00}";
+            if (timer < 0)
+            {
+                timer = 0;
+                text.text = "00:00";
+                increaseTime = 0;
+                duelObject.SetActive(true);
+                DuelManager.Instance.PrepareDuel();
+            }
         }
         else if (timer > 0 && isStopped)
         {
@@ -47,8 +55,6 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
             timer = 0;
             text.text = "00:00";
             increaseTime = 0;
-            duelObject.SetActive(true);
-            DuelManager.Instance.PrepareDuel();
             //Debug.Log("TEMPO FINITO");
         }
     }

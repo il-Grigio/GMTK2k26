@@ -40,7 +40,7 @@ public class NPCDuelShoot : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(Shoot), Random.Range(.35f, .7f));
+            Invoke(nameof(Shoot), Random.Range(.2f, .7f));
         }
     }
     IEnumerator Walk()

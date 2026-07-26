@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Grigios;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,6 +13,9 @@ public class DuelManager : Grigios.Singleton<DuelManager>
 
     [SerializeField] Transform npcTargetPosition;
     [SerializeField] Transform playerTargetPosition;
+
+    [SerializeField] CinemachineCamera indoorCamera;
+    [SerializeField] private GameObject mainMenu;
     
     [SerializeField] DuelCameraSwitcher duelCameraSwitcher;
     [Header("Timing")]
@@ -73,7 +77,6 @@ public class DuelManager : Grigios.Singleton<DuelManager>
 
         _input.OnStepForward -= StepForward;
         _input.OnStepForward += StepForward;
-        Invoke(nameof(PrepareDuel), 2f);
     }
 
     private void OnDisable()
@@ -86,6 +89,7 @@ public class DuelManager : Grigios.Singleton<DuelManager>
 
     public void PrepareDuel()
     {
+        mainMenu.gameObject.SetActive(false);
         inputEnabled = true;
         AudioManager.Instance.SetMusicState(4);
         countdown = countdownStart;
@@ -248,7 +252,8 @@ public class DuelManager : Grigios.Singleton<DuelManager>
 
         if(TimerSystem.Instance.GetTimer() <= 0)
         {
-            Lose();
+            PointSystem.Instance.DoubleScore();
+            FinishGame();
         }
         else
         {
@@ -265,10 +270,18 @@ public class DuelManager : Grigios.Singleton<DuelManager>
         StopDuelCoroutine();
         OnLose?.Invoke();
         Debug.Log("Duel Lost");
-        AudioManager.Instance.SetMusicState(0);
+        
         AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.shootSound, player.transform.position);
         duelCameraSwitcher.EndDuel();
+        FinishGame();
+    }
+
+    private void FinishGame()
+    {
+        mainMenu.gameObject.SetActive(true);
+        indoorCamera.Priority = 5;
+        GameOver.Instance.FinishGame();
         duelCameraSwitcher.SwitchToLeaderboardCamera();
-        GameOver.Instance.Loose();
+        AudioManager.Instance.SetMusicState(0);
     }
 }
