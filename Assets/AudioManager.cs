@@ -47,6 +47,11 @@ public class AudioManager : Singleton<AudioManager>
         musicEventInstance = CreateInstance(musicEventReference);
         musicEventInstance.start();
     }
+    public void SetMusicState(int state)
+    {
+        // 0 = STEALTH, 1 CAOS, 2 CAOS2, 3 CAOS3, 4 = DUEL
+        musicEventInstance.setParameterByName("MusicState", state);
+    }
     private void OnDestroy()
     {
         CleanUp();

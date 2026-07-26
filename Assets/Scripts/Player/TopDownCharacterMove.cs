@@ -102,15 +102,18 @@ public class TopDownCharacterMove : MonoBehaviour
 
     private void UpdateSound()
     {
+        playerFootsteps.getPlaybackState(out PLAYBACK_STATE playbackState);
+
         if (isWalking)
         {
-            PLAYBACK_STATE playbackState;
-            playerFootsteps.getPlaybackState(out playbackState);
-            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            if (playbackState == PLAYBACK_STATE.STOPPED)
             {
                 playerFootsteps.start();
             }
-            else
+        }
+        else
+        {
+            if (playbackState != PLAYBACK_STATE.STOPPED && playbackState != PLAYBACK_STATE.STOPPING)
             {
                 playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
             }

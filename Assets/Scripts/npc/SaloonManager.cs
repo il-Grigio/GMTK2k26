@@ -16,6 +16,11 @@ public class SaloonManager : MonoBehaviour
     [SerializeField] Image[] stelleImage = new Image[5]; // componenti Image delle stelle
     [SerializeField] float heatPerStar = 0.18f; // quanto heat serve per accendere una stella
 
+    [Header("Music State")]
+    [Tooltip("Soglie di playerHeat oltre le quali si passa allo stato musicale successivo")]
+    [SerializeField] float[] musicHeatThresholds = { 0.20f, 0.50f, 0.70f };
+    private int lastMusicState = -1;
+
     public event Action<float> OnHeatChanged;
 
     private readonly List<SaloonNPC> npcs = new List<SaloonNPC>();
@@ -58,6 +63,25 @@ public class SaloonManager : MonoBehaviour
             lastStarCount = currentStarCount;
             OnHeatChanged?.Invoke(playerHeat);
             UpdateStars(currentStarCount);
+        }
+
+        UpdateMusicState();
+    }
+
+    // Determina lo stato musicale in base alle soglie di heat e lo applica solo se cambiato
+    private void UpdateMusicState()
+    {
+        int newState = 0;
+        for (int i = 0; i < musicHeatThresholds.Length; i++)
+        {
+            if (playerHeat >= musicHeatThresholds[i])
+                newState = i + 1;
+        }
+
+        if (newState != lastMusicState)
+        {
+            lastMusicState = newState;
+            AudioManager.Instance.SetMusicState(newState);
         }
     }
 

@@ -408,7 +408,6 @@ MonoBehaviour:
   Banks:
   - MUSIC
   - SFX
-  - SFX NON ROTTO
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
