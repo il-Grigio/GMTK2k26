@@ -119,6 +119,20 @@ public class SaloonManager : Grigios.Singleton<SaloonManager>
             }
         }
     }
+    // Chiamato quando il PLAYER uccide/colpisce un NPC, per avvisare i testimoni vicini.
+    // Diverso da BroadcastShooting perché qui non c'è un SaloonNPC "shooter".
+    public void BroadcastPlayerShooting(SaloonNPC victim, Vector3 position, float witnessRadius = 12f)
+    {
+        foreach (var npc in npcs)
+        {
+            if (npc == null || !npc.IsAlive || npc == victim) continue;
+            float dist = Vector3.Distance(npc.transform.position, position);
+            if (dist <= witnessRadius)
+            {
+                npc.OnWitnessPlayerShooting(victim);
+            }
+        }
+    }
     // ---------------- RICERCA NPC ----------------
     public List<SaloonNPC> GetNPCsNear(Vector3 position, float radius, SaloonNPC exclude = null)
     {
