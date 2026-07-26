@@ -717,6 +717,7 @@ public class SaloonNPC : MonoBehaviour, IDamageable
         if (anim != null)
             anim.SetTrigger("Die");
         AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.dieSound, transform.position);
+        SaloonManager.Instance.SetHeat(1f);
     }
 
     // ---------------- CALMA DOPO LA TEMPESTA ----------------
