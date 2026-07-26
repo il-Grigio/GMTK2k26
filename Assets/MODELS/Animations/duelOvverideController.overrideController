@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: duelOvverideController
+  m_Controller: {fileID: 9100000, guid: fd32e2d37375d714fbe401b39387b0c4, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: a1a7bad5159b22149bd2cac444561e9d, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 7b320a6b18d1d244b9ec1c1909fe9361, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 7668e1f29fc8e8d4086d54819ff73cdb, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 2076e7f16eb0dc648841659ed90df42f, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: af1c0d666af8f25449ccbc8033e4d154, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7fbe456fd639fff47b9c4f14567e5d5b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4699a470ae14ea24ca396856927acab5, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 555fec6c2daf772418fcd7115e9082c5, type: 3}

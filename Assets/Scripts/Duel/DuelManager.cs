@@ -35,6 +35,8 @@ public class DuelManager : Singleton<DuelManager>
     private bool shootInput;
     private bool _canShoot;
 
+    private bool inputEnabled;
+
     private bool canShoot
     {
         get => _canShoot;
@@ -68,6 +70,7 @@ public class DuelManager : Singleton<DuelManager>
 
         _input.OnStepForward -= StepForward;
         _input.OnStepForward += StepForward;
+        Invoke(nameof(PrepareDuel), 2f);
     }
 
     private void OnDisable()
@@ -80,6 +83,7 @@ public class DuelManager : Singleton<DuelManager>
 
     public void PrepareDuel()
     {
+        inputEnabled = true;
         AudioManager.Instance.SetMusicState(4);
         countdown = countdownStart;
         Debug.Log("Duel Countdown: " + countdown);
@@ -186,6 +190,7 @@ public class DuelManager : Singleton<DuelManager>
 
     private void Shoot()
     {
+        if (!inputEnabled) return;
         if (!isDuelActive) return;
 
         if (canShoot)
@@ -203,6 +208,7 @@ public class DuelManager : Singleton<DuelManager>
 
     private void StepForward()
     {
+        if (!inputEnabled) return;
         if (!isDuelActive)
         {
             StartDuel();
@@ -224,6 +230,7 @@ public class DuelManager : Singleton<DuelManager>
     private void Win()
     {
         if (!isDuelActive) return;
+        inputEnabled = false;
         isDuelActive = false;
         StopDuelCoroutine();
         OnWin?.Invoke();
@@ -246,6 +253,7 @@ public class DuelManager : Singleton<DuelManager>
     private void Lose()
     {
         if (!isDuelActive) return;
+        inputEnabled = false;
         isDuelActive = false;
         StopDuelCoroutine();
         OnLose?.Invoke();
