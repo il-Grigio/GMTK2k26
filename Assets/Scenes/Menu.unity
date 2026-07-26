@@ -13264,6 +13264,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 524178402}
   m_SourcePrefab: {fileID: 100100000, guid: 10066c449bd50334fbf05dfc89b5a555, type: 3}
+--- !u!114 &557514560 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8404291437442977675, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+  m_PrefabInstance: {fileID: 8687434957099140592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_InputField
 --- !u!4 &559263138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5961895706447275019, guid: d9f67f6768b8ddb46bd07d6600e44d89, type: 3}
@@ -28729,7 +28740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140c7579046f6934f859fc47d1d9a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerSystem
-  timer: 6
+  timer: 40
   increaseTime: 20
   text: {fileID: 338371918}
   duelObject: {fileID: 1999036815}
@@ -28750,6 +28761,7 @@ MonoBehaviour:
   timeToIncreaseMultiplier: 10
   scoreMultiplierIncrease: 0.1
   bounty: {fileID: 510632612}
+  nameInputField: {fileID: 557514560}
 --- !u!114 &1183243411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56704,6 +56716,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3594384050277291044, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3688250805351392984, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -56815,6 +56831,10 @@ PrefabInstance:
     - target: {fileID: 4825922530375173058, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910889118879161422, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4910889118879161422, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -57240,6 +57260,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8023135656365934731, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8146295176426813623, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -57354,6 +57378,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8881448884926082271, guid: cdf74d3258095e94698d0f302128e522, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888880631427374599, guid: cdf74d3258095e94698d0f302128e522, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8891594044801677766, guid: cdf74d3258095e94698d0f302128e522, type: 3}

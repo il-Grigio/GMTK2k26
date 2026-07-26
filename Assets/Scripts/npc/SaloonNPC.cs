@@ -79,7 +79,7 @@ public class SaloonNPC : MonoBehaviour, IDamageable
     [Header("Movimento - Combattimento")]
     [Tooltip("Distanza minima e massima che l'NPC cerca di mantenere dal bersaglio quando è ostile")]
     public float minCombatDistance = 3f;
-    public float maxCombatDistance = 8f;
+    public float maxCombatDistance = 40f;
     public float repositionCheckInterval = 2f;
     public float combatSpeed = 2.5f;
     [Tooltip("Layer usati per capire se qualcosa blocca la linea di tiro (muri, banco del bar, altri NPC...)")]
@@ -254,13 +254,16 @@ public class SaloonNPC : MonoBehaviour, IDamageable
 
     private bool HasLineOfSight(Transform targetTransform)
     {
-        Vector3 origin = transform.position + Vector3.up;
-        Vector3 targetPos = targetTransform.position + Vector3.up;
+        Vector3 origin = transform.position + Vector3.up * aimHeightOffset;
+        Vector3 targetPos = targetTransform.position + Vector3.up * aimHeightOffset;
         Vector3 dir = targetPos - origin;
 
-        if (Physics.Raycast(origin, dir.normalized, out RaycastHit hit, dir.magnitude, obstacleMask))
+        // Esegui il Raycast fino a un soffio prima del bersaglio per non rischiare di colpire il bersaglio stesso
+        float distance = dir.magnitude;
+
+        if (Physics.Raycast(origin, dir.normalized, out RaycastHit hit, distance - 0.2f, obstacleMask))
         {
-            return false; // qualcosa (banco, tavolo, un altro cliente...) blocca la visuale
+            return false; // Qualcosa (parete, tavolo) blocca la visuale
         }
         return true;
     }
@@ -537,24 +540,23 @@ public class SaloonNPC : MonoBehaviour, IDamageable
 
     private void TryEscalateToViolence(Transform targetTransform, SaloonNPC npcTarget, float angerLevel)
     {
-        // se non è ancora a distanza/angolo di tiro buono, prima si riposiziona (gestito in HandleCombatRepositioning)
-        // e rimanda la decisione di sparare al prossimo check
         float distance = Vector3.Distance(transform.position, targetTransform.position);
-        if (distance < minCombatDistance || distance > maxCombatDistance || !HasLineOfSight(targetTransform))
+
+        // Se la visuale è ostruita o la distanza è davvero eccessiva, riposizionati
+        if (distance > maxCombatDistance + 2f || !HasLineOfSight(targetTransform))
         {
             SetState(NPCState.Hostile);
             return;
         }
 
-        // probabilità di sparare = combinazione di rabbia, ubriachezza, aggressività, coraggio
-        float shootChance = angerLevel * 0.5f
-                           + drunkenness * 0.3f
-                           + aggression * 0.15f
-                           + courage * 0.15f;
+        // Calcolo probabilità sparatoria
+        float shootChance = angerLevel * 0.6f
+                           + drunkenness * 0.2f
+                           + aggression * 0.2f
+                           + courage * 0.1f;
 
-        shootChance = Mathf.Clamp01(shootChance);
-
-        if (Random.value < shootChance)
+        // Se la rabbia verso il bersaglio è massima (1.0), spara sempre
+        if (angerLevel >= 0.60f || Random.value < shootChance)
         {
             ShootAt(targetTransform, npcTarget);
         }
@@ -563,7 +565,6 @@ public class SaloonNPC : MonoBehaviour, IDamageable
             SetState(NPCState.Hostile);
         }
     }
-
     // ---------------- COMBATTIMENTO ----------------
 
     // Spara un proiettile puramente visivo (VFX) verso un punto già deciso dalla logica di gioco.
