@@ -74,6 +74,14 @@ public class Shop : MonoBehaviour
         }
     }
 
+    public void BuyTime(int m)
+    {
+        if (HasEnoughMoney(m))
+        {
+            TimerSystem.Instance.IncreaseTimer(20 * m);
+        }
+    }
+
     public void BuyDynamite(int m)
     {
         if (HasEnoughMoney(m))

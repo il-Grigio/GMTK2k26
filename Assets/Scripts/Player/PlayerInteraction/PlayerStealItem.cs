@@ -47,7 +47,6 @@ public class PlayerStealItem : PlayerInteraction
                     float currentStealth = stealthSkill;
                     item.Steal(transform, Mathf.Clamp01(currentStealth));
                     PointSystem.Instance.AddScore(target.GetComponent<ItemInfoComponent>().GetPointValue());
-                    TimerSystem.Instance.IncreaseTimer(increaseTimerMULT);
                 }
             }
         }
