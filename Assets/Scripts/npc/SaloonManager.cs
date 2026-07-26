@@ -21,7 +21,6 @@ public class SaloonManager : MonoBehaviour
     [Tooltip("Soglie di playerHeat oltre le quali si passa allo stato musicale successivo")]
     [SerializeField] float[] musicHeatThresholds = { 0.20f, 0.50f, 0.70f };
     private int lastMusicState = -1;
-    public EventReference shootAudio;
     public event Action<float> OnHeatChanged;
 
     private readonly List<SaloonNPC> npcs = new List<SaloonNPC>();

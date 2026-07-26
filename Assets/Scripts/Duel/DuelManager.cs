@@ -68,7 +68,6 @@ public class DuelManager : Singleton<DuelManager>
 
         _input.OnStepForward -= StepForward;
         _input.OnStepForward += StepForward;
-        Invoke(nameof(PrepareDuel), 0.2f);
     }
 
     private void OnDisable()
@@ -79,7 +78,7 @@ public class DuelManager : Singleton<DuelManager>
         isDuelActive = false;
     }
 
-    void PrepareDuel()
+    public void PrepareDuel()
     {
         AudioManager.Instance.SetMusicState(4);
         countdown = countdownStart;
@@ -93,9 +92,10 @@ public class DuelManager : Singleton<DuelManager>
         npc.transform.position = npcTargetPosition.position;
         npc.transform.rotation = npcTargetPosition.rotation;
         duelCameraSwitcher.PrepareDuel();
+        TimerSystem.Instance.PauseAndResumeTimer();
     }
     
-    public void StartDuel()
+    private void StartDuel()
     {
         isDuelActive = true;
         StopDuelCoroutine();
@@ -229,6 +229,17 @@ public class DuelManager : Singleton<DuelManager>
         OnWin?.Invoke();
         Debug.Log("Duel Win");
         AudioManager.Instance.SetMusicState(0);
+        duelCameraSwitcher.EndDuel();
+        PointSystem.Instance.DoubleScore();
+
+        if(TimerSystem.Instance.GetTimer() <= 0)
+        {
+            duelCameraSwitcher.SwitchToLeaderboardCamera();
+        }
+        else
+        {
+            TimerSystem.Instance.PauseAndResumeTimer();
+        }
     }
 
     private void Lose()
@@ -239,5 +250,9 @@ public class DuelManager : Singleton<DuelManager>
         OnLose?.Invoke();
         Debug.Log("Duel Lost");
         AudioManager.Instance.SetMusicState(0);
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.shootSound, player.transform.position);
+        duelCameraSwitcher.EndDuel();
+        duelCameraSwitcher.SwitchToLeaderboardCamera();
+        GameOver.Instance.Loose();
     }
 }

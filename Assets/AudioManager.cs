@@ -10,7 +10,7 @@ public class AudioManager : Singleton<AudioManager>
 {
     private List<EventInstance> eventInstances = new List<EventInstance>();
     private EventInstance musicEventInstance;
-
+    private EventInstance ambienceBackground;
     private void Awake()
     {
         eventInstances = new List<EventInstance>();
@@ -19,6 +19,7 @@ public class AudioManager : Singleton<AudioManager>
     public void Start()
     {
         InitializeMusic(FMODEventsManager.Instance.baseMusic);
+        InitializeAmbience(FMODEventsManager.Instance.ambiance);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPosition)
@@ -51,6 +52,12 @@ public class AudioManager : Singleton<AudioManager>
     {
         // 0 = STEALTH, 1 CAOS, 2 CAOS2, 3 CAOS3, 4 = DUEL
         musicEventInstance.setParameterByName("MusicState", state);
+    }
+
+    private void InitializeAmbience(EventReference ambienceEventReference)
+    {
+        ambienceBackground = CreateInstance(ambienceEventReference);
+        ambienceBackground.start();
     }
     private void OnDestroy()
     {

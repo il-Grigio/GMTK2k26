@@ -50,28 +50,30 @@ public class SettingsUIController : MonoBehaviour
 
     // ---------------- Callback: inoltrano tutto a GameSettings ----------------
 
-    public void OnAmbianceUp() => OnAmbianceSlider(++currentAmbianceVolume);
-    public void OnAmbianceDown() => OnAmbianceSlider(--currentAmbianceVolume);
-    public void OnMusicUp() => OnMusicSlider(++currentMusicVolume);
-    public void OnMusicDown() => OnMusicSlider(--currentMusicVolume);
-    public void OnSfxUp() => OnSfxSlider(++currentSfxVolume);
-    public void OnSfxDown() => OnSfxSlider(--currentSfxVolume);
+    public void OnAmbianceUp() => OnAmbianceSlider(Mathf.Min(currentAmbianceVolume + 1, 10));
+    public void OnAmbianceDown() => OnAmbianceSlider(Mathf.Max(currentAmbianceVolume - 1, 0));
+    public void OnMusicUp() => OnMusicSlider(Mathf.Min(currentMusicVolume + 1, 10));
+    public void OnMusicDown() => OnMusicSlider(Mathf.Max(currentMusicVolume - 1, 0));
+    public void OnSfxUp() => OnSfxSlider(Mathf.Min(currentSfxVolume + 1, 10));
+    public void OnSfxDown() => OnSfxSlider(Mathf.Max(currentSfxVolume - 1, 0));
 
     private void OnMusicSlider(int v)
     {
-        Debug.Log(v);
+        currentMusicVolume = v; // aggiungi questa riga per tenere lo state coerente col valore clampato
         SetValue(musicSlider, v);
         GameSettings.Instance.SetMusicVolume(v);
     }
 
     private void OnSfxSlider(int v)
     {
+        currentSfxVolume = v;
         SetValue(sfxSlider, v);
         GameSettings.Instance.SetSfxVolume(v);
     }
 
     private void OnAmbianceSlider(int v)
     {
+        currentAmbianceVolume = v;
         SetValue(ambianceSlider, v);
         GameSettings.Instance.SetAmbianceVolume(v);
     }

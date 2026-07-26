@@ -42,14 +42,14 @@ public class MenuButton : MonoBehaviour
 
     private void OnEnable()
     {
-        inputHandler.OnMenuAction -= OnMouseDown;
-        inputHandler.OnMenuAction += OnMouseDown;
+        inputHandler.OnMenuAction -= OnClickMenu;
+        inputHandler.OnMenuAction += OnClickMenu;
         collider.enabled = true;
     }
 
     private void OnDisable()
     {
-        inputHandler.OnMenuAction -= OnMouseDown;
+        inputHandler.OnMenuAction -= OnClickMenu;
     }
 
     private void Start()
@@ -88,7 +88,7 @@ public class MenuButton : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private void OnClickMenu()
     {
         if (isHover)
         {
@@ -99,6 +99,7 @@ public class MenuButton : MonoBehaviour
                 spinLeft?.Invoke();
             isHover = false;
             collider.enabled = false;
+            AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.shootSound, transform.position);
             //Invoke(nameof(EnableCollider), 1f); 
         }
     }
