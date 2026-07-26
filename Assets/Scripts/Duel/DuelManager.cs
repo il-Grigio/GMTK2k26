@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using Grigios;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class DuelManager : Singleton<DuelManager>
+public class DuelManager : Grigios.Singleton<DuelManager>
 {
     [SerializeField] private GameObject npc;
     [SerializeField] private GameObject player;
@@ -26,6 +27,8 @@ public class DuelManager : Singleton<DuelManager>
     public Action OnWin;
     public Action OnLose;
 
+    [SerializeField] GameObject playerUi;
+    [SerializeField] GameObject tutorialUI;
     private InputHandler _input;
     private int countdown;
     private Coroutine duelCoroutine;
@@ -96,11 +99,14 @@ public class DuelManager : Singleton<DuelManager>
         npc.transform.position = npcTargetPosition.position;
         npc.transform.rotation = npcTargetPosition.rotation;
         duelCameraSwitcher.PrepareDuel();
+        playerUi.SetActive(false);
+        tutorialUI.SetActive(true);
         TimerSystem.Instance.PauseTimer();
     }
     
     private void StartDuel()
     {
+        tutorialUI.SetActive(false);
         isDuelActive = true;
         StopDuelCoroutine();
         duelCoroutine = StartCoroutine(DuelCoroutine());
@@ -229,6 +235,7 @@ public class DuelManager : Singleton<DuelManager>
 
     private void Win()
     {
+        playerUi.SetActive(true);
         if (!isDuelActive) return;
         inputEnabled = false;
         isDuelActive = false;
@@ -241,12 +248,12 @@ public class DuelManager : Singleton<DuelManager>
 
         if(TimerSystem.Instance.GetTimer() <= 0)
         {
-            duelCameraSwitcher.SwitchToLeaderboardCamera();
-            SaloonManager.Instance.SetHeat(0);
+            Lose();
         }
         else
         {
             TimerSystem.Instance.ResumeTimer();
+            SaloonManager.Instance.SetHeat(0);
         }
     }
 
