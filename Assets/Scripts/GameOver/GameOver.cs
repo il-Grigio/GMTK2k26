@@ -11,6 +11,7 @@ public class GameOver : Singleton<GameOver>
     {
         TurnDownItems();
         TurnUpItems();
+        TimerSystem.Instance.PauseTimer();
         LeaderBoardWanted.Instance.SetWanteds();
     }
 

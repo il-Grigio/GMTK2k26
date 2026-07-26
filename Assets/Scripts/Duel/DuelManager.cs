@@ -92,7 +92,7 @@ public class DuelManager : Singleton<DuelManager>
         npc.transform.position = npcTargetPosition.position;
         npc.transform.rotation = npcTargetPosition.rotation;
         duelCameraSwitcher.PrepareDuel();
-        TimerSystem.Instance.PauseAndResumeTimer();
+        TimerSystem.Instance.PauseTimer();
     }
     
     private void StartDuel()
@@ -239,7 +239,7 @@ public class DuelManager : Singleton<DuelManager>
         }
         else
         {
-            TimerSystem.Instance.PauseAndResumeTimer();
+            TimerSystem.Instance.ResumeTimer();
         }
     }
 

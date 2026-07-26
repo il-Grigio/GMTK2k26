@@ -14,10 +14,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private CinemachineCamera gameCamera;
     
     [SerializeField] private MenuButton[] buttons;
-    
-    [Header("Items")]
-    [Tooltip("Item da attivare e disattivare tra inizio e fine scena")]
-    public List<GameObject> turnableitems = new List<GameObject>();
 
     [Header("Pannelli UI")]
     [SerializeField] private GameObject settingsPanel;
@@ -27,6 +23,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] List<GameObject> turnDownItems = new List<GameObject>();
     private void Start()
     {
+        
         TurnDownItems();
         ShowMainMenu();
     }
@@ -57,6 +54,8 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ResetCameras();
         gameCamera.Priority = 20;
+        TimerSystem.Instance.ResumeTimer();
+        TurnUpItems();
         InputHandler.Instance.CurrentState = InputHandler.State.Game;
         foreach (GameObject gb in turnableitems)
         {
@@ -129,6 +128,14 @@ public class MainMenu : MonoBehaviour
         foreach (GameObject gb in turnableitems)
         {
             gb.SetActive(false);
+        }
+    }
+
+    public void TurnUpItems()
+    {
+        foreach (GameObject gb in turnableitems)
+        {
+            gb.SetActive(true);
         }
     }
 }

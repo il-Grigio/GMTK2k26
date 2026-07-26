@@ -8,7 +8,8 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
     [SerializeField] private float timer = 30f;
     [SerializeField] float increaseTime = 10f;
     [SerializeField] TextMeshProUGUI text;
-    private bool isStopped = false;
+    private bool isStopped = true;
+
     public float GetTimer()
     {
         return timer;
@@ -50,9 +51,13 @@ public class TimerSystem : Grigios.Singleton<TimerSystem>
         }
     }
 
-    public void PauseAndResumeTimer()
+    public void PauseTimer()
     {
-        isStopped = !isStopped;
+        isStopped = true;
+    }
+
+    public void ResumeTimer() {
+        isStopped = false;
     }
 }
 
