@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Grigios;
 using TMPro;
+using FMODUnity;
 public class InventorySystem : Singleton<InventorySystem>
 {
     public List<ItemInfoData> inventory = new List<ItemInfoData>();
@@ -92,6 +93,7 @@ public class InventorySystem : Singleton<InventorySystem>
     {
         maxBullet++;
         bulletInInventory = maxBullet;
+        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.megIn, transform.position);
         FixInventoryText();
     }
 
@@ -105,6 +107,7 @@ public class InventorySystem : Singleton<InventorySystem>
     {
         if(bulletInInventory <= 0)
         {
+            AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.megOut, transform.position);
             return false;
         }
         else
