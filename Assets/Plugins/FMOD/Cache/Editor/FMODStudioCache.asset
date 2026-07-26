@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4068962165149641768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 639206293338218959
+  FileSizes:
+  - Name: Desktop
+    Value: 48896
+  Exists: 1
+--- !u!114 &-2747512454715892741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX NON ROTTO.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/SFX NON ROTTO.bank
+  Name: SFX NON ROTTO
+  StudioPath: bank:/SFX NON ROTTO
+  lastModified: 639206293338450160
+  FileSizes:
+  - Name: Desktop
+    Value: 48896
+  Exists: 1
 --- !u!114 &-1745908764548291659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18,6 +58,54 @@ MonoBehaviour:
   lastModified: 639203438276301063
   FileSizes: []
   Exists: 1
+--- !u!114 &-1586096432003607062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639206293337815918
+  FileSizes:
+  - Name: Desktop
+    Value: 994
+  Exists: 1
+--- !u!114 &-1331695253667834012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/PlayerFootSteps
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/PlayerFootSteps
+  Guid:
+    Data1: -1446606475
+    Data2: 1269581235
+    Data3: -1329800043
+    Data4: 158099191
+  Banks:
+  - {fileID: -2747512454715892741}
+  - {fileID: -4068962165149641768}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &-805257137479533250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,6 +124,33 @@ MonoBehaviour:
   lastModified: 639203438276501980
   FileSizes: []
   Exists: 1
+--- !u!114 &-314636265232971030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/Stealth (base Music)
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/MUSIC/Stealth (base Music)
+  Guid:
+    Data1: 1926413449
+    Data2: 1302995998
+    Data3: -1475250528
+    Data4: -149948753
+  Banks:
+  - {fileID: 7860939280234413247}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 143124
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,23 +164,25 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
-  - {fileID: 6715324140233362238}
-  - {fileID: -1745908764548291659}
-  - {fileID: -805257137479533250}
+  - {fileID: -1586096432003607062}
+  - {fileID: 3131689233621219755}
+  - {fileID: 7860939280234413247}
+  - {fileID: -4068962165149641768}
+  - {fileID: -2747512454715892741}
   EditorEvents:
-  - {fileID: 2093450774610740840}
-  - {fileID: 5941389634943666450}
+  - {fileID: -314636265232971030}
+  - {fileID: -1331695253667834012}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1745908764548291659}
+  - {fileID: 3131689233621219755}
   StringsBanks:
-  - {fileID: 6715324140233362238}
+  - {fileID: -1586096432003607062}
   cacheVersion: 131858
-  cacheTime: 639203438276501980
+  cacheTime: 639206293338450160
   SerializableEventsDict:
-  - key: event:/SwordHit
+  - key: event:/MUSIC/Stealth (base Music)
     index: 0
-  - key: event:/PlayerFootsteps
+  - key: event:/SFX/PlayerFootSteps
     index: 1
 --- !u!114 &2093450774610740840
 MonoBehaviour:
@@ -94,6 +211,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3131689233621219755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639206293337800815
+  FileSizes:
+  - Name: Desktop
+    Value: 1074
+  Exists: 1
 --- !u!114 &5941389634943666450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,4 +277,24 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 874
+  Exists: 1
+--- !u!114 &7860939280234413247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MUSIC.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/MUSIC.bank
+  Name: MUSIC
+  StudioPath: bank:/MUSIC
+  lastModified: 639206277469286979
+  FileSizes:
+  - Name: Desktop
+    Value: 1597696
   Exists: 1

@@ -5,6 +5,6 @@ public class TestAudioEmitter : MonoBehaviour
 {
     private void Start()
     {
-        AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.swordSFX, transform.position);
+        // AudioManager.Instance.PlayOneShot(FMODEventsManager.Instance.swordSFX, transform.position);
     }
 }

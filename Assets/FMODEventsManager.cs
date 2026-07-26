@@ -11,8 +11,7 @@ public class FMODEventsManager : Singleton<FMODEventsManager>
     [field: Header("Player SFX")]
     [field: SerializeField]
     public EventReference playerFootstepsSFX { get; private set; }
-    
-    [field: Header("Sword SFX")]
-    [field: SerializeField]
-    public EventReference swordSFX { get; private set; }
+
+    [field: Header("Music di base")]
+    [field: SerializeField] public EventReference baseMusic { get; private set; }
 }

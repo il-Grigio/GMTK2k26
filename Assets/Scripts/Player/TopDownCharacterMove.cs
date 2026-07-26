@@ -1,14 +1,16 @@
+using FMOD.Studio;
 using UnityEngine;
-
+using FMOD.Studio;
 public class TopDownCharacterMove : MonoBehaviour
 {
     private InputHandler _input;
-
+    private EventInstance playerFootsteps;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private Animator anim;
     [SerializeField] private float animDampTime = 0.1f;
 
+    private bool isWalking;
     private Camera cam;
 
     private static readonly int MoveX = Animator.StringToHash("MoveX");
@@ -22,6 +24,7 @@ public class TopDownCharacterMove : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        playerFootsteps = AudioManager.Instance.CreateInstance(FMODEventsManager.Instance.playerFootstepsSFX);
     }
 
     void Update()
@@ -30,6 +33,8 @@ public class TopDownCharacterMove : MonoBehaviour
 
         if (_input.CurrentState == InputHandler.State.Game)
         {
+            isWalking = targetVector.sqrMagnitude > 0.001f;
+
             MoveTowardTarget(targetVector);
             RotateTowardsMouseVector();
             UpdateAnimator(targetVector);
@@ -39,6 +44,8 @@ public class TopDownCharacterMove : MonoBehaviour
             anim.SetFloat(MoveX, 0f, animDampTime, Time.deltaTime);
             anim.SetFloat(MoveY, 0f, animDampTime, Time.deltaTime);
         }
+
+        UpdateSound();
     }
 
     private void UpdateAnimator(Vector3 inputVector)
@@ -91,5 +98,22 @@ public class TopDownCharacterMove : MonoBehaviour
         var speed = moveSpeed * Time.deltaTime;
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
+    }
+
+    private void UpdateSound()
+    {
+        if (isWalking)
+        {
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+            else
+            {
+                playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            }
+        }
     }
 }

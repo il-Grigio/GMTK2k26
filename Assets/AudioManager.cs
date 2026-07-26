@@ -9,10 +9,16 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 public class AudioManager : Singleton<AudioManager>
 {
     private List<EventInstance> eventInstances = new List<EventInstance>();
+    private EventInstance musicEventInstance;
 
     private void Awake()
     {
         eventInstances = new List<EventInstance>();
+    }
+
+    public void Start()
+    {
+        InitializeMusic(FMODEventsManager.Instance.baseMusic);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPosition)
@@ -36,6 +42,11 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    private void InitializeMusic(EventReference musicEventReference)
+    {
+        musicEventInstance = CreateInstance(musicEventReference);
+        musicEventInstance.start();
+    }
     private void OnDestroy()
     {
         CleanUp();
