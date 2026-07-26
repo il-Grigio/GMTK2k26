@@ -60,5 +60,16 @@ public class PointSystem : Singleton<PointSystem>
         else
             scoreMultiplier = 1.0f;
     }
+
+    string playername = "John Doe";
+    public void GetPlayerName(string nome)
+    {
+        playername = nome;
+    }
+    public void SendScore()
+    {
+        dreamloLeaderBoard.Instance.AddScore(playername, (int)score);
+        LeaderBoardWanted.Instance.SetWanteds();
+    }
 }
 

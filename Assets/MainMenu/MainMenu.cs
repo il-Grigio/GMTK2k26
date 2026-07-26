@@ -22,10 +22,12 @@ public class MainMenu : MonoBehaviour
     [Header("Pannelli UI")]
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject creditsPanel;
- 
+
+    [Header("TurnDown Items")]
+    [SerializeField] List<GameObject> turnDownItems = new List<GameObject>();
     private void Start()
     {
-        GameOver.Instance.TurnDownItems();
+        TurnDownItems();
         ShowMainMenu();
     }
 
@@ -122,4 +124,11 @@ public class MainMenu : MonoBehaviour
         menuCamera.Priority = 20;
     }
 
+    public void TurnDownItems()
+    {
+        foreach (GameObject gb in turnableitems)
+        {
+            gb.SetActive(false);
+        }
+    }
 }

@@ -7,8 +7,6 @@ public class ItemInfoComponent : MonoBehaviour
     private static readonly int IsSceneLayerID = Shader.PropertyToID("_IsSceneLayer");
     [SerializeField] private LayerMask sceneLayerMask;
 
-    [SerializeField] GameObject gameObject;
-
     [SerializeField] int countValue;
 
     [SerializeField] int moneyValue;
