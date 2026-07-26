@@ -3296,7 +3296,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3323,7 +3323,7 @@ Transform:
   m_GameObject: {fileID: 123050538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9110003, y: 1.28, z: -21.994999}
+  m_LocalPosition: {x: 6.24, y: 1.406, z: -18.161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10838,18 +10838,18 @@ MonoBehaviour:
     Path: 
   <playerFootstepsSFX>k__BackingField:
     Guid:
-      Data1: 348960051
-      Data2: 1176019107
-      Data3: 1269737093
-      Data4: 964320659
-    Path: event:/PlayerFootsteps
-  <swordSFX>k__BackingField:
+      Data1: -1446606475
+      Data2: 1269581235
+      Data3: -1329800043
+      Data4: 158099191
+    Path: event:/SFX/PlayerFootSteps
+  <baseMusic>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1926413449
+      Data2: 1302995998
+      Data3: -1475250528
+      Data4: -149948753
+    Path: event:/MUSIC/Stealth (base Music)
 --- !u!4 &476022618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4711375206408613415, guid: a8de5f6a2932a834a84783440acf06a8, type: 3}
