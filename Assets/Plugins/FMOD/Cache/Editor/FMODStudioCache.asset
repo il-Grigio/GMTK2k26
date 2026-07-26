@@ -19,7 +19,7 @@ MonoBehaviour:
     Data3: 2050223788
     Data4: -1856976767
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
---- !u!114 &-6148852414298949321
+--- !u!114 &-7219926639871137028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,33 +39,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/Master.strings.bank
+  Path: FMOD/PROGETTO GIOCO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639206686974634993
+  lastModified: 639206715730724844
   FileSizes:
   - Name: Desktop
     Value: 1594
-  Exists: 1
---- !u!114 &-6128322443803577154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/AMBIENCE.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/AMBIENCE.bank
-  Name: AMBIENCE
-  StudioPath: bank:/AMBIENCE
-  lastModified: 639206686980809581
-  FileSizes:
-  - Name: Desktop
-    Value: 368928
   Exists: 1
 --- !u!114 &-5057107329964641198
 MonoBehaviour:
@@ -86,7 +66,7 @@ MonoBehaviour:
     Data3: -1710098278
     Data4: -1100861460
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -138,7 +118,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 48896
   Exists: 1
---- !u!114 &-3311752610541237702
+--- !u!114 &-2947258203535944522
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,15 +128,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 639206686974613929
+  Path: FMOD/PROGETTO GIOCO/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 639206715730729798
   FileSizes:
   - Name: Desktop
-    Value: 1726
+    Value: 548160
   Exists: 1
 --- !u!114 &-2747512454715892741
 MonoBehaviour:
@@ -215,26 +195,6 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 994
-  Exists: 1
---- !u!114 &-1561454325709631277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 639206650680383868
-  FileSizes:
-  - Name: Desktop
-    Value: 548160
   Exists: 1
 --- !u!114 &-1331695253667834012
 MonoBehaviour:
@@ -309,6 +269,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 143124
+--- !u!114 &-260129444355151530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/AMBIENCE.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/PROGETTO GIOCO/Build/Desktop/AMBIENCE.bank
+  Name: AMBIENCE
+  StudioPath: bank:/AMBIENCE
+  lastModified: 639206715730589712
+  FileSizes:
+  - Name: Desktop
+    Value: 368928
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,11 +302,11 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
-  - {fileID: -6148852414298949321}
-  - {fileID: -3311752610541237702}
-  - {fileID: 350818469765625532}
-  - {fileID: -1561454325709631277}
-  - {fileID: -6128322443803577154}
+  - {fileID: -7219926639871137028}
+  - {fileID: -260129444355151530}
+  - {fileID: 8756755750543331409}
+  - {fileID: 8340196908368637446}
+  - {fileID: -2947258203535944522}
   EditorEvents:
   - {fileID: 2903118806042225475}
   - {fileID: 6875700441145804568}
@@ -339,11 +319,11 @@ MonoBehaviour:
   - {fileID: 2622064215009883316}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -3311752610541237702}
+  - {fileID: 8756755750543331409}
   StringsBanks:
-  - {fileID: -6148852414298949321}
+  - {fileID: -7219926639871137028}
   cacheVersion: 131858
-  cacheTime: 639206686980809581
+  cacheTime: 639206715730729798
   SerializableEventsDict:
   - key: event:/SFX/PlayerPiedini
     index: 0
@@ -382,7 +362,7 @@ MonoBehaviour:
     Data3: 314062726
     Data4: 505193978
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -390,26 +370,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
---- !u!114 &350818469765625532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/MUSIC.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: ../../../../../FMOD/PROGETTO GIOCO/Build/Desktop/MUSIC.bank
-  Name: MUSIC
-  StudioPath: bank:/MUSIC
-  lastModified: 639206650679518931
-  FileSizes:
-  - Name: Desktop
-    Value: 5042464
-  Exists: 1
 --- !u!114 &556483974081289379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +389,7 @@ MonoBehaviour:
     Data3: 898511505
     Data4: 8183196
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -483,7 +443,7 @@ MonoBehaviour:
     Data3: 153076411
     Data4: -667493159
   Banks:
-  - {fileID: -6128322443803577154}
+  - {fileID: -260129444355151530}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -510,7 +470,7 @@ MonoBehaviour:
     Data3: 815637182
     Data4: -438306732
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -557,7 +517,7 @@ MonoBehaviour:
     Data3: 339387029
     Data4: 883085296
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -611,7 +571,7 @@ MonoBehaviour:
     Data3: -186328683
     Data4: -827734
   Banks:
-  - {fileID: -1561454325709631277}
+  - {fileID: -2947258203535944522}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -658,7 +618,7 @@ MonoBehaviour:
     Data3: -1475250528
     Data4: -149948753
   Banks:
-  - {fileID: 350818469765625532}
+  - {fileID: 8340196908368637446}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -686,4 +646,44 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1597696
+  Exists: 1
+--- !u!114 &8340196908368637446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MUSIC.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/PROGETTO GIOCO/Build/Desktop/MUSIC.bank
+  Name: MUSIC
+  StudioPath: bank:/MUSIC
+  lastModified: 639206715730709813
+  FileSizes:
+  - Name: Desktop
+    Value: 5042464
+  Exists: 1
+--- !u!114 &8756755750543331409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/PROGETTO GIOCO/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639206715730714810
+  FileSizes:
+  - Name: Desktop
+    Value: 1726
   Exists: 1
