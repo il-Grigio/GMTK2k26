@@ -37,25 +37,25 @@ public class GameSettings : Singleton<GameSettings>
 
     // ==================== AUDIO ====================
 
-    public void SetMusicVolume(float linear01)
+    public void SetMusicVolume(int linear01)
     {
-        MusicVolume = Mathf.Clamp01(linear01);
+        MusicVolume = Mathf.Clamp01(linear01 * 0.1f);
         ApplyMixerVolume("MusicVolume", MusicVolume);
         PlayerPrefs.SetFloat(PREFIX + "music_vol", MusicVolume);
         Notify();
     }
 
-    public void SetSfxVolume(float linear01)
+    public void SetSfxVolume(int linear01)
     {
-        SfxVolume = Mathf.Clamp01(linear01);
+        SfxVolume = Mathf.Clamp01(linear01 * 0.1f);
         ApplyMixerVolume("SFXVolume", SfxVolume);
         PlayerPrefs.SetFloat(PREFIX + "sfx_vol", SfxVolume);
         Notify();
     }
 
-    public void SetAmbianceVolume(float linear01)
+    public void SetAmbianceVolume(int linear01)
     {
-        AmbianceVolume = Mathf.Clamp01(linear01);
+        AmbianceVolume = Mathf.Clamp01(linear01 * 0.1f);
         ApplyMixerVolume("AmbianceVolume", AmbianceVolume);
         PlayerPrefs.SetFloat(PREFIX + "ambiance_vol", AmbianceVolume);
         Notify();

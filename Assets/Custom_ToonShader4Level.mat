@@ -33,7 +33,7 @@ Material:
     - _BandSmooth: 0.01
     - _DebugShowLightCount: 0
     - _IsSceneLayer: 0
-    - _OutlineWidth: 0.02
+    - _OutlineWidth: 0.002
     - _ShadowCutoff: 0.5
     - _SpecularSize: 0.85
     - _SpecularSmooth: 0.05

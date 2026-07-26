@@ -8,6 +8,9 @@ public class SettingsUIController : MonoBehaviour
     [SerializeField] private Image[] sfxSlider;
     [SerializeField] private Image[] ambianceSlider;
     
+    int currentMusicVolume;
+    int currentSfxVolume;
+    int currentAmbianceVolume;
     private bool isRefreshingUI = false; // evita loop quando aggiorniamo la UI a mano
 
     private void OnEnable()
@@ -27,42 +30,47 @@ public class SettingsUIController : MonoBehaviour
     {
         var s = GameSettings.Instance;
 
-        SetValue(musicSlider, s.MusicVolume);
-        SetValue(sfxSlider, s.SfxVolume);
-        SetValue(ambianceSlider, s.AmbianceVolume);
+        currentMusicVolume = Mathf.RoundToInt(s.MusicVolume * 10);
+        currentSfxVolume = Mathf.RoundToInt(s.SfxVolume * 10);
+        currentAmbianceVolume = Mathf.RoundToInt(s.AmbianceVolume * 10);
+        
+        SetValue(musicSlider, currentMusicVolume);
+        SetValue(sfxSlider, currentSfxVolume);
+        SetValue(ambianceSlider, currentAmbianceVolume);
 
     }
 
-    private void SetValue(Image[] slider, float i)
+    private void SetValue(Image[] slider, int i)
     {
         for (int j = slider.Length - 1; j >= 0; j--)
         {
-            slider[j].enabled = j < i * 10;
+            slider[j].enabled = j < i;
         }
     }
 
     // ---------------- Callback: inoltrano tutto a GameSettings ----------------
 
-    public void OnAmbianceUp() => OnAmbianceSlider(Mathf.Clamp01(GameSettings.Instance.AmbianceVolume + 0.1f));
-    public void OnAmbianceDown() => OnAmbianceSlider(Mathf.Clamp01(GameSettings.Instance.AmbianceVolume - 0.1f));
-    public void OnMusicUp() => OnMusicSlider(Mathf.Clamp01(GameSettings.Instance.MusicVolume + 0.1f));
-    public void OnMusicDown() => OnMusicSlider(Mathf.Clamp01(GameSettings.Instance.MusicVolume - 0.1f));
-    public void OnSfxUp() => OnSfxSlider(Mathf.Clamp01(GameSettings.Instance.SfxVolume + 0.1f));
-    public void OnSfxDown() => OnSfxSlider(Mathf.Clamp01(GameSettings.Instance.SfxVolume - 0.1f));
+    public void OnAmbianceUp() => OnAmbianceSlider(++currentAmbianceVolume);
+    public void OnAmbianceDown() => OnAmbianceSlider(--currentAmbianceVolume);
+    public void OnMusicUp() => OnMusicSlider(++currentMusicVolume);
+    public void OnMusicDown() => OnMusicSlider(--currentMusicVolume);
+    public void OnSfxUp() => OnSfxSlider(++currentSfxVolume);
+    public void OnSfxDown() => OnSfxSlider(--currentSfxVolume);
 
-    private void OnMusicSlider(float v)
+    private void OnMusicSlider(int v)
     {
+        Debug.Log(v);
         SetValue(musicSlider, v);
         GameSettings.Instance.SetMusicVolume(v);
     }
 
-    private void OnSfxSlider(float v)
+    private void OnSfxSlider(int v)
     {
         SetValue(sfxSlider, v);
         GameSettings.Instance.SetSfxVolume(v);
     }
 
-    private void OnAmbianceSlider(float v)
+    private void OnAmbianceSlider(int v)
     {
         SetValue(ambianceSlider, v);
         GameSettings.Instance.SetAmbianceVolume(v);
