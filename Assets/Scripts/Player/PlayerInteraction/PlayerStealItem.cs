@@ -15,6 +15,9 @@ public class PlayerStealItem : PlayerInteraction
 
     [Header("Points for stealing")]
     [SerializeField] private int pointsForStealing = 100;
+
+
+    private StealableItem currentItem;
     protected override void OnEnable()
     {
         if (_input.OnInteractAction != null)
@@ -34,21 +37,32 @@ public class PlayerStealItem : PlayerInteraction
 
     private void ItemToInventory(Vector2 mousePos)
     {
-        Ray ray = cam.ScreenPointToRay(mousePos);
+        var itemInfo = currentItem.ItemInfo;
+        if (itemInfo != null && InventorySystem.Instance.AddInventory(itemInfo.GetInfo()))
+        {
+            float currentStealth = stealthSkill;
+            currentItem.Steal(transform, Mathf.Clamp01(currentStealth));
+            PointSystem.Instance.AddScore(itemInfo.GetPointValue());
+        }
+    }
+    private void Update()
+    {
+        Ray ray = cam.ScreenPointToRay(_input.MousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f, itemLayerMask))
         {
             var target = hitInfo.collider.gameObject;
             if ((transform.position - target.transform.position).sqrMagnitude > interactionRadius * interactionRadius) return;
-            var itemInfo = target.GetComponent<ItemInfoComponent>().GetInfo();
             if (target.TryGetComponent(out StealableItem item))
             {
-                if (itemInfo != null && InventorySystem.Instance.AddInventory(itemInfo))
-                {
-                    float currentStealth = stealthSkill;
-                    item.Steal(transform, Mathf.Clamp01(currentStealth));
-                    PointSystem.Instance.AddScore(target.GetComponent<ItemInfoComponent>().GetPointValue());
-                }
+                currentItem = item;
+                GameManager.Instance.ShowItemInfo(currentItem.ItemInfo.GetInfo(), _input.MousePosition);
             }
         }
+        else if (currentItem != null)
+        {
+            currentItem = null;
+            GameManager.Instance.ShowItemInfo(null, _input.MousePosition);
+        }
     }
+    
 }

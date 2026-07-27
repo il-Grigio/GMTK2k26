@@ -4,6 +4,13 @@ public class StealableItem : MonoBehaviour
 {
     [Tooltip("Quanto è rumoroso/visibile rubare questo oggetto (0 = furtivo, 1 = plateale)")]
     [Range(0f, 1f)] public float baseNoise = 0.3f;
+    
+    ItemInfoComponent itemInfo;
+    private void Awake()
+    {
+        itemInfo = GetComponent<ItemInfoComponent>();
+    }
+    public ItemInfoComponent ItemInfo => itemInfo;
 
     public void Steal(Transform thief, float playerStealthSkill)
     {

@@ -4,13 +4,14 @@ using UnityEngine;
 using Grigios;
 using TMPro;
 using FMODUnity;
+using UnityEngine.Serialization;
+
 public class InventorySystem : Singleton<InventorySystem>
 {
     public List<ItemInfoData> inventory = new List<ItemInfoData>();
 
     [Header("Inventario")]
-    [SerializeField] private int actualItemCount;
-    [SerializeField] private int maxItemCount = 3;
+    [FormerlySerializedAs("maxItemCount")] [SerializeField] private int maxItemWeight = 3;
     [SerializeField] private int inventoryValue; // Valore monetario dell'inventario
     [SerializeField] private int moneyHeld; // Soldi che ha effettivamente il player
 
@@ -22,6 +23,8 @@ public class InventorySystem : Singleton<InventorySystem>
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] TextMeshProUGUI actualItemCountUI;
     [SerializeField] TextMeshProUGUI actualBulletUI;
+    
+    private int actualItemWeight;
 
     private void Start()
     {
@@ -30,9 +33,9 @@ public class InventorySystem : Singleton<InventorySystem>
     }
     public bool AddInventory(ItemInfoData item)
     {
-        if(item.CountValue <= (maxItemCount - actualItemCount))
+        if(item.Weight <= (maxItemWeight - actualItemWeight))
         {
-            actualItemCount += item.CountValue;
+            actualItemWeight += item.Weight;
             inventoryValue += item.MoneyValue;
             inventory.Add(item);
             FixInventoryText();
@@ -50,7 +53,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
         inventoryValue = 0;
 
-        actualItemCount = 0;
+        actualItemWeight = 0;
 
         inventory.Clear();
 
@@ -125,7 +128,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     private void FixInventoryText()
     {
-        actualItemCountUI.text = actualItemCount.ToString() + "/" + maxItemCount.ToString();
+        actualItemCountUI.text = actualItemWeight.ToString() + "/" + maxItemWeight.ToString();
         actualBulletUI.text = bulletInInventory.ToString() + "/" + maxBullet.ToString();
     }
 }
