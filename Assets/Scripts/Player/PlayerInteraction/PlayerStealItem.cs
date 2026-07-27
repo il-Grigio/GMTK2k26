@@ -37,6 +37,7 @@ public class PlayerStealItem : PlayerInteraction
 
     private void ItemToInventory(Vector2 mousePos)
     {
+        if (currentItem == null) return;
         var itemInfo = currentItem.ItemInfo;
         if (itemInfo != null && InventorySystem.Instance.AddInventory(itemInfo.GetInfo()))
         {

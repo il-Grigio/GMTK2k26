@@ -12,7 +12,6 @@ public class PointSystem : Singleton<PointSystem>
     [SerializeField] TextMeshProUGUI bounty;
     public void AddScore(int qta)
     {
-        Debug.Log(qta + "!!!!!!");
         if (timeToIncreaseMultiplier > 0)
         {
             AddScoreMultiplier(scoreMultiplierIncrease);
