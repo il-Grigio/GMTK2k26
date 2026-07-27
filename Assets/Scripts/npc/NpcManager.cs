@@ -6,9 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Grigios;
-public class SaloonManager : Grigios.Singleton<SaloonManager>
+public class NpcManager : Grigios.Singleton<NpcManager>
 {
-    public static SaloonManager Instance { get; private set; }
     [Header("Reputazione Player")]
     [Tooltip("0 = nessuno sospetta di te, 1 = tutti ti tengono d'occhio")]
     [Range(0f, 1f)] public float playerHeat = 0f;
@@ -24,28 +23,19 @@ public class SaloonManager : Grigios.Singleton<SaloonManager>
     private int lastMusicState = -1;
     public event Action<float> OnHeatChanged;
 
-    private readonly List<SaloonNPC> npcs = new List<SaloonNPC>();
+    private readonly List<NPCController> npcs = new List<NPCController>();
     private int lastStarCount = -1; // tiene traccia del rank attuale, per rilevare i cambi
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
     private void Update()
     {
         SetHeat(Mathf.Max(0f, playerHeat - heatDecayPerSecond * Time.deltaTime));
     }
-    public void Register(SaloonNPC npc)
+    public void Register(NPCController npcController)
     {
-        if (!npcs.Contains(npc)) npcs.Add(npc);
+        if (!npcs.Contains(npcController)) npcs.Add(npcController);
     }
-    public void Unregister(SaloonNPC npc)
+    public void Unregister(NPCController npcController)
     {
-        npcs.Remove(npc);
+        npcs.Remove(npcController);
     }
     // ---------------- REPUTAZIONE PLAYER ----------------
     public void IncreasePlayerHeat(float amount)
@@ -107,7 +97,7 @@ public class SaloonManager : Grigios.Singleton<SaloonManager>
         }
     }
     // Chiamato quando avviene una sparatoria, per avvisare i testimoni vicini
-    public void BroadcastShooting(SaloonNPC shooter, SaloonNPC victim, Vector3 position, float witnessRadius = 12f)
+    public void BroadcastShooting(NPCController shooter, NPCController victim, Vector3 position, float witnessRadius = 12f)
     {
         foreach (var npc in npcs)
         {
@@ -120,8 +110,8 @@ public class SaloonManager : Grigios.Singleton<SaloonManager>
         }
     }
     // Chiamato quando il PLAYER uccide/colpisce un NPC, per avvisare i testimoni vicini.
-    // Diverso da BroadcastShooting perché qui non c'è un SaloonNPC "shooter".
-    public void BroadcastPlayerShooting(SaloonNPC victim, Vector3 position, float witnessRadius = 12f)
+    // Diverso da BroadcastShooting perchï¿½ qui non c'ï¿½ un SaloonNPC "shooter".
+    public void BroadcastPlayerShooting(NPCController victim, Vector3 position, float witnessRadius = 12f)
     {
         foreach (var npc in npcs)
         {
@@ -134,9 +124,9 @@ public class SaloonManager : Grigios.Singleton<SaloonManager>
         }
     }
     // ---------------- RICERCA NPC ----------------
-    public List<SaloonNPC> GetNPCsNear(Vector3 position, float radius, SaloonNPC exclude = null)
+    public List<NPCController> GetNPCsNear(Vector3 position, float radius, NPCController exclude = null)
     {
-        List<SaloonNPC> result = new List<SaloonNPC>();
+        List<NPCController> result = new List<NPCController>();
         foreach (var npc in npcs)
         {
             if (npc == null || !npc.IsAlive || npc == exclude) continue;
@@ -146,9 +136,9 @@ public class SaloonManager : Grigios.Singleton<SaloonManager>
         return result;
     }
     // Usato per il "colpo a vuoto": trova un bersaglio casuale nel raggio, diverso da chi spara/mira originale
-    public SaloonNPC GetRandomNearby(Vector3 position, float radius, params SaloonNPC[] exclude)
+    public NPCController GetRandomNearby(Vector3 position, float radius, params NPCController[] exclude)
     {
-        List<SaloonNPC> candidates = new List<SaloonNPC>();
+        List<NPCController> candidates = new List<NPCController>();
         foreach (var npc in npcs)
         {
             if (npc == null || !npc.IsAlive) continue;

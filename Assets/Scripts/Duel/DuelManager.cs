@@ -258,7 +258,7 @@ public class DuelManager : Grigios.Singleton<DuelManager>
         else
         {
             TimerSystem.Instance.ResumeTimer();
-            SaloonManager.Instance.SetHeat(0);
+            NpcManager.Instance.SetHeat(0);
         }
     }
 

@@ -17,10 +17,9 @@ public class StealableItem : MonoBehaviour
         // stealthValue finale: più alto = meno probabilità di essere notato
         float stealthValue = Mathf.Clamp01(playerStealthSkill - baseNoise);
 
-        SaloonManager.Instance.NotifyTheft(thief, stealthValue, transform.position);
+        NpcManager.Instance.NotifyTheft(thief, stealthValue, transform.position);
 
         // qui la tua logica di raccolta oggetto (inventario, distruggi oggetto, ecc.)
-        Debug.Log($"Oggetto '{name}' rubato da {thief.name}");
         SpawnStealableObjectManager.Instance.TurnDownItems(gameObject);
     }
 }

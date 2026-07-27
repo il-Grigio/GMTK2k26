@@ -294,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aada4ef3a6d6ac2408d09b31194c1921, type: 3}
       propertyPath: m_Name
-      value: npc1
+      value: npc_gentleman
       objectReference: {fileID: 0}
     - target: {fileID: 1330755669629619180, guid: aada4ef3a6d6ac2408d09b31194c1921, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -610,6 +610,8 @@ MonoBehaviour:
   accusationThreshold: 0.5
   hostileThreshold: 0.75
   shootCheckInterval: 3
+  playerTransform: {fileID: 0}
+  playerAnger: 0
   alibiCheckRadius: 2.5
   alibiWeightPenalty: 0.15
   gossipRadius: 8
@@ -630,3 +632,7 @@ MonoBehaviour:
     m_Bits: 0
   fleeDistance: 10
   fleeSpeed: 4
+  firePoint: {fileID: 0}
+  bulletSpeed: 40
+  aimHeightOffset: 1
+  totalMissSpread: 1.5

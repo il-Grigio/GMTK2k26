@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(SaloonNPC shooter)
+    public void TakeDamage(NPCController shooter)
     {
         int dmg = 1;
         currentHealth -= dmg;

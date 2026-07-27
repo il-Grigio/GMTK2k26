@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3639219198858330959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8611289603828899683}
+  m_Layer: 0
+  m_Name: shootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8611289603828899683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639219198858330959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.636363, z: 0.9090909}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6761379422208395097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6512072843342340274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       propertyPath: m_Name
-      value: cowboy_fine
+      value: npc_cowboy
       objectReference: {fileID: 0}
     - target: {fileID: 1330755669629619180, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -490,7 +521,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56f67047eff7ef54db5552b787829000, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8611289603828899683}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56f67047eff7ef54db5552b787829000, type: 3}
       insertIndex: -1
@@ -632,7 +666,12 @@ MonoBehaviour:
     m_Bits: 0
   fleeDistance: 10
   fleeSpeed: 4
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 8611289603828899683}
   bulletSpeed: 40
   aimHeightOffset: 1
   totalMissSpread: 1.5
+--- !u!4 &6761379422208395097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56f67047eff7ef54db5552b787829000, type: 3}
+  m_PrefabInstance: {fileID: 6512072843342340274}
+  m_PrefabAsset: {fileID: 0}

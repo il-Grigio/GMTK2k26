@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ItemInfoComponent : MonoBehaviour
 {
-    [SerializeField] int countValue;
+    [FormerlySerializedAs("countValue")] [SerializeField] int weightValue;
 
     [SerializeField] int moneyValue;
     public int GetPointValue()
     {
-        return moneyValue * countValue ;
+        return moneyValue * weightValue ;
     }
     public ItemInfoData GetInfo()
     {
-        return new ItemInfoData(countValue, moneyValue);
+        return new ItemInfoData(weightValue, moneyValue);
     }
 
 }
